@@ -14,6 +14,7 @@ import Following from "./content/following";
 import Likes from "./content/likes";
 import Reports from "./content/reports";
 import { useEffect, useMemo } from "react";
+import AIReports from "./content/ai_reports";
 
 export default function Dashboard() {
 	const { t } = useTranslation();
@@ -39,6 +40,12 @@ export default function Dashboard() {
 					return false;
 				if (
 					item.value == "reports" &&
+					!roledata.is_view_reports
+				)
+					return false;
+
+				if (
+					item.value == "ai_reports" &&
 					!roledata.is_view_reports
 				)
 					return false;
@@ -74,7 +81,8 @@ export default function Dashboard() {
 					jams: <Jams />,
 					following: <Following />,
 					likes: <Likes />,
-					reports: <Reports />
+					reports: <Reports />,
+					ai_reports: <AIReports />
 				}}
 			/>
 		</div>

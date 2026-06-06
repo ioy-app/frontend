@@ -5,7 +5,8 @@
 		"following": "Подписки",
 		"saves": "Сохраненные",
 		"likes": "Понравилось",
-		"reports": "Жалобы"
+		"reports": "Жалобы",
+		"ai_reports": "Отчеты AI"
 	},
 	"statuses": {
 		"all": "Все",

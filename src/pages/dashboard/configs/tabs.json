@@ -18,5 +18,9 @@
 	{
 		"label": "dashboard.tabs.reports",
 		"value": "reports"
+	},
+	{
+		"label": "dashboard.tabs.ai_reports",
+		"value": "ai_reports"
 	}
 ]

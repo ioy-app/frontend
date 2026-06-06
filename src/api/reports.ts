@@ -27,6 +27,17 @@ export const reports_list = (params: Record<string, any>) =>
 	apiInstance.get(Routes.reports.list, { params });
 
 /**
+ * Get ai report (Only for Admin)
+ * 
+ * @param params - Filters
+*/
+export const reports_ai = (params: Record<string, any>) =>
+	apiInstance.post(Routes.reports.ai, {
+		timeout: 1000 * 60 * 60 * 60,
+		...params
+	});
+
+/**
  * Answer for report (Only for Admin)
  * 
  * @param report_id - ID Report 

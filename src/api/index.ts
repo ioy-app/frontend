@@ -145,7 +145,8 @@ const Routes = {
 	},
 	reports: {
 		list: "/reports",
-		details: (id: number) => `/reports/${id}`
+		details: (id: number) => `/reports/${id}`,
+		ai: "/reports/ai"
 	},
 	feed: {
 		global: "/feed/global"

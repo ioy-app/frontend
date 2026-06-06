@@ -5,7 +5,8 @@
 		"following": "Following",
 		"saves": "Saves",
 		"likes": "Likes",
-		"reports": "Reports"
+		"reports": "Reports",
+		"ai_reports": "Reports AI"
 	},
 	"statuses": {
 		"all": "All",
