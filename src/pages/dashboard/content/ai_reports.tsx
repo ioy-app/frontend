@@ -20,7 +20,8 @@ const AIReports: React.FC = () => {
   const submit = useMutation({
     mutationKey: [ "ai", "query" ],
     mutationFn: async (data) => {
-      console.log(data);
+      setColumns([]);
+      setData([]);
       const response = await reports_ai(data);
       return response;
     },
