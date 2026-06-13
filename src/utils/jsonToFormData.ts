@@ -6,13 +6,14 @@
 */
 const jsonToFormData = (obj: Record<string, any>, parentKey: string = ""): FormData => {
 	const formData = new FormData();
-
+	
 	const process = (value: any, key: string) => {
 		if (value === null || value === undefined)
 			return;
 
 		if (Array.isArray(value)) {
 			const files = value.some((item) => item instanceof File || item instanceof Blob);
+			
 			if (files) {
 				value.forEach((item) => {
 					if (!(item instanceof File || item instanceof Blob))

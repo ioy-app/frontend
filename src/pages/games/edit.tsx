@@ -38,6 +38,7 @@ import JamBlock from "./jam";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { jams_details } from "@/api/jams";
 import { UserProps } from "@/types";
+import { useSelector } from "react-redux";
 
 export default function Edit() {
 	const params = useParams();
@@ -45,6 +46,9 @@ export default function Edit() {
 	const { t } = useTranslation();
 	const { notify } = useNotify();
 	const { modal } = useModal();
+	const { login } = useSelector(
+		(state: any) => state?.login,
+	);
 
 	const isCreate: boolean = Boolean(
 		typeof params.id == "undefined",
@@ -86,7 +90,7 @@ export default function Edit() {
 			const version = data?.version;
 			const description = data?.description;
 			const status: "draft" | "public" = !jam_id ? data?.status : "public";
-			const authors = data?.authors_data?.map?.((user: UserProps) => Number(user?.id)) || [];
+			const authors = data?.authors || [];
 			const tags = data?.tags || [];
 			const game = data?.game;
 			const is_background = data?.is_background;
@@ -186,6 +190,10 @@ export default function Edit() {
 	const tags = methods.watch("tags") || [];
 	const is_avatar = methods.watch("is_avatar") || false;
 	const authors_data = methods.watch("authors_data");
+
+	const authorsData = useMemo(() => {
+		return (authors_data || [])?.filter?.((user: UserProps) => user?.login != login) || [];
+	}, [ authors_data, login ]);
 
 	// Game details:
 	const query = useQuery({
@@ -348,12 +356,11 @@ export default function Edit() {
 							))}
 						</div>
 					</div>
-
 					<SelectUser
 						name="authors"
 						placeholder={t("games.placeholders.authors")}
 						label={t("games.labels.authors")}
-						initial={authors_data}
+						initial={authorsData}
 						{...methods}
 						disabled={submit.isPending}
 					/>

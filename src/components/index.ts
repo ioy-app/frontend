@@ -18,7 +18,7 @@ import Tag from "./custom/tag";
 import Block from "./custom/block";
 import Table from "./base/table";
 import Pagination from "./base/pagination";
-import SelectUser from "./custom/selectUser";
+import SelectUser from "./custom/selectors/selectUser";
 import Report from "./custom/report";
 import Meta from "./custom/meta";
 import DatePicker from "./base/datePicker";
