@@ -30,6 +30,7 @@ import MasonryTable from "./custom/masonryTable";
 import SearchBlock from "./custom/searchBlock";
 import TitleColorfull from "./custom/titleColorfull";
 import SelectGame from "./custom/selectors/selectGame";
+import Sider from "./custom/sider";
 
 export {
 	Header,
@@ -63,5 +64,6 @@ export {
 	MasonryTable,
 	SearchBlock,
 	TitleColorfull,
-	SelectGame
+	SelectGame,
+	Sider
 };

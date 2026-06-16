@@ -175,7 +175,7 @@ export default function Profile() {
 			/>
 			<div className="w-full px-4 py-4 flex gap-4 flex-col items-center">
 				{token && (
-					<div className="fixed right-0 top-12 p-4 flex flex-col gap-4 z-25">
+					<div className="fixed right-0 top-0 p-4 flex flex-col gap-4 z-25">
 						{isMe ? (
 							<>
 								<Button
@@ -282,25 +282,13 @@ export default function Profile() {
 						/>
 					</div>
 					<div
-						className={`transition-all duration-200 ${isScrollable && `z-20 sticky top-2`}`}
+						className={`transition-all duration-200`}
 					>
-						<motion.p
-							variants={{
-								stable: { scale: 1 },
-								movement: {
-									scale: 0.8,
-								},
-							}}
-							transition={{
-								duration: 0.2,
-							}}
-							animate={
-								(isScrollable && "movement") || "stable"
-							}
+						<p
 							className={`text-title text-center ${data?.is_donut && "text-second" || ""}`}
 						>
 							{data?.login}
-						</motion.p>
+						</p>
 					</div>
 					<div
 						className="flex gap-4 flex-col items-center pb-4 w-full"
