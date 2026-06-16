@@ -51,7 +51,7 @@ const Player: React.FC<{
 			ref={ref}
 		>
 			{!isPlay ? (
-				<div className="relative flex w-full h-full items-center justify-center bg-br/15">
+				<div className="relative flex w-full h-full items-center justify-center bg-black/75">
 					{picture && pictureurl && (
 						<>
 							<img
@@ -59,7 +59,7 @@ const Player: React.FC<{
 								className="absolute z-0 w-full opacity-50 scale-125"
 							/>
 							<div
-								className="absolute right-4 bottom-4"
+								className="absolute right-4 bottom-4 text-white!"
 							>
 								<Picture
 									dataSource={picture}
