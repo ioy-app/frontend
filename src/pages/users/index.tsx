@@ -3,10 +3,8 @@ import React, {
 	useReducer,
 	useState,
 } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-	Navigate,
-	useLocation,
 	useNavigate,
 	useOutletContext,
 	useParams,
@@ -22,18 +20,8 @@ import {
 	Meta,
 	Picture,
 } from "@/components";
-
-import { UserProps } from "@/types";
 import { StoreProps } from "@/stories";
-import * as Icons from "@/icons";
-import {
-	motion,
-	useScroll,
-	useMotionValueEvent,
-} from "motion/react";
-
 import Edit from "./edit";
-
 import {
 	users_details,
 	users_games,
@@ -44,50 +32,34 @@ import {
 } from "@/api/users";
 import { useModal, useNotify } from "@/hooks";
 import { useTranslation } from "react-i18next";
-import { user_paths } from "@/routes/user";
 import { dashboard_paths } from "@/routes/dashboard";
 import {
-	BiAlignLeft,
 	BiCog,
 	BiCommentError,
-	BiDetail,
 	BiGridAlt,
-	BiSitemap,
-	BiSolidReport,
 	BiUser,
 	BiUserMinus,
 	BiUserPlus,
 } from "react-icons/bi";
 import {
-	useMutation,
 	useQuery,
 	useQueryClient,
 } from "@tanstack/react-query";
 import UserContent from "./content";
 import { paths } from "@/routes";
 import ErrorPage from "../error";
-import { Helmet } from "react-helmet-async";
 
 export default function Profile() {
 	const context = useOutletContext();
-	const { scrollY } = useScroll();
 	const { t } = useTranslation();
 	const navigator = useNavigate();
 	const { token } = useSelector(
 		(state: StoreProps) => state.login,
 	);
 	const params = useParams();
-	const [update, forceUpdate] = useReducer(
-		(x: number) => x + 1,
-		0,
-	);
 	const { login } = params;
-	const [isScrollable, setScrollable] =
-		useState<boolean>(false);
-
 	const { notify } = useNotify();
 	const { modal } = useModal();
-
 	const queryClient = useQueryClient();
 
 	const handleSubscribe = async () => {
@@ -133,14 +105,13 @@ export default function Profile() {
 	const {
 		data,
 		status,
-		isError,
 		error,
 		refetch,
 		isRefetching,
 	} = useQuery({
 		queryKey: ["user", login],
 		queryFn: async () => users_details(login),
-		retry: 0,
+		retry: 0
 	});
 
 	useEffect(() => {
@@ -156,12 +127,6 @@ export default function Profile() {
 	const isMe = data?.controls?.is_me;
 	const isLoading = status == "pending" || isRefetching;
 
-	useMotionValueEvent(scrollY, "change", (value) => {
-		const prev = scrollY.getPrevious();
-		if (value > prev && value > 200) setScrollable(true);
-		if (value <= 200) setScrollable(false);
-	});
-
 	if (status == "error") {
 		return <ErrorPage msg={error?.message || "errors.exists"} />;
 	}
@@ -173,100 +138,8 @@ export default function Profile() {
 				description={data?.description}
 				url={paths.users.details(login)}
 			/>
-			<div className="w-full px-4 py-4 flex gap-4 flex-col items-center">
-				{token && (
-					<div className="fixed right-0 top-0 p-4 flex flex-col gap-4 z-25">
-						{isMe ? (
-							<>
-								<Button
-									variant="default"
-									htmlType="button"
-									onClick={() =>
-										navigator(dashboard_paths.list)
-									}
-								>
-									<BiGridAlt />
-									{t("buttons.dashboard")}
-								</Button>
-								<Button
-									variant="default"
-									onClick={() => {
-										modal("", (onClose) => (
-											<Edit
-												onClose={(login?: string) => {
-													try {
-														if (login)
-															navigator(
-																paths.users.details(login),
-															);
-														refetch();
-													} catch (err) {}
-													onClose && onClose();
-												}}
-												login={login}
-												navigator={navigator}
-											/>
-										));
-									}}
-								>
-									<BiCog />
-									{t("buttons.settings")}
-								</Button>
-							</>
-						) : (
-							<>
-								<Button
-									onClick={handleSubscribe}
-									variant={
-										data?.controls?.is_subscribe
-											? "second"
-											: "primary"
-									}
-								>
-									{!data?.controls?.is_subscribe
-										? t("buttons.subscribe")
-										: t("buttons.unsubscribe")}
-									{!data?.controls?.is_subscribe ? (
-										<BiUserPlus />
-									) : (
-										<BiUserMinus />
-									)}
-								</Button>
-								<Button
-									onClick={() => modal("", (onClose) => (
-										<Report
-											type="user"
-											target_id={data?.id}
-											Instance={(
-												<div className="flex flex-col gap-4 items-center justify-center">
-													<div>
-														<User
-															login={login}
-															dataSource={{
-																is_avatar: data?.is_avatar,
-															}}
-															size="large"
-															hideLogin
-															className="transition-all w-full h-full"
-															nolink
-
-														/>
-													</div>
-													<p className="text-title">{login}</p>
-												</div>
-											)}
-											onClose={onClose}
-										/>
-									))}
-								>
-									{t("buttons.report")}
-									<BiCommentError />
-								</Button>
-							</>
-						)}
-					</div>
-				)}
-				<div className="flex flex-col gap-4 w-[60%] max-md:w-full items-center">
+			<div className="w-full px-4 py-4 flex gap-4 flex-col items-center flex-1">
+				<div className="flex flex-col gap-4 w-[60%] max-md:w-full items-center h-full">
 					<div className="w-32 h-32">
 						<User
 							login={login}
@@ -292,7 +165,6 @@ export default function Profile() {
 					</div>
 					<div
 						className="flex gap-4 flex-col items-center pb-4 w-full"
-						key={update}
 					>
 						<p
 							className="text-default flex items-center gap-2"
@@ -309,6 +181,98 @@ export default function Profile() {
 							</p>
 						)}
 					</div>
+					{token && (
+						<div className="flex gap-4">
+							{isMe ? (
+								<>
+									<Button
+										variant="default"
+										htmlType="button"
+										onClick={() =>
+											navigator(dashboard_paths.list)
+										}
+									>
+										<BiGridAlt />
+										{t("buttons.dashboard")}
+									</Button>
+									<Button
+										variant="default"
+										onClick={() => {
+											modal("", (onClose) => (
+												<Edit
+													onClose={(login?: string) => {
+														try {
+															if (login)
+																navigator(
+																	paths.users.details(login),
+																);
+															refetch();
+														} catch (err) {}
+														onClose && onClose();
+													}}
+													login={login}
+													navigator={navigator}
+												/>
+											));
+										}}
+									>
+										<BiCog />
+										{t("buttons.settings")}
+									</Button>
+								</>
+							) : (
+								<>
+									<Button
+										onClick={handleSubscribe}
+										variant={
+											data?.controls?.is_subscribe
+												? "second"
+												: "primary"
+										}
+									>
+										{!data?.controls?.is_subscribe
+											? t("buttons.subscribe")
+											: t("buttons.unsubscribe")}
+										{!data?.controls?.is_subscribe ? (
+											<BiUserPlus />
+										) : (
+											<BiUserMinus />
+										)}
+									</Button>
+									<Button
+										onClick={() => modal("", (onClose) => (
+											<Report
+												type="user"
+												target_id={data?.id}
+												Instance={(
+													<div className="flex flex-col gap-4 items-center justify-center">
+														<div>
+															<User
+																login={login}
+																dataSource={{
+																	is_avatar: data?.is_avatar,
+																}}
+																size="large"
+																hideLogin
+																className="transition-all w-full h-full"
+																nolink
+
+															/>
+														</div>
+														<p className="text-title">{login}</p>
+													</div>
+												)}
+												onClose={onClose}
+											/>
+										))}
+									>
+										{t("buttons.report")}
+										<BiCommentError />
+									</Button>
+								</>
+							)}
+						</div>
+					)}
 					<div className="flex flex-col gap-4 w-full">
 						{data?.privacy?.games && (
 							<Block

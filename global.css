@@ -63,7 +63,7 @@
 		@apply text-2xl font-normal font-roboto;
 	}
 	.text-default {
-		@apply text-xl font-light font-roboto;
+		@apply text-xl font-normal font-roboto;
 	}
 	.text-placeholder {
 		@apply text-lg font-thin font-roboto;

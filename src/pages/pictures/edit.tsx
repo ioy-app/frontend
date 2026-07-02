@@ -344,37 +344,40 @@ export default function Edit() {
 								</span>
 							))}
 						</div>
-						<p className="text-placeholder">{t("pictures.labels.game_id")}</p>
-						<Controller
-							name="game_id"
-							control={methods.control}
-							render={({ field }) => (
-								<SelectGame
-									value={field.value}
-									disabled={field.disabled}
-									onChange={(value) => field.onChange(value)}
-								/>
-							)}
-						/>
-						
-					</div>
-					<div className="flex gap-4 items-center justify-between w-full flex-wrap">
-						<div className="flex gap-4 items-center">
-							{!jam_id && (
-								<Select
-									options={status}
-									value={status?.[1]}
-									{...methods.register("status")}
-									align="top"
+						<div className="flex gap-4 items-end justify-between w-full flex-wrap">
+							<div className="flex gap-4 items-center">
+								{!jam_id && (
+									<Select
+										options={status}
+										value={status?.[1]}
+										{...methods.register("status")}
+										align="top"
+										disabled={submit.isPending}
+									/>
+								)}
+								<Checkbox
+									{...methods.register("is_background")}
+									placeholder={t("pictures.placeholders.is_background")}
 									disabled={submit.isPending}
 								/>
-							)}
-							<Checkbox
-								{...methods.register("is_background")}
-								placeholder={t("pictures.placeholders.is_background")}
-								disabled={submit.isPending}
-							/>
+							</div>
+							<div className="flex flex-col gap-2">
+								<p className="text-placeholder">{t("pictures.labels.game_id")}</p>
+								<Controller
+									name="game_id"
+									control={methods.control}
+									render={({ field }) => (
+										<SelectGame
+											value={field.value}
+											disabled={field.disabled}
+											onChange={(value) => field.onChange(value)}
+										/>
+									)}
+								/>
+							</div>
 						</div>
+					</div>
+					<div className="flex gap-4 items-center justify-end w-full flex-wrap">
 						<Button
 							variant="primary"
 							htmlType="submit"

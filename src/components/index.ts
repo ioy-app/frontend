@@ -1,4 +1,3 @@
-import Header from "./custom/header";
 import Footer from "./custom/footer";
 import Game from "./content/game";
 import User from "./content/user";
@@ -33,7 +32,6 @@ import SelectGame from "./custom/selectors/selectGame";
 import Sider from "./custom/sider";
 
 export {
-	Header,
 	Footer,
 	Game,
 	User,

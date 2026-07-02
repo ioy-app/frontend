@@ -8,7 +8,7 @@ import Dashboard from "./dashboard";
 import ErrorPage from "./error";
 import About from "./home/pages/about";
 import Verify from "./verify";
-import Feed from "./home/pages/feed";
+import Feed from "./feed";
 import PictureEdit from "./pictures/edit";
 import Donut from "./home/pages/donut";
 
