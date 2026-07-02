@@ -49,7 +49,7 @@ export default function About() {
 	});
 
 	return (
-		<div className="flex-1 flex justify-center flex-col items-center w-full min-h-full">
+		<div className="w-full flex flex-col gap-4 h-fit items-center">
 			<Meta
 				title="ioy.app"
 				description={t("about.description")}

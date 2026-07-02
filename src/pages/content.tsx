@@ -40,9 +40,9 @@ export default function Content() {
 
 	
 	return (
-		<div className="flex max-md:flex-col-reverse w-full min-h-screen bg-back text-text">
+		<div className="flex max-md:flex-col-reverse w-full min-h-screen h-screen bg-back text-text">
 			<Components.Sider collapse />
-			<div className="flex flex-col w-full h-fit">
+			<div className="flex flex-col w-full flex-1 overflow-y-auto">
 				<main className="flex-1 p-4 pb-0 gap-4 flex flex-col w-full min-h-full">
 					<ScrollToTop />
 					<Outlet />
