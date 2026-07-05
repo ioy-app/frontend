@@ -1,38 +1,32 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
 import * as Icons from "@/icons";
 import { FormProvider, useForm } from "react-hook-form";
-
-import confPackage from "@/../package.json";
-
 import { Input, Button, Checkbox } from "@/components";
-import { auth_reg } from "@/api/auth";
+import { auth_reg } from "./api";
 import { useNotify } from "@/hooks";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
+import { useMutation } from "@tanstack/react-query";
 
-export default function Reg({
-	onClose,
-}: {
-	onClose?: () => void;
-}) {
+/**
+ * Auth, reg form
+*/
+export default function Reg({ onClose }: { onClose?: () => void; }) {
 	const methods = useForm();
 	const { notify } = useNotify();
 	const { t } = useTranslation();
 
-	const submit = async (data) => {
-		try {
-			methods.clearErrors();
-			await auth_reg(data);
+	const submit = useMutation({
+		mutationKey: [ "auth", "reg", "submit" ],
+		mutationFn: async (data: {
+			email: string;
+			login: string;
+		}) => (await auth_reg(data)),
+		onError: (err) => notify(t(err?.message?.toString?.())),
+		onSuccess: () => {
 			notify(t("auth.reg"), "success");
-			onClose && onClose();
-		} catch (err) {
-			methods.setError("valid", {
-				type: "valid",
-				message: err?.message?.toString(),
-			});
+			onClose && onClose?.();
 		}
-	};
+	});
 
 	const terms = methods.watch("rules")
 
@@ -40,7 +34,7 @@ export default function Reg({
 		<FormProvider {...methods}>
 			<form
 				className="flex flex-col gap-4 items-end w-full"
-				onSubmit={methods.handleSubmit(submit)}
+				onSubmit={methods.handleSubmit((data) => submit.mutate(data))}
 			>
 				<div className="flex flex-col gap-2 items-center w-full">
 					<img src={Icons.Logo} className="w-25" />
@@ -54,9 +48,7 @@ export default function Reg({
 					placeholder={t("auth.placeholders.login")}
 					type="text"
 					{...methods.register("login")}
-					onLocalChange={() => {
-						methods.clearErrors();
-					}}
+					disabled={submit?.isPending}
 				/>
 				<Input
 					label={t("auth.labels.email")}
@@ -64,14 +56,13 @@ export default function Reg({
 					placeholder={t("auth.placeholders.email")}
 					type="email"
 					{...methods.register("email")}
-					onLocalChange={() => {
-						methods.clearErrors();
-					}}
+					disabled={submit?.isPending}
 				/>
 				<div className="w-full flex justify-center">
 					<Checkbox
 						name="rules"
-						placeholder={
+						disabled={submit?.isPending}
+						placeholder={(
 							<div className="flex flex-row gap-1 items-center">
 								{t("auth.placeholders.rules")}
 								<a
@@ -87,21 +78,14 @@ export default function Reg({
 									</Button>
 								</a>
 							</div>
-						}
+						)}
 						{...methods.register("rules")}
 					/>
-				</div>
-				{methods.formState.errors.valid && (
-					<p className="text-placeholder text-danger">
-						{t(
-							`auth.${methods.formState.errors.valid.message}`,
-						)}
-					</p>
-				)}
+				</div>	
 				<Button
 					variant="primary"
 					htmlType="submit"
-					disabled={methods.formState.errors.valid || !terms}
+					disabled={!terms || submit?.isPending}
 				>
 					{t("buttons.create")}
 				</Button>

@@ -5,8 +5,8 @@ import { Routes, apiInstance } from "@/api";
  * 
  * @param data - User's creds
 */
-export const auth_login = (data: { email: string }) =>
-	apiInstance.post(Routes.auth.login, data);
+export const auth_login = (email: string) =>
+	apiInstance.post(Routes.auth.login, { email });
 
 /**
  * Registration new user

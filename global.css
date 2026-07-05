@@ -16,19 +16,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--font-roboto: "Roboto";
-	--color-primary: #739441;
-	--color-primary-br: #5a783d;
-	--color-primary-hover: #7e9e49;
-	--color-second: #e07f72;
-	--color-second-br: #cf6572;
-	--color-second-hover: #e78c78;
-	--color-danger: #ff3131;
-	--color-back: #fff;
-	--color-br: #e0e0e0;
-	--color-disabled: #c8c8c8;
-	--color-disabled-content: #a8a8a8;
-	--color-text: #000;
+  --font-roboto: "Roboto";
+  --color-primary: #739441;
+  --color-primary-br: #5a783d;
+  --color-primary-hover: #7e9e49;
+  --color-second: #e07f72;
+  --color-second-br: #cf6572;
+  --color-second-hover: #e78c78;
+  --color-danger: #ff3131;
+  --color-back: #fff;
+  --color-br: #e0e0e0;
+  --color-disabled: #c8c8c8;
+  --color-disabled-content: #a8a8a8;
+  --color-text: #000;
   --animate-donate: background-donate ease infinite;
 
   @keyframes background-donate {

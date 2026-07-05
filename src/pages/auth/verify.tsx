@@ -1,9 +1,9 @@
-import { auth_verify } from "@/api/auth";
+import { auth_verify } from "./api";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
-import ErrorPage from "./error";
+import ErrorPage from "../error";
 import { Spin, Button } from "@/components";
 import * as Icons from "@/icons";
 import { NavLink } from "react-router-dom";
