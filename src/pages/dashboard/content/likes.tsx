@@ -1,68 +1,32 @@
-import confOrder from "@/configs/order.json";
-import confTypesFilter from "../configs/typesFilter.json";
-import {
-	BiBox,
-	BiEditAlt,
-	BiPlus,
-	BiSearch,
-	BiSearchAlt,
-} from "react-icons/bi";
-import confStatus from "../configs/status.json";
-
-import { dashboard_games, dashboard_likes } from "@/api/dashboard";
-import { useEffect, useState } from "react";
-
+import { BiBox } from "react-icons/bi";
+import { dashboard_likes } from "@/api/dashboard";
 import * as Components from "@/components";
 import dayjs from "dayjs";
-import {
-	Link,
-	NavLink,
-	useNavigate,
-	useSearchParams,
-} from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { games_paths } from "@/routes/games";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
 import { useQuery } from "@tanstack/react-query";
-import { FormProvider, useForm } from "react-hook-form";
-import {
-	users_favorites,
-	users_likes,
-} from "@/api/users";
 import { useSelector } from "react-redux";
 import { StoreProps } from "@/stories";
 
 const Likes: React.FC = () => {
 	const { t } = useTranslation();
-	const navigator = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
-	const { login } = useSelector(
-		(state: StoreProps) => state.login,
-	);
+	const { login } = useSelector((state: StoreProps) => state.login);
 
 	const max = 10;
-	const current_page = Number(
-		searchParams.get("page") || 1,
-	);
+	const current_page = Number(searchParams.get("page") || 1);
 	const status = searchParams.get("status");
 	const sort = searchParams.get("sort");
 	const searchQS = searchParams.get("search");
 	const type = searchParams.get("type");
 
 	const query = useQuery({
-		queryKey: [
-			"dashboard",
-			"likes",
-			searchParams?.toString(),
-		],
+		queryKey: [ "dashboard", "likes", searchParams?.toString() ],
 		queryFn: async () => {
 			const search = new URLSearchParams();
 
-			search.set(
-				"offset",
-				String((current_page - 1) * max),
-			);
+			search.set("offset", String((current_page - 1) * max));
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
 			if (status) search.set("status", status);
@@ -74,90 +38,8 @@ const Likes: React.FC = () => {
 		},
 	});
 
-	const onSubmit = async (data) => {
-		const us = new URLSearchParams();
-		if (data.search) us.set("search", data.search);
-		if (data.status && data.status != "all")
-			us.set("status", data.status);
-		if (data.sort) us.set("sort", data.sort);
-		if (data.type && data.type != "all") us.set("type", data.type);
-		setSearchParams(us);
-	};
-
-	const methods = useForm();
-
-	useEffect(() => {
-		if (searchParams.get("search"))
-			methods.setValue(
-				"search",
-				searchParams.get("search"),
-			);
-		if (searchParams.get("status"))
-			methods.setValue(
-				"status",
-				searchParams.get("status"),
-			);
-		if (searchParams.get("type"))
-			methods.setValue(
-				"type",
-				searchParams.get("type"),
-			);
-		if (searchParams.get("sort"))
-			methods.setValue("sort", searchParams.get("sort"));
-	}, [searchParams]);
-
-	const sorOptions = confOrder?.map((item) => {
-		item.label = t(item.label);
-		return item;
-	});
-
 	return (
 		<div className="w-full flex flex-col gap-4">
-			<FormProvider {...methods}>
-				<form
-					className="flex gap-4 items-center flex-wrap"
-					onSubmit={methods.handleSubmit(onSubmit)}
-				>
-					<div className="flex gap-4 w-full">
-						<Components.Input
-							type="search"
-							{...methods.register("search")}
-							placeholder={t(
-								"dashboard.placeholders.instances.search",
-							)}
-						/>
-						<Components.Button
-							variant="primary"
-							htmlType="submit"
-						>
-							<BiSearch />
-						</Components.Button>
-					</div>
-					<div className="flex flex-wrap items-center justify-between gap-4 w-full">
-						<div className="flex flex-wrap gap-4 items-center">
-							<Components.Select
-								placeholder={t(
-									"dashboard.placeholders.type",
-								)}
-								options={confTypesFilter.map((record) => ({
-									...record,
-									label: t(record.label),
-								}))}
-								{...methods.register("type")}
-								className="w-50"
-							/>
-							<Components.Select
-								options={sorOptions}
-								className="w-50"
-								placeholder={t(
-									"dashboard.placeholders.order",
-								)}
-								{...methods.register("sort")}
-							/>
-						</div>
-					</div>
-				</form>
-			</FormProvider>
 			<Components.Table
 				columns={[
 					{
@@ -254,7 +136,7 @@ const Likes: React.FC = () => {
 						total={query?.data?.total || 1}
 						current={current_page}
 						per_page={max}
-						onChange={(offset, page) => {
+						onChange={(_, page) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();

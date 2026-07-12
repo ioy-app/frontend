@@ -126,3 +126,7 @@
 		scrollbar-width: none;
 	}
 }
+
+.infinite-scroll-component__outerdiv {
+	width: 100%;
+}

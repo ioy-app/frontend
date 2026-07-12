@@ -1,5 +1,4 @@
 import confTabs from "./configs/tabs.json";
-
 import * as Components from "@/components";
 import Instances from "./content/instances";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
@@ -15,39 +14,31 @@ import Likes from "./content/likes";
 import Reports from "./content/reports";
 import { useEffect, useMemo } from "react";
 import AIReports from "./content/ai_reports";
+import DashboardFilters from "./filters";
 
 export default function Dashboard() {
 	const { t } = useTranslation();
 	const params = useParams();
 	const tab = params?.tab;
 	const navigate = useNavigate();
-	const { login, roledata } = useSelector(
-		(state: StoreProps) => state.login,
-	);
+	const { login, roledata } = useSelector((state: StoreProps) => state.login);
 
 	const tabs = useMemo(() =>
-		confTabs
-			.map((record) => ({
+		confTabs.map((record) => ({
 				...record,
 				label: (
 					<NavLink to={`${paths.dashboard.list}/${record.value}`}>
 						{t(record.label)}
 					</NavLink>
-				),
-			}))
-			.filter((item) => {
+				)
+			})).filter((item) => {
 				if (item.value == "jams" && !FEATURE_JAMS)
 					return false;
-				if (
-					item.value == "reports" &&
-					!roledata.is_view_reports
-				)
+
+				if (item.value == "reports" && !roledata.is_view_reports)
 					return false;
 
-				if (
-					item.value == "ai_reports" &&
-					!roledata.is_view_reports
-				)
+				if (item.value == "ai_reports" && !roledata.is_view_reports)
 					return false;
 
 				return true;
@@ -56,14 +47,11 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		document.title = t(`dashboard.tabs.${tab && tab || "instances"}`);
-	}, [
-		t,
-		tab
-	]);
+	}, [ t, tab ]);
 
 	return (
 		<div className="w-full">
-			<div className="w-full flex flex-col gap-2 items-start mb-4">
+			<div className="w-full justify-between flex gap-2 items-start mb-4">
 				<Components.Button
 					variant="text"
 					onClick={() => navigate(paths.users.details(login))}
@@ -71,6 +59,10 @@ export default function Dashboard() {
 					<BiChevronsLeft />
 					{t("buttons.back")}
 				</Components.Button>
+				<DashboardFilters
+					tab={tab}
+					key={tab}
+				/>
 			</div>
 			<Components.Tabs
 				headers={tabs}

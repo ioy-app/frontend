@@ -27,6 +27,7 @@
 		"picture": "Picture"
 	},
 	"placeholders": {
+		"search": "Search...",
 		"status": "Status",
 		"order": "Sort order",
 		"type": "Type",

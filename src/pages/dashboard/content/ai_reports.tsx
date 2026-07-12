@@ -1,6 +1,6 @@
 import { reports_ai } from "@/api/reports";
 import { Button, Input, Spin, Table } from "@/components";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { BiSearchAlt2 } from "react-icons/bi";
