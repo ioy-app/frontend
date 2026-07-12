@@ -2,10 +2,11 @@ import { Routes, apiInstance } from "@/api";
 
 /**
  * Create new report by target
- * 
+ *
  * @param target_id - Target ID
  * @param type - Target type
  * @param message - Report message
+ * @returns
 */
 export const reports_create = (
 	target_id: number,
@@ -20,16 +21,18 @@ export const reports_create = (
 
 /**
  * Get reports list (Only for Admin)
- * 
+ *
  * @param params - Filters
+ * @returns
 */
 export const reports_list = (params: Record<string, any>) =>
 	apiInstance.get(Routes.reports.list, { params });
 
 /**
  * Get ai report (Only for Admin)
- * 
+ *
  * @param params - Filters
+ * @returns
 */
 export const reports_ai = (params: Record<string, any>) =>
 	apiInstance.post(Routes.reports.ai, {
@@ -39,9 +42,10 @@ export const reports_ai = (params: Record<string, any>) =>
 
 /**
  * Answer for report (Only for Admin)
- * 
- * @param report_id - ID Report 
+ *
+ * @param report_id - ID Report
  * @param data - Answer's data
+ * @returns
 */
 export const reports_answer = (
 	report_id: number,

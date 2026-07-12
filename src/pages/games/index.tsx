@@ -1,4 +1,4 @@
-import { games_list, games_tags } from "@/api/games";
+import { games_list, games_tags } from "./api";
 import imgEmpty from "@/icons/empty.svg";
 import {
 	Game,
@@ -8,7 +8,7 @@ import {
 	Tag,
 	ViewModel,
 } from "@/components";
-import GameProps from "@/types/game";
+import GameProps from "./api";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NavLink, useSearchParams } from "react-router";

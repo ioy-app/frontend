@@ -1,0 +1,96 @@
+{
+	"buttons": {
+		"delete": "Delete",
+		"delete_all_sessions": "Delete all sessions",
+		"settings": "Settings",
+		"save": "Save",
+		"cancel": "Cancel",
+		"stats": "Stats",
+		"add_game": "Add Game",
+		"add_picture": "Add Picture",
+		"add_jam": "Add Jam",
+		"add": "Add",
+		"view": "View",
+		"subscribe": "Follow",
+		"unsubscribe": "Unfollow",
+		"create": "Create",
+		"ok": "OK",
+		"loading": "Loading",
+		"login": "Sign In",
+		"reg": "Sign Up",
+		"back": "Back",
+		"main": "Home",
+		"dashboard": "Dashboard",
+		"nav": {
+			"feed": "Feed",
+			"games": "Games",
+			"jams": "Jams",
+			"pictures": "Pictures",
+			"search": "Search"
+		},
+		"play": "Play",
+		"change_email": "Change email",
+		"sessions": "Sessions",
+		"logout": "Logout",
+		"edit": "Edit",
+		"delete_account": "Delete account",
+		"report": "Report",
+		"join": "Join",
+		"leave": "Leave"
+	},
+	"errors": {
+		"exists": "No found",
+		"unknown": "Unknown",
+		"title": "Error!",
+		"nodata": "Nothing :(",
+		"denied": "Access denied",
+		"invalid": {
+			"theme": "Invalid theme",
+			"title": "Invalid title",
+			"nominations": "Invalid nominations",
+			"date_started": "Invalid Start date",
+			"date_finished": "Invalid Finish date",
+			"date_vote_started": "Invalid Vote start date",
+			"date_vote_finished": "Invalid Vote finish date",
+			"vote_type": "Invalid vote type",
+			"judge": "Invalid judge",
+			"creater_id": "Invalid creater ID",
+			"description": "Invalid description"
+		},
+		"date": {
+			"date_finished": {
+				"date_started": "Finish date is before Start date"
+			},
+			"date_started": {
+				"now": "Start date is before current date"
+			},
+			"date_vote_started": {
+				"date_started": "Vote start date is before Start date",
+				"date_finished": "Vote start date is after Finish date"
+			}
+		},
+		"required": {
+			"title": "Title is required",
+			"theme": "Theme is required",
+			"nominations": "Nominations is required",
+			"creater_id": "Creater ID is required",
+			"date_started": "Start date is required",
+			"date_finished": "Finish date is required",
+			"date_vote_started": "Start vote date is required",
+			"date_vote_finished": "Finish vote date is required"
+		}
+	},
+	"notify": {
+		"save": "Save!",
+		"like": "Like!",
+		"unlike": "Unlike!",
+		"subscribe": "Save!",
+		"unsubscribe": "Unsave!",
+		"deleted": {
+			"comment": "Comment has deleted!",
+			"game": "Game has deleted!",
+			"jam": "Jam has deleted!",
+			"user": "Your accound has deleted!"
+		}
+	}
+}

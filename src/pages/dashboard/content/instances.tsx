@@ -4,15 +4,15 @@ import {
 	BiHeart,
 	BiPlus
 } from "react-icons/bi";
-import { dashboard_instances } from "@/api/dashboard";
+import { dashboard_instances } from "../api";
 import * as Components from "@/components";
 import dayjs from "dayjs";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { games_paths } from "@/routes/games";
+import { games_paths } from "@/pages/games/routes";
 import { paths } from "@/routes";
 import { useQuery } from "@tanstack/react-query";
-import { pictures_paths } from "@/routes/pictures";
+import { pictures_paths } from "@/pages/pictures/routes";
 
 const Games: React.FC = () => {
 	const { t } = useTranslation();

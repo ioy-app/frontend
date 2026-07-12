@@ -21,7 +21,7 @@ import {
 	Picture,
 } from "@/components";
 import { StoreProps } from "@/stories";
-import Edit from "./edit";
+import Edit from "./modals/edit";
 import {
 	users_details,
 	users_games,
@@ -29,10 +29,10 @@ import {
 	users_pictures,
 	users_subscribe,
 	users_following,
-} from "@/api/users";
+} from "./api";
 import { useModal, useNotify } from "@/hooks";
 import { useTranslation } from "react-i18next";
-import { dashboard_paths } from "@/routes/dashboard";
+import { dashboard_paths } from "@/pages/dashboard/routes";
 import {
 	BiCog,
 	BiCommentError,

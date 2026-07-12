@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import Store from "@/stories";
 import { HelmetProvider } from "react-helmet-async";
 import * as Pages from "@/pages";
-import "./global.css";
+import "./style.css";
 import { ModalProvider, NotifyProvider } from "@/hooks";
 import "@/i18n";
 import routes, { paths } from "@/routes";

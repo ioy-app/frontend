@@ -1,4 +1,4 @@
-import { jams_create, jams_delete, jams_details, jams_edit } from "@/api/jams";
+import { jams_create, jams_delete, jams_details, jams_edit } from "./api";
 import {
 	Button,
 	Code,
@@ -14,7 +14,7 @@ import {
 } from "@/components";
 import { useModal, useNotify } from "@/hooks";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
+import GameProps from "@/pages/games/api";
 import {
 	useEffect,
 	useMemo,

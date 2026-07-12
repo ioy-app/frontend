@@ -1,9 +1,6 @@
 import * as Profile from "./profile";
 import * as Sessions from "./sessions";
-import * as Users from "./users";
-import * as Games from "./games";
 import * as Comments from "./comments";
-import * as Jams from "./jams";
 
 import axios from "axios";
 export const apiInstance = axios.create({
@@ -84,46 +81,6 @@ const Routes = {
 		me: `/auth/me`,
 		logout: `/auth/logout`,
 	},
-	users: {
-		self: `/users/self`,
-		details: (login: string) => `/users/${login}`,
-		subscribe: (login: string) =>
-			`/users/${login}/subscribe`,
-		games: (login: string) => `/users/${login}/games`,
-		pictures: (login: string) => `/users/${login}/pictures`,
-		jams: (login: string) => `/users/${login}/jams`,
-		avatar: (login: string) => `/users/${login}/avatar`,
-		subscribers: (login: string) =>
-			`/users/${login}/subscribers`,
-		favorites: (login: string) =>
-			`/users/${login}/favorites`,
-		likes: (login: string) => `/users/${login}/likes`,
-		email: `/users/change-email`,
-		delete: `/users/delete`,
-	},
-	auth: {
-		login: `/auth/login`,
-		reg: `/auth/reg`,
-		verify: `/auth/verify`
-	},
-	games: {
-		list: `/games`,
-		tags: "/games/tags",
-		details: (id: number) => `/games/${id}`,
-		icon: (id: number) => `/games/${id}/icon`,
-		subscribe: (id: number) => `/games/${id}/subscribe`,
-		game: (id: number) => `/games/${id}/game`,
-		like: (id: number) => `/games/${id}/like`,
-		create: `/games/create`,
-		votes: (id: number) => `/games/${id}/my-votes`
-	},
-	dashboard: {
-		instances: "/auth/dashboard/instances",
-		games: `/games/my`,
-		jams: `/jams/my`,
-		pictures: `/pictures/my`,
-		likes: "/auth/dashboard/likes"
-	},
 	comments: {
 		details: (id: number) => `/comments/${id}`,
 		answers: (id: number, commentid: number) =>
@@ -134,38 +91,16 @@ const Routes = {
 		like: (id: number) => `/comments/${id}/like`,
 	},
 	search: `/search`,
-	jams: {
-		list: `/jams`,
-		details: (id: number) => `/jams/${id}`,
-		icon: (id: number) => `/jams/${id}/icon`,
-		join: (id: number) => `/jams/${id}/join`,
-		leave: (id: number) => `/jams/${id}/leave`,
-		games: (id: number) => `/jams/${id}/games`
-	},
 	reports: {
 		list: "/reports",
 		details: (id: number) => `/reports/${id}`,
 		ai: "/reports/ai"
 	},
-	feed: {
-		global: "/feed/global"
-	},
-	pictures: {
-		list: "/pictures",
-		tags: "/pictures/tags",
-		details: (id: number) => `/pictures/${id}`,
-		like: (id: number) => `/pictures/${id}/like`,
-		image: (id: number) => `/pictures/${id}/image`,
-		votes: (id: number) => `/pictures/${id}/my-votes`
-	}
 };
 
 export {
 	Profile,
 	Sessions,
-	Users,
-	Games,
 	Comments,
-	Jams,
 	Routes
 };

@@ -16,8 +16,8 @@ import {
 } from "@/components";
 import { GoLaw } from "react-icons/go";
 import { useQuery } from "@tanstack/react-query";
-import { games_list } from "@/api/games";
-import { pictures_list } from "@/api/pictures";
+import { games_list } from "@/pages/games/api";
+import { pictures_list } from "@/pages/pictures/api";
 import { FaBluesky } from "react-icons/fa6";
 import { useEffect } from "react";
 

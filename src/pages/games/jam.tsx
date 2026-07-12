@@ -1,8 +1,8 @@
-import { games_votes_list, games_votes_put } from "@/api/games";
+import { games_votes_list, games_votes_put } from "./api";
 import { Jam, Spin, Vote } from "@/components";
 import { useNotify } from "@/hooks";
 import { VotingOne, VotingThird, VotingTwo } from "@/icons";
-import JamProps from "@/types/jam";
+import JamProps from "@/pages/jams/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

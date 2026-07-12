@@ -1,5 +1,5 @@
 import { BiBox, BiPlus } from "react-icons/bi";
-import { dashboard_jams } from "@/api/dashboard";
+import { dashboard_jams } from "../api";
 import * as Components from "@/components";
 import dayjs from "dayjs";
 import {
@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
+import GameProps from "@/pages/games/api";
 import { useQuery } from "@tanstack/react-query";
-import { jams_paths } from "@/routes/jams";
+import { jams_paths } from "@/pages/jams/routes";
 import { useMemo } from "react";
 
 const Jams: React.FC = () => {

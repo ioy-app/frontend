@@ -5,7 +5,7 @@ import {
 } from "@/api/sessions";
 import { Button, Session, Spin } from "@/components";
 import { useNotify } from "@/hooks";
-import { Session as SessionProps } from "@/types";
+import { Session as SessionProps } from "../api";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 

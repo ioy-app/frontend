@@ -1,6 +1,6 @@
-import { jams_list } from "@/api/jams";
+import { jams_list } from "./api";
 import { Button, Jam, Spin, Table } from "@/components";
-import JamProps from "@/types/jam";
+import JamProps from "./api";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";

@@ -2,7 +2,7 @@ import { profile_logout } from "@/api/profile";
 import {
 	users_delete,
 	users_games,
-} from "@/api/users";
+} from "../api";
 import { Button, Code, Spin } from "@/components";
 import { useNotify } from "@/hooks";
 import { StoreProps } from "@/stories";
