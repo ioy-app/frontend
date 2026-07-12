@@ -1,7 +1,6 @@
 import * as Profile from "./profile";
 import * as Sessions from "./sessions";
 import * as Users from "./users";
-import * as oAuth from "./auth";
 import * as Games from "./games";
 import * as Comments from "./comments";
 import * as Jams from "./jams";
@@ -165,7 +164,6 @@ export {
 	Profile,
 	Sessions,
 	Users,
-	oAuth,
 	Games,
 	Comments,
 	Jams,

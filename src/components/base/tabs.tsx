@@ -17,11 +17,13 @@ const Tabs: React.FC<{
 	content: Record<string, ReactNode>;
 	onChange?: (tab: string) => void;
 	value?: string;
+	extra?: React.ReactNode;
 }> = ({
 	headers,
 	content,
 	onChange,
-	value
+	value,
+	extra
 }) => {
 	const [ selectTab, setSelectTab ] = useState<HeaderProps | null>(headers[0]);
 	const { t } = useTranslation();
@@ -40,19 +42,26 @@ const Tabs: React.FC<{
 
 	return (
 		<div className="text-placeholder flex flex-col gap-4 w-full">
-			<div className="flex flex-row items-center border-b border-b-br overflow-hidden overflow-x-auto no-scrollbar">
-				{headers.map((header: HeaderProps, i: number) => (
-					<div
-						className={`px-4 py-2 select-none cursor-default rounded-t-xl ${(header?.value == selectTab?.value && "text-text bg-primary font-light") || "cursor-pointer"} transition-colors`}
-						onClick={() => {
-							setSelectTab(header);
-							onChange && onChange?.(header?.value)
-						}}
-						key={i}
-					>
-						{header.label}
+			<div className="flex items-center border-b justify-between border-b-br gap-4">	
+				<div className="flex items-center overflow-hidden overflow-x-auto no-scrollbar">
+					{headers.map((header: HeaderProps, i: number) => (
+						<div
+							className={`px-4 py-2 select-none cursor-default rounded-t-xl ${(header?.value == selectTab?.value && "text-text bg-primary font-light") || "cursor-pointer"} transition-colors`}
+							onClick={() => {
+								setSelectTab(header);
+								onChange && onChange?.(header?.value)
+							}}
+							key={i}
+						>
+							{header.label}
+						</div>
+					))}
+				</div>
+				{extra && (
+					<div className="flex justify-end items-center gap-4">
+						{extra}
 					</div>
-				))}
+				)}
 			</div>
 			<AnimatePresence mode="wait">
 				<motion.div

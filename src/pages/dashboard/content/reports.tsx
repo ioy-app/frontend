@@ -1,24 +1,8 @@
-import confOrder from "@/configs/order.json";
-
-import {
-	BiBox,
-	BiCheck,
-	BiEditAlt,
-	BiPlus,
-	BiReply,
-	BiSearch,
-	BiSearchAlt,
-} from "react-icons/bi";
-import confStatus from "../configs/status.json";
-import { useEffect, useState } from "react";
-
+import { BiCheck, BiReply } from "react-icons/bi";
+import { useState } from "react";
 import * as Components from "@/components";
 import dayjs from "dayjs";
-import {
-	Link,
-	useNavigate,
-	useSearchParams,
-} from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
 import GameProps from "@/types/game";
@@ -35,16 +19,10 @@ const Reports: React.FC = () => {
 	const [ searchParams, setSearchParams ] = useSearchParams();
 
 	const max = 10;
-	const current_page = Number(
-		searchParams.get("page") || 1,
-	);
+	const current_page = Number(searchParams.get("page") || 1);
 
 	const query = useQuery({
-		queryKey: [
-			"dashboard",
-			"reports",
-			searchParams?.toString(),
-		],
+		queryKey: [ "dashboard", "reports", searchParams?.toString() ],
 		queryFn: async () => {
 			const result = await reports_list(
 				(current_page - 1) * max,
@@ -57,13 +35,6 @@ const Reports: React.FC = () => {
 	const handleOpen = (data, i) => {
 		modal("", (onClose) => <ReportAnswer onClose={onClose} data={data} />);
 	}
-
-	const methods = useForm();
-
-	useEffect(() => {
-		if (searchParams.get("sort"))
-			methods.setValue("sort", searchParams.get("sort"));
-	}, [searchParams]);
 
 	return (
 		<div className="w-full flex flex-col gap-4">
@@ -198,7 +169,6 @@ const ReportAnswer: React.FC<{
 			console.log(err);
 		}
 		finally { setLoading(false); }
-		//console.log(data, fd);
 	}
 
 	return (

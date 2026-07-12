@@ -5,24 +5,13 @@ import { Button, Tabs } from "@/components";
 import { BiX } from "react-icons/bi";
 
 /**
- * Содержания блока авторизации/регистрации
- */
-const Auth: React.FC<{
-	/** Событие закрытия модального окна */
-	onClose: () => void;
-}> = ({ onClose }) => {
+ * Auth content
+*/
+const Auth: React.FC<{ onClose: () => void; }> = ({ onClose }) => {
 	const { t } = useTranslation();
+
 	return (
-		<div className="flex flex-col gap-4 justify-center items-center w-full">
-			<div className="w-full flex items-center justify-end">
-				<Button
-					onClick={() => onClose && onClose()}
-					variant="text"
-					className="text-2xl"
-				>
-					<BiX />
-				</Button>
-			</div>
+		<div className="flex flex-col gap-4 justify-center items-center w-full">	
 			<Tabs
 				headers={[
 					{
@@ -45,6 +34,15 @@ const Auth: React.FC<{
 					login: <Login onClose={onClose} />,
 					reg: <Reg onClose={onClose} />,
 				}}
+				extra={(
+					<Button
+						onClick={() => onClose && onClose()}
+						variant="text"
+						className="text-2xl"
+					>
+						<BiX />
+					</Button>
+				)}
 			/>
 		</div>
 	);

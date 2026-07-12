@@ -1,9 +1,5 @@
 [
 	{
-		"label": "dashboard.types.all",
-		"value": "all"
-	},
-	{
 		"label": "dashboard.types.games",
 		"value": "games"
 	},

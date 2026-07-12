@@ -21,6 +21,7 @@
 		"picture": "Картинка"
 	},
 	"placeholders": {
+		"search": "Поиск...",
 		"status": "Статус",
 		"order": "Сортировка по",
 		"instances": {

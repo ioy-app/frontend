@@ -1,34 +1,22 @@
-import confOrder from "@/configs/order.json";
-
 import {
-	BiBookmark,
 	BiBox,
 	BiComment,
 	BiEditAlt,
 	BiHeart,
-	BiLike,
-	BiPlus,
-	BiSearch,
-	BiSearchAlt,
+	BiPlus
 } from "react-icons/bi";
-import confStatus from "../configs/status.json";
-
-import { dashboard_games, dashboard_pictures } from "@/api/dashboard";
-import { useEffect, useState } from "react";
-
+import { dashboard_pictures } from "@/api/dashboard";
 import * as Components from "@/components";
 import dayjs from "dayjs";
 import {
 	Link,
 	useNavigate,
-	useSearchParams,
+	useSearchParams
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { games_paths } from "@/routes/games";
 import { paths } from "@/routes";
 import GameProps from "@/types/game";
 import { useQuery } from "@tanstack/react-query";
-import { FormProvider, useForm } from "react-hook-form";
 import { pictures_paths } from "@/routes/pictures";
 
 const Pictures: React.FC = () => {
@@ -37,26 +25,17 @@ const Pictures: React.FC = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const max = 10;
-	const current_page = Number(
-		searchParams.get("page") || 1,
-	);
+	const current_page = Number(searchParams.get("page") || 1);
 	const status = searchParams.get("status");
 	const sort = searchParams.get("sort");
 	const searchQS = searchParams.get("search");
 
 	const query = useQuery({
-		queryKey: [
-			"dashboard",
-			"pictures",
-			searchParams?.toString(),
-		],
+		queryKey: [ "dashboard", "pictures", searchParams?.toString() ],
 		queryFn: async () => {
 			const search = new URLSearchParams();
 
-			search.set(
-				"offset",
-				String((current_page - 1) * max),
-			);
+			search.set("offset", String((current_page - 1) * max));
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
 			if (status) search.set("status", status);
@@ -67,82 +46,8 @@ const Pictures: React.FC = () => {
 		},
 	});
 
-	const onSubmit = async (data) => {
-		const us = new URLSearchParams();
-		if (data.search) us.set("search", data.search);
-		if (data.status && data.status != "all")
-			us.set("status", data.status);
-		if (data.sort) us.set("sort", data.sort);
-		setSearchParams(us);
-	};
-
-	const methods = useForm();
-
-	useEffect(() => {
-		if (searchParams.get("search"))
-			methods.setValue(
-				"search",
-				searchParams.get("search"),
-			);
-		if (searchParams.get("status"))
-			methods.setValue(
-				"status",
-				searchParams.get("status"),
-			);
-		if (searchParams.get("sort"))
-			methods.setValue("sort", searchParams.get("sort"));
-	}, [searchParams]);
-
-	const sorOptions = confOrder?.map((item) => {
-		item.label = t(item.label);
-		return item;
-	});
-
 	return (
 		<div className="w-full flex flex-col gap-4">
-			<FormProvider {...methods}>
-				<form
-					className="flex gap-4 items-center flex-wrap"
-					onSubmit={methods.handleSubmit(onSubmit)}
-				>
-					<Components.Input
-						type="search"
-						{...methods.register("search")}
-						placeholder={t(
-							"dashboard.placeholders.pictures.search",
-						)}
-					/>
-					<div className="flex flex-wrap items-center justify-between gap-4 w-full">
-						<div className="flex flex-wrap gap-4 items-center">
-							<Components.Select
-								placeholder={t(
-									"dashboard.placeholders.status",
-								)}
-								options={confStatus.map((record) => ({
-									...record,
-									label: t(record.label),
-								}))}
-								{...methods.register("status")}
-								className="w-50"
-							/>
-							<Components.Select
-								options={sorOptions}
-								className="w-50"
-								placeholder={t(
-									"dashboard.placeholders.order",
-								)}
-								{...methods.register("sort")}
-							/>
-						</div>
-						<Components.Button
-							variant="primary"
-							htmlType="submit"
-						>
-							<BiSearch />
-						</Components.Button>
-					</div>
-				</form>
-			</FormProvider>
 			<Components.Table
 				columns={[
 					{

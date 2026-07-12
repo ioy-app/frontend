@@ -33,6 +33,37 @@ const Post: React.FC<{
   } = data;
   const { t } = useTranslation();
 
+	return (
+		<div className="flex flex-col gap-4 border border-br rounded-2xl p-4">
+			<div className="flex justify-between items-center gap-4">
+				<User
+					dataSource={author_data}
+					login={author_data?.login}
+					size="small"
+					className="flex-row flex w-fit"
+				/>
+				<p className="text-placeholder text-text/50">{dayjs(data.date_created).format("HH:mm DD.MM.YYYY")}</p>				
+			</div>
+
+			<div className="flex gap-4 border border-br p-4 rounded-2xl">
+				{data?.type == "game" && (
+					<Game
+						dataSource={props}
+					/>
+				)}
+				{data?.type == "picture" && (
+					<Picture
+						dataSource={props}
+					/>
+				)}
+				<div className="flex flex-col gap-4">
+					<p className="text-title">{title}</p>
+					<p className="text-default">{description}</p>
+				</div>
+			</div>
+		</div>
+	);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">

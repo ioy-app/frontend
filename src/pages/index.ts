@@ -7,7 +7,7 @@ import GameEdit from "./games/edit";
 import Dashboard from "./dashboard";
 import ErrorPage from "./error";
 import About from "./home/pages/about";
-import Verify from "./verify";
+import Verify from "./auth/verify";
 import Feed from "./feed";
 import PictureEdit from "./pictures/edit";
 import Donut from "./home/pages/donut";

@@ -1,9 +1,5 @@
 [
 	{
-		"label": "dashboard.statuses.all",
-		"value": "all"
-	},
-	{
 		"label": "dashboard.statuses.public",
 		"value": "public"
 	},
