@@ -1,4 +1,4 @@
-import confOrder from "@/configs/order.json";
+import confOrder from "@/configs/selectors/order.json";
 
 import {
 	Button,
@@ -11,8 +11,8 @@ import {
 	User,
 } from "@/components";
 import { paths } from "@/routes";
-import { UserProps } from "@/types";
-import GameProps from "@/types/game";
+import UserProps from "./api";
+import GameProps from "@/pages/games/api";
 import {
 	useInfiniteQuery,
 	useMutation,

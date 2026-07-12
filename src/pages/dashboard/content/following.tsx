@@ -1,5 +1,5 @@
 import { BiBox } from "react-icons/bi";
-import { users_following } from "@/api/users";
+import { users_following } from "@/pages/users/api";
 import { useSelector } from "react-redux";
 import { StoreProps } from "@/stories";
 import * as Components from "@/components";

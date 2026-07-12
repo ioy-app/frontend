@@ -1,4 +1,4 @@
-import { jams_list } from "@/api/jams";
+import { jams_list } from "./api";
 import { Button, Jam, Spin } from "@/components";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
@@ -11,7 +11,6 @@ import {
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isBetween from "dayjs/plugin/isBetween";
-import { Routes } from "@/api";
 import { useModal } from "@/hooks";
 import ModalJams from "./modal";
 import { paths } from "@/routes";
@@ -144,7 +143,7 @@ const Jams: React.FC = () => {
 												{jam.is_avatar && (
 													<div className="w-6 h-6">
 														<img
-															src={`/api/v1${Routes.jams.icon(jam.id)}`}
+															src={`/api/v1/jams/${jam.id}/icon`}
 															className="w-full h-full"
 														/>
 													</div>

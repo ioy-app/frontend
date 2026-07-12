@@ -5,7 +5,7 @@ import {
 	BiHeart,
 	BiPlus
 } from "react-icons/bi";
-import { dashboard_pictures } from "@/api/dashboard";
+import { dashboard_pictures } from "../api";
 import * as Components from "@/components";
 import dayjs from "dayjs";
 import {
@@ -15,9 +15,9 @@ import {
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
+import GameProps from "@/pages/games/api";
 import { useQuery } from "@tanstack/react-query";
-import { pictures_paths } from "@/routes/pictures";
+import { pictures_paths } from "@/pages/pictures/routes";
 
 const Pictures: React.FC = () => {
 	const { t } = useTranslation();

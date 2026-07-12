@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import confOrder from "@/configs/order.json";
-import confTypesFilter from "../configs/typesFilter.json";
+import confOrder from "@/configs/selectors/order.json";
+import confTypesFilter from "@/configs/selectors/typesFilter.json";
 import { useTranslation } from "react-i18next";
 import { Select } from "@/components";
 import { useMemo } from "react";

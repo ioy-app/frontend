@@ -1,4 +1,4 @@
-import confOrder from "@/configs/order.json";
+import confOrder from "@/configs/selectors/order.json";
 import {
 	comments_answers,
 	comments_create,
@@ -10,7 +10,7 @@ import {
 import { Button, Select, Spin, ViewModel } from "@/components";
 import Comment from "@/components/content/comment";
 import CommentForm from "@/components/content/comment/form";
-import CommentProps from "@/types/comment";
+import { CommentProps } from "@/api/comments";
 import { useModal, useNotify } from "@/hooks";
 import { StoreProps } from "@/stories";
 import {

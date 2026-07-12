@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import confOrder from "@/configs/order.json";
+import confOrder from "@/configs/selectors/order.json";
 import confJamsTypes from "../configs/jams.json";
 import { useTranslation } from "react-i18next";
 import { Select } from "@/components";

@@ -1,10 +1,10 @@
-import confStatus from "../dashboard/configs/status.json";
+import confStatus from "@/configs/selectors/status.json";
 import {
 	games_create,
 	games_delete,
 	games_details,
 	games_edit,
-} from "@/api/games";
+} from "./api";
 import {
 	Button,
 	Checkbox,
@@ -19,7 +19,7 @@ import {
 } from "@/components";
 import { useModal, useNotify } from "@/hooks";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
+import GameProps from "./api";
 import {
 	useEffect,
 	useMemo,
@@ -36,8 +36,8 @@ import { Navigate, NavLink, useNavigate, useParams } from "react-router-dom";
 import Uploader from "./uploader";
 import JamBlock from "./jam";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { jams_details } from "@/api/jams";
-import { UserProps } from "@/types";
+import { jams_details } from "@/pages/jams/api";
+import UserProps from "@/pages/users/api";
 import { useSelector } from "react-redux";
 
 export default function Edit() {

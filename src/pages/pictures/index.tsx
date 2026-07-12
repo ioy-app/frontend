@@ -12,7 +12,7 @@ import {
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { NavLink, useSearchParams } from "react-router";
-import { pictures_list, pictures_tags } from "@/api/pictures";
+import { pictures_list, pictures_tags } from "./api";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 /**

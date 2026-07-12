@@ -1,5 +1,5 @@
 import { BiBox } from "react-icons/bi";
-import { dashboard_likes } from "@/api/dashboard";
+import { dashboard_likes } from "../api";
 import * as Components from "@/components";
 import dayjs from "dayjs";
 import { NavLink, useSearchParams } from "react-router-dom";

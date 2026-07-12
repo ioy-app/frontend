@@ -1,4 +1,4 @@
-import confStatus from "../dashboard/configs/status.json";
+import confStatus from "@/configs/selectors/status.json";
 import {
 	Button,
 	Checkbox,
@@ -13,7 +13,7 @@ import {
 } from "@/components";
 import { useModal, useNotify } from "@/hooks";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
+import GameProps from "@/pages/games/api";
 import {
 	useEffect,
 	useMemo,
@@ -40,13 +40,13 @@ import {
   useMutation,
   useQuery
 } from "@tanstack/react-query";
-import { jams_details } from "@/api/jams";
+import { jams_details } from "@/pages/jams/api";
 import {
   pictures_create,
   pictures_delete,
   pictures_details,
   pictures_edit
-} from "@/api/pictures";
+} from "./api";
 
 export default function Edit() {
 	const params = useParams();

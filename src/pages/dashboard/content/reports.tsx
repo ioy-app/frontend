@@ -5,13 +5,13 @@ import dayjs from "dayjs";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
-import GameProps from "@/types/game";
+import GameProps from "@/pages/games/api";
 import { useQuery } from "@tanstack/react-query";
 import { FormProvider, useForm } from "react-hook-form";
 import { reports_answer, reports_list } from "@/api/reports";
-import { UserProps } from "@/types";
+import UserProps from "@/pages/users/api";
 import { useModal } from "@/hooks";
-import JamProps from "@/types/jam";
+import JamProps from "@/pages/jams/api";
 
 const Reports: React.FC = () => {
 	const { t } = useTranslation();

@@ -1,9 +1,9 @@
-import { jams_delete, jams_details, jams_games, jams_join, jams_leave } from "@/api/jams";
+import { jams_delete, jams_details, jams_games, jams_join, jams_leave } from "./api";
 import { Button, Code, Game, Jam, Pagination, Report, Spin, Table, Tag, User } from "@/components";
 import { useModal } from "@/hooks";
 import { paths } from "@/routes";
 import { StoreProps } from "@/stories";
-import GameProps from "@/types/game";
+import GameProps from "@/pages/games/api";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";

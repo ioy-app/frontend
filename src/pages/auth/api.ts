@@ -1,17 +1,25 @@
-import { Routes, apiInstance } from "@/api";
+import { apiInstance } from "@/api";
+
+const Routes = {
+	login: `/auth/login`,
+	reg: `/auth/reg`,
+	verify: `/auth/verify`
+};
 
 /**
  * Login
- * 
- * @param data - User's creds
+ *
+ * @param email - User's email
+ * @returns
 */
 export const auth_login = (email: string) =>
-	apiInstance.post(Routes.auth.login, { email });
+	apiInstance.post(Routes.login, { email });
 
 /**
  * Registration new user
- * 
+ *
  * @param data - Creds for new user
+ * @returns
 */
 export const auth_reg = (
 	data: {
@@ -19,14 +27,16 @@ export const auth_reg = (
 		email: string;
 	}
 ) =>
-	apiInstance.post(Routes.auth.reg, data);
+	apiInstance.post(Routes.reg, data);
 
 /**
  * Verify created account
- * @param code - Code
+ *
+ * @param code - Verification code
+ * @returns
 */
 export const auth_verify = (code: string) =>
-	apiInstance.get(Routes.auth.verify, {
+	apiInstance.get(Routes.verify, {
 		params: {
 			code
 		}

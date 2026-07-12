@@ -14,7 +14,7 @@ import Likes from "./content/likes";
 import Reports from "./content/reports";
 import { useEffect, useMemo } from "react";
 import AIReports from "./content/ai_reports";
-import DashboardFilters from "./filters";
+import DashboardFilters from "./components/filter";
 
 export default function Dashboard() {
 	const { t } = useTranslation();

@@ -1,0 +1,83 @@
+{
+	"dashboard": {
+		"tabs": {
+			"instances": "Instances",
+			"jams": "Jams",
+			"following": "Following",
+			"saves": "Saves",
+			"likes": "Likes",
+			"reports": "Reports",
+			"ai_reports": "Reports AI"
+		},
+		"statuses": {
+			"all": "All",
+			"draft": "Draft",
+			"public": "Public"
+		},
+		"jams": {
+			"all": "All",
+			"author": "Author",
+			"judge": "Judge",
+			"join": "Join"
+		},
+		"types": {
+			"all": "All",
+			"games": "Games",
+			"pictures": "Pictures",
+			"game": "Game",
+			"picture": "Picture"
+		},
+		"placeholders": {
+			"search": "Search...",
+			"status": "Status",
+			"order": "Sort order",
+			"type": "Type",
+			"instances": {
+				"search": "Search...",
+				"upload": "Upload",
+				"edit": "Edit",
+				"delete": "Delete"
+			},
+			"jams": {
+				"search": "Search...",
+				"sort": "Jams type"
+			}
+		},
+		"labels": {
+			"nodata": "No data"
+		},
+		"table": {
+			"instances": {
+				"instance": "Instance",
+				"status": "Status",
+				"date_created": "Date created",
+				"date_updated": "Date updated",
+				"like_created": "Like created",
+				"author": "Author",
+				"likes": "Likes",
+				"saves": "Saves",
+				"place": "Place",
+				"score": "Score",
+				"comments": "Comments"
+			},
+			"jams": {
+				"jam": "Jam",
+				"status": "Status",
+				"started_to_finished": "Date range",
+				"vote_started_to_finished": "Vote date range"
+			},
+			"following": {
+				"user": "User"
+			},
+			"reports": {
+				"target_id": "Target",
+				"source_id": "Author",
+				"message": "Message",
+				"answer_id": "Answer Author",
+				"answer": "Answer",
+				"date_created": "Date created",
+				"date_answered": "Date answered"
+			}
+		}
+	}
+}

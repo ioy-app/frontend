@@ -1,8 +1,7 @@
 import {
 	games_details,
 	games_like,
-	games_subscribe,
-} from "@/api/games";
+} from "./api";
 import {
 	Button,
 	Game,
@@ -16,9 +15,9 @@ import {
 	Textarea,
 	User,
 } from "@/components";
-import GameProps from "@/types/game";
+import GameProps from "./api";
 import { useModal, useNotify } from "@/hooks";
-import { UserProps } from "@/types";
+import UserProps from "@/pages/users/api";
 import {
 	useMutation,
 	useQuery,
@@ -48,7 +47,6 @@ import { useSelector } from "react-redux";
 import { StoreProps } from "@/stories";
 import Auth from "../auth";
 import { useRef } from "react";
-import { Routes } from "@/api";
 import JamBlock from "./jam";
 
 export default function GamePage() {
@@ -174,7 +172,7 @@ export default function GamePage() {
 				description={query?.data?.description}
 				url={paths.games.details(id)}
 				keywords={query?.data?.tags?.join(",")}
-				favicon={`/api/v1${Routes.games.icon(id)}`}
+				favicon={`/api/v1/games/${id}/icon`}
 				author={query?.data?.authors_data?.map(author => author?.login)?.join(", ")}
 			/>
 			<Spin loading={query?.status == "pending"} key={id}>
