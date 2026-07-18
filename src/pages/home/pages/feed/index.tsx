@@ -7,32 +7,32 @@ import { useMemo } from "react";
 
 /**
  * Feed
- * @example
- * return <Feed />
-*/
+ * @description Global feed page with infinite scrolling posts from all users
+ * @returns JSX element with feed posts and infinite scroll
+ */
 export default function Feed({}) {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  const query = useInfiniteQuery({
-    queryKey: [ "feed-global" ],
-    queryFn: async ({ pageParam = 0 }) => {
-      const response = await feed_global(pageParam);
-      return response;
-    },
-    getNextPageParam: (lastPage) => {
-      const next = lastPage.offset + lastPage.limit;
-      if (next >= lastPage?.total)
-        return null;
-      return next;
-    },
-    getPreviousPageParam: (firstPage) => firstPage.offset
-  });
+	const query = useInfiniteQuery({
+		queryKey: [ "feed-global" ],
+		queryFn: async ({ pageParam = 0 }) => {
+			const response = await feed_global(pageParam);
+			return response;
+		},
+		getNextPageParam: (lastPage) => {
+			const next = lastPage.offset + lastPage.limit;
+			if (next >= lastPage?.total)
+				return null;
+			return next;
+		},
+		getPreviousPageParam: (firstPage) => firstPage.offset
+	});
 
 	const items = useMemo(() => [].concat?.(...(query?.data?.pages?.map?.(page => page?.items || []) || [])), [ query?.data ]);
 
-  return (
-    <div className="w-full h-fit min-h-full gap-4 flex">
-      <div className="w-full flex flex-col items-center">
+	return (
+		<div className="w-full h-fit min-h-full gap-4 flex">
+			<div className="w-full flex flex-col items-center">
 				<Spin loading={query?.isPending}>
 					<InfiniteScroll
 						className="w-full grid grid-cols-1 gap-4 max-lg:grid-cols-1"
@@ -63,7 +63,7 @@ export default function Feed({}) {
 						))}
 					</InfiniteScroll>
 				</Spin>
-      </div>
-    </div>
-  );
+			</div>
+		</div>
+	);
 }

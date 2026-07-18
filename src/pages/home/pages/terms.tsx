@@ -7,8 +7,8 @@ import { Meta } from "@/components";
 
 /**
  * Terms
- * @example
- * return <Terms />
+ * @description Terms of service, privacy policy, and cookie policy page with embedded PDF documents
+ * @returns JSX element with terms content and document links
  */
 export default function Terms() {
 	const { t } = useTranslation();

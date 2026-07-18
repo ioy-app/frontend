@@ -24,6 +24,13 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+/**
+ * Comments
+ * @description Infinite-scrolling comments section with create, reply, like, and delete functionality
+ *
+ * @param type - The content type the comments belong to ("game" or "picture")
+ * @returns JSX element with comment list, form, and infinite scroll
+ */
 const Comments: React.FC<{
 	type: "game" | "picture"
 }> = ({
@@ -69,8 +76,11 @@ const Comments: React.FC<{
 			return response;
 		},
 		onError: (err) => notify(t(err.toString()), "error"),
-		onSuccess: (data, params) => {
-			const is_like = data?.status == "liked";
+		onSuccess: (
+			data,
+			params
+		) => {
+			const isLiked = data?.status == "liked";
 			queryClient.setQueryData(
 				["comments", type, id, order],
 				({ pages, pageParams }) => {
@@ -82,9 +92,9 @@ const Comments: React.FC<{
 						visited.add(obj.id);
 
 						if (obj.id == params) {
-							obj.is_like = is_like;
+							obj.is_like = isLiked;
 							obj.likes +=
-								Number(is_like) - Number(!is_like);
+								Number(isLiked) - Number(!isLiked);
 							return true;
 						} else {
 							let isFind = false;
@@ -113,22 +123,25 @@ const Comments: React.FC<{
 		},
 	});
 
-	const del = useMutation({
-		mutationFn: async (commentid: number) => {
+	const deleteMutation = useMutation({
+		mutationFn: async (commentId: number) => {
 			const response = await comments_delete(
 				Number(id),
-				Number(commentid),
+				Number(commentId),
 			);
 			return response;
 		},
 		onError: (err) => notify(t(err.toString()), "error"),
-		onSuccess: (data, params) => {
-			const is_deleted = data?.status == "deleted";
+		onSuccess: (
+			data,
+			params
+		) => {
+			const isDeleted = data?.status == "deleted";
 			notify(
 				t(
-					`notify.${is_deleted ? "deleted.comment" : "denied"}`,
+					`notify.${isDeleted ? "deleted.comment" : "denied"}`,
 				),
-				is_deleted ? "success" : "warning",
+				isDeleted ? "success" : "warning",
 			);
 			queryClient.setQueryData(
 				["comments", type, id, order],
@@ -139,7 +152,7 @@ const Comments: React.FC<{
 					) => {
 						if (visited.has(obj.id)) return false;
 						visited.add(obj.id);
-						if (!is_deleted) return true;
+						if (!isDeleted) return true;
 						if (obj.id == params) {
 							obj.deleted = true;
 							return true;
@@ -172,11 +185,11 @@ const Comments: React.FC<{
 
 	const create = useMutation({
 		mutationFn: async (props: {
-			comment_id?: number;
+			commentId?: number;
 			comment: string;
 		}) => {
 			let response;
-			if (typeof props.comment_id == "undefined")
+			if (typeof props.commentId == "undefined")
 				response = await comments_create(
 					Number(id),
 					props.comment,
@@ -185,13 +198,16 @@ const Comments: React.FC<{
 			else
 				response = await comments_reply(
 					Number(id),
-					Number(props.comment_id),
+					Number(props.commentId),
 					props.comment,
 				);
 			return response;
 		},
 		onError: (err) => notify(t(err.toString()), "error"),
-		onSuccess: (data, params) => {
+		onSuccess: (
+			data,
+			params
+		) => {
 			const globalComment = {
 				...data,
 				author: {
@@ -211,7 +227,7 @@ const Comments: React.FC<{
 					) => {
 						if (visited.has(obj.id)) return false;
 						visited.add(obj.id);
-						if (obj.id == params.comment_id) {
+						if (obj.id == params.commentId) {
 							if (!obj.answers?.length) obj.answers = [];
 							obj.answers.unshift(globalComment);
 							obj.answers_total = obj.answers.length;
@@ -231,7 +247,7 @@ const Comments: React.FC<{
 					return {
 						pageParams,
 						pages: pages.map((page) => {
-							if (typeof params.comment_id == "undefined") {
+							if (typeof params.commentId == "undefined") {
 								page.items.unshift(globalComment);
 							} else {
 								page.items.map((comment) => {
@@ -249,12 +265,12 @@ const Comments: React.FC<{
 
 	const loadNext = useMutation({
 		mutationFn: async (props: {
-			commentid: number;
+			commentId: number;
 			offset: number;
 		}) => {
 			const response = await comments_answers(
 				Number(id),
-				Number(props.commentid),
+				Number(props.commentId),
 				{
 					offset: props.offset,
 					limit: 5
@@ -263,7 +279,10 @@ const Comments: React.FC<{
 			return response;
 		},
 		onError: (err) => notify(t(err.toString()), "error"),
-		onSuccess: (data, params) => {
+		onSuccess: (
+			data,
+			params
+		) => {
 			queryClient.setQueryData(
 				["comments", type, id, order],
 				({ pages, pageParams }) => {
@@ -273,7 +292,7 @@ const Comments: React.FC<{
 					) => {
 						if (visited.has(obj.id)) return false;
 						visited.add(obj.id);
-						if (obj.id == params.commentid) {
+						if (obj.id == params.commentId) {
 							if (!obj.answers?.length) obj.answers = [];
 							obj.answers.push(...data.items);
 							return true;
@@ -356,24 +375,33 @@ const Comments: React.FC<{
 						</div>
 					)}
 				>
-					{comments?.map((comment, i) => (
+					{comments?.map((
+    comment,
+    i
+) => (
 						<Comment
 							{...comment}
 							key={i}
 							onLike={(id) => like.mutate(id)}
-							onOk={(comment_id, comment) =>
-								create.mutate({
-									comment_id,
-									comment,
-								})
-							}
+						onOk={(
+							commentId,
+							comment
+						) =>
+							create.mutate({
+								commentId,
+								comment,
+							})
+						}
 							onLoadNext={(offset) =>
 								loadNext.mutate({
-									commentid: comment.id,
+									commentId: comment.id,
 									offset,
 								})
 							}
-							onDelete={(comment_id, comment_text) => {
+							onDelete={(
+							commentId,
+							commentText
+						) => {
 								modal(
 									() => (
 										<div className="flex flex-col gap-2">
@@ -381,7 +409,7 @@ const Comments: React.FC<{
 												{t("games.comments.confirm")}
 											</p>
 											<div className="w-full p-4 border border-br rounded-xl">
-												{comment_text}
+												{commentText}
 											</div>
 										</div>
 									),
@@ -394,7 +422,7 @@ const Comments: React.FC<{
 												variant="danger"
 												onClick={() => {
 													onClose();
-													del.mutate(comment_id);
+													deleteMutation.mutate(commentId);
 												}}
 											>
 												{t("buttons.ok")}

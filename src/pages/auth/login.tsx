@@ -10,8 +10,12 @@ import { useNotify } from "@/hooks";
 import { useMutation } from "@tanstack/react-query";
 
 /**
- * Auth, login form
-*/
+ * Login
+ * @description Login form with email input and verification code confirmation
+ *
+ * @param onClose - Callback when login is completed or modal is closed
+ * @returns JSX element with login form or code verification
+ */
 const Login: React.FC<{ onClose: () => void; }> = ({ onClose }) => {
 	const { t } = useTranslation();
 	const dispatch = useDispatch();

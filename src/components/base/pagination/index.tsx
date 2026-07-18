@@ -4,22 +4,26 @@ import Button from "../button";
 /**
  * Pagination component
  * @example
- * return <Pagination current={1} total={50} per_page={10} />
+ * return <Pagination current={1} total={50} perPage={10} />
+ * @returns Page navigation buttons
  */
 const Pagination: React.FC<{
 	/** Total rows */
 	total: number;
 	/** Rows per page */
-	per_page?: number;
+	perPage?: number;
 	/** Current page */
 	current: number;
 	/** Change page event */
-	onChange: (offset: number, page: number) => void;
+	onChange: (
+		offset: number,
+		page: number
+	) => void;
 	/** Disabled navigation */
 	disabled?: boolean;
-}> = ({ total, per_page, current, onChange, disabled }) => {
+}> = ({ total, perPage, current, onChange, disabled }) => {
 	const pages = useMemo<number[]>(() => {
-		const max = Math.ceil(total / per_page);
+		const max = Math.ceil(total / perPage);
 		const setter = new Set<number>();
 
 		setter.add(1);
@@ -38,16 +42,22 @@ const Pagination: React.FC<{
 			setter.add(i);
 		setter.add(max);
 
-		return Array.from(setter).sort((a, b) => a - b);
-	}, [current, per_page, total]);
+		return Array.from(setter).sort((
+			a,
+			b
+		) => a - b);
+	}, [current, perPage, total]);
 
 	if (pages?.length <= 1) return <></>;
 
 	return (
 		<div className="flex gap-4 items-center justify-end flex-wrap">
 			{pages &&
-				pages?.map((page: number, i: number) => {
-					const offset = Math.max(page - 1, 0) * per_page;
+				pages?.map((
+				page: number,
+				i: number
+			) => {
+					const offset = Math.max(page - 1, 0) * perPage;
 					return (
 						<Button
 							key={i}

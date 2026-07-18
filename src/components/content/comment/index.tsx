@@ -18,14 +18,35 @@ import { StoreProps } from "@/stories";
 import { useModal } from "@/hooks";
 import Report from "@/components/custom/report";
 
+/**
+ * Comment
+ * @description Displays a single comment with author info, content, timestamps, and action buttons (like, reply, delete, report). Supports nested answer threads with pagination.
+ *
+ * @param props - CommentProps and additional event callbacks
+ * @param onLike - Callback fired when the like button is clicked with the comment id
+ * @param onOk - Callback fired when a reply is submitted with the parent comment id and new comment text
+ * @param onDelete - Callback fired when the delete button is clicked with the comment id and comment text
+ * @param onLoadNext - Callback fired to load the next page of answer comments with the current offset
+ * @param disabled - Disables interaction buttons
+ * @returns A comment card with author, text, timestamps, action buttons, and nested answer thread
+ *
+ * @example
+ * <Comment {...commentData} onLike={(id) => handleLike(id)} />
+ */
 const Comment: React.FC<
 	CommentProps & {
 		/** Like event */
 		onLike?: (id: number) => void;
 		/** Submit event */
-		onOk?: (id: number, comment: string) => void;
+		onOk?: (
+			id: number,
+			comment: string
+		) => void;
 		/** Delete event */
-		onDelete?: (id: number, comment: string) => void;
+		onDelete?: (
+			id: number,
+			comment: string
+		) => void;
 		/** Load next comments page */
 		onLoadNext?: (offset: number) => void;
 		/** Disabled */
@@ -172,7 +193,10 @@ const Comment: React.FC<
 			{props?.answers?.length > 0 && (
 				<div className="flex flex-col gap-4 border-l border-l-gray-200 ml-4 pl-4">
 					{props?.answers?.map(
-						(comment: CommentProps, i: number) => (
+						(
+							comment: CommentProps,
+							i: number
+						) => (
 							<Comment
 								onLike={props.onLike}
 								onOk={props.onOk}

@@ -32,7 +32,7 @@ import {
 } from "./api";
 import { useModal, useNotify } from "@/hooks";
 import { useTranslation } from "react-i18next";
-import { dashboard_paths } from "@/pages/dashboard/routes";
+import { dashboardPaths } from "@/pages/dashboard/routes";
 import {
 	BiCog,
 	BiCommentError,
@@ -49,6 +49,11 @@ import UserContent from "./content";
 import { paths } from "@/routes";
 import ErrorPage from "../error";
 
+/**
+ * Profile
+ * @description User profile page with avatar, subscriber count, games, pictures, subscribers, and likes blocks
+ * @returns JSX element with full user profile view
+ */
 export default function Profile() {
 	const context = useOutletContext();
 	const { t } = useTranslation();
@@ -71,7 +76,7 @@ export default function Profile() {
 
 			if (!data.controls)
 				throw new Error("Нет авторизации");
-			const is_subscribe =
+			const isSubscribed =
 				response?.status == "created" ? true : false;
 			const subscribers =
 				data.subscribers +
@@ -94,7 +99,7 @@ export default function Profile() {
 				subscribers,
 				controls: {
 					...prev?.controls,
-					is_subscribe,
+					is_subscribe: isSubscribed,
 				},
 			}));
 		} catch (err) {
@@ -189,7 +194,7 @@ export default function Profile() {
 										variant="default"
 										htmlType="button"
 										onClick={() =>
-											navigator(dashboard_paths.list)
+											navigator(dashboardPaths.list)
 										}
 									>
 										<BiGridAlt />

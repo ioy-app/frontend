@@ -3,6 +3,22 @@ import Spin from "@/components/base/spin";
 import { Profile } from "@/icons";
 import { useQuery } from "@tanstack/react-query";
 
+/**
+ * Jam
+ * @description Displays a jam event card with an avatar image and title. Optionally wrapped in a link to the jam page.
+ *
+ * @param dataSource - Jam data object containing id, title, and avatar info
+ * @param preview - URL of a preview image to display instead of the default avatar
+ * @param nolink - Disables the navigation link to the jam page
+ * @param className - Additional CSS class names
+ * @param size - Avatar size in Tailwind size units (default: 24)
+ * @param onClick - Callback fired when the card is clicked (only works in nolink mode) with the jam id
+ * @returns A jam card with avatar and title, optionally wrapped in a link
+ *
+ * @example
+ * <Jam dataSource={jamData} size={32} />
+ * <Jam dataSource={jamData} nolink onClick={(id) => handleSelect(id)} />
+ */
 const Jam: React.FC<{
 	/** Game data */
 	dataSource: Record<string, any>;

@@ -16,6 +16,11 @@ import { useEffect, useMemo } from "react";
 import AIReports from "./content/ai_reports";
 import DashboardFilters from "./components/filter";
 
+/**
+ * Dashboard
+ * @description Admin dashboard with tabbed content for instances, jams, following, likes, reports, and AI reports
+ * @returns JSX element with tabbed dashboard layout and filters
+ */
 export default function Dashboard() {
 	const { t } = useTranslation();
 	const params = useParams();

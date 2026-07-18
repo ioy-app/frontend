@@ -5,6 +5,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Email
+ * @description Email change form with current email verification and code confirmation
+ *
+ * @param onClose - Callback when the modal is closed
+ * @returns JSX element with email change form
+ */
 const Email: React.FC<{
 	onClose;
 }> = ({ onClose }) => {

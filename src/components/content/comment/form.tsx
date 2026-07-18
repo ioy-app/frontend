@@ -7,6 +7,19 @@ import {
 import { useTranslation } from "react-i18next";
 import { BiCheck } from "react-icons/bi";
 
+/**
+ * CommentForm
+ * @description A form component for creating or replying to comments. Contains a textarea and submit/cancel buttons.
+ *
+ * @param isReply - Whether the form is in reply mode (shows a cancel button)
+ * @param onClose - Callback fired when the cancel button is clicked
+ * @param onOk - Callback fired on form submission with the comment text
+ * @returns A form with a textarea and action buttons for submitting a comment
+ *
+ * @example
+ * <CommentForm onOk={(comment) => console.log(comment)} />
+ * <CommentForm isReply onClose={() => setReply(false)} onOk={handleSubmit} />
+ */
 const CommentForm: React.FC<{
 	/** Reply mode */
 	isReply?: boolean;

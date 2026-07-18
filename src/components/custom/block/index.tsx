@@ -6,6 +6,20 @@ import { useTranslation } from "react-i18next";
 import { BiExpandAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Block
+ * @description Paginated content block that fetches items and renders them in a grid with an expand button
+ *
+ * @param title - Display title for the block
+ * @param id - Optional unique identifier for the query key
+ * @param request - Async function that fetches items by page and count
+ * @param Component - React component used to render each item
+ * @param onOpen - Callback triggered when the expand button is clicked
+ * @returns A bordered block with a title, item count badge, and a grid of rendered items
+ *
+ * @example
+ * <Block title="Games" id="games" request={fetchGames} Component={GameCard} onOpen={() => openModal()} />
+ */
 const Block: React.FC<{
 	/** Title */
 	title: string;
@@ -60,7 +74,10 @@ const Block: React.FC<{
 				<Spin loading={isFetching}>
 					<div className="grid grid-cols-5 max-md:grid-cols-3 gap-4">
 						{Component &&
-							data?.items?.map((item, i: number) => (
+							data?.items?.map((
+							item,
+							i: number
+						) => (
 								<Component
 									size="full"
 									{...(item as any)}

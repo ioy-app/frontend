@@ -9,10 +9,10 @@ import * as Icons from "@/icons";
 import { NavLink } from "react-router-dom";
 
 /**
- * Verify account
- * @example
- * return <Verify />
-*/
+ * Verify
+ * @description Account verification page that confirms user email via verification code from URL params
+ * @returns JSX element with verification status display
+ */
 export default function Verify({}) {
   const { t } = useTranslation();
   const [ searchParam ] = useSearchParams();

@@ -2,10 +2,21 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 /**
- * Meta tags
+ * Meta
+ * @description HTML meta tags manager using react-helmet-async for SEO and social sharing
+ *
+ * @param title - Page title
+ * @param description - Page description for meta and Open Graph tags
+ * @param keywords - Comma-separated keywords for the meta tag
+ * @param author - Content author name
+ * @param banner - Path to the social sharing banner image
+ * @param favicon - Path to the favicon image
+ * @param url - Canonical URL path for the page
+ * @returns Helmet component that injects title, meta, and Open Graph tags into the document head
+ *
  * @example
- * return <Meta />
-*/
+ * <Meta title="My Page" description="Page description" url="/my-page" />
+ */
 const Meta: React.FC<{
   title: string;
   description: string;

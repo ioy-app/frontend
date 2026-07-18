@@ -7,9 +7,13 @@ import { useState } from "react";
 
 /**
  * Footer
+ * @description Site footer with navigation links, language selector, and dark mode toggle
+ *
+ * @returns A footer element containing terms link, email, about/donut navigation, language select, and theme toggle
+ *
  * @example
- * return <Footer />
-*/
+ * <Footer />
+ */
 const Footer: React.FC = () => {
 	const { i18n, t } = useTranslation();
 	const prefersDarkMode =

@@ -9,6 +9,11 @@ import { Session as SessionProps } from "../api";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Sessions
+ * @description Active sessions management modal with list of sessions and delete functionality
+ * @returns JSX element with sessions list and delete controls
+ */
 const Sessions: React.FC = () => {
 	const { t } = useTranslation();
 	const { notify } = useNotify();
@@ -62,7 +67,10 @@ const Sessions: React.FC = () => {
 			<p className="text-title">{t("sessions.title")}</p>
 			{!data?.length && <p>{t("sessions.empty")}</p>}
 			<div className="flex flex-col gap-4">
-				{data?.map((session: SessionProps, i: number) => (
+				{data?.map((
+						session: SessionProps,
+						i: number
+					) => (
 					<Session
 						key={i}
 						{...session}

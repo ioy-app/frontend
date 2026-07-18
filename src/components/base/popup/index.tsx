@@ -5,6 +5,7 @@ import { useState } from "react";
  * Helpers popup
  * @example
  * return <Popup />
+ * @returns Hover-triggered tooltip popup with animated reveal
  */
 const Popup: React.FC<{
 	children: React.ReactNode;

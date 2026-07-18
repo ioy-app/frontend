@@ -49,6 +49,11 @@ import Auth from "../auth";
 import { useRef } from "react";
 import JamBlock from "./jam";
 
+/**
+ * GamePage
+ * @description Detailed game view with player, like/share/report actions, authors, description, and comments
+ * @returns JSX element with full game details page
+ */
 export default function GamePage() {
 	const params = useParams();
 	const id = params?.id;
@@ -82,10 +87,10 @@ export default function GamePage() {
 		onError: (err) => notify(t(err?.message?.toString()), "error"),
 		onSuccess: (data) => {
 			if (!data) return;
-			const is_like = data?.status == "liked";
+			const isLiked = data?.status == "liked";
 			notify(
-				t(`notify.${is_like ? "like" : "unlike"}`),
-				is_like ? "success" : "warning",
+				t(`notify.${isLiked ? "like" : "unlike"}`),
+				isLiked ? "success" : "warning",
 			);
 			queryClient.setQueryData(
 				["games", id],
@@ -293,8 +298,11 @@ export default function GamePage() {
 									{t("games.labels.authors")}
 								</p>
 								<div className="flex flex-col gap-4 w-full border border-br rounded-xl p-4 h-fit">
-									{query?.data?.authors_data?.map(
-										(author: UserProps, i: number) => (
+								{query?.data?.authors_data?.map(
+									(
+										author: UserProps,
+										i: number
+									) => (
 											<User
 												login={author?.login}
 												dataSource={author}
@@ -316,8 +324,11 @@ export default function GamePage() {
 											{query?.data?.description}
 										</LinkifyText>
 										<div className="flex flex-row flex-wrap gap-4">
-											{query?.data?.tags?.map(
-												(tag: string, i: number) => (
+										{query?.data?.tags?.map(
+											(
+												tag: string,
+												i: number
+											) => (
 													<Tag
 														title={tag}
 														key={i}
@@ -353,7 +364,10 @@ export default function GamePage() {
 								</p>
 								<div className="grid grid-cols-5 max-md:grid-cols-3 gap-4 p-4 border border-br rounded-xl w-full">
 									{query?.data?.recommendator?.map(
-										(game: GameProps, i: number) => (
+										(
+											game: GameProps,
+											i: number
+										) => (
 											<div>
 												<Game
 													dataSource={game}

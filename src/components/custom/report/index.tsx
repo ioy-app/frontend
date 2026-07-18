@@ -7,9 +7,17 @@ import { reports_create } from "@/api/reports";
 import { useState } from "react";
 
 /**
- * Report form
+ * Report
+ * @description Report form for submitting content moderation reports
+ *
+ * @param target_id - ID of the content being reported
+ * @param type - Type of content being reported (game, user, jam, comment, or picture)
+ * @param Instance - React node preview of the reported content
+ * @param onClose - Callback triggered when the report modal is closed
+ * @returns A form with a message textarea, cancel and submit buttons
+ *
  * @example
- * return <Report />
+ * <Report target_id={1} type="game" Instance={<GamePreview />} onClose={() => closeModal()} />
  */
 const Report: React.FC<{
 	target_id: number;

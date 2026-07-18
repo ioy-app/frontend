@@ -8,10 +8,10 @@ import { Form } from "react-router";
 import { AI } from "@/icons";
 
 /**
- * AI Reports
- * @example
- * return <AIReports />
-*/
+ * AIReports
+ * @description AI-powered reports search with natural language query and results table display
+ * @returns JSX element with search input and results table
+ */
 const AIReports: React.FC = () => {
   const [ columns, setColumns ] = useState([]);
   const [ data, setData ] = useState([]);

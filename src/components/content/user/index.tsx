@@ -5,6 +5,26 @@ import Spin from "../../base/spin";
 import { useQuery } from "@tanstack/react-query";
 import UserProps from "@/pages/users/api";
 
+/**
+ * User
+ * @description Displays a user avatar with an optional login name. Supports multiple sizes, animated donut border for donors, and optional navigation link to the user profile.
+ *
+ * @param login - User's login name displayed next to the avatar
+ * @param hideLogin - Hides the login text
+ * @param preview - URL of a preview image to display instead of the default avatar
+ * @param size - Avatar size preset ("small" | "middle" | "large" | "full") or a numeric Tailwind size value (default: "large")
+ * @param nolink - Disables the navigation link to the user profile
+ * @param className - Additional CSS class names
+ * @param dataSource - User data object containing is_avatar and is_donut status
+ * @param ref - Forwarded ref to the root div element
+ * @param onClick - Callback fired when the avatar is clicked with the user's login
+ * @param vertical - Arranges the avatar and login name vertically
+ * @returns A user avatar card with optional login text, optionally wrapped in a navigation link
+ *
+ * @example
+ * <User login="username" dataSource={userData} />
+ * <User login="username" size="small" nolink vertical />
+ */
 const User: React.FC<{
 	/** Login */
 	login?: string;

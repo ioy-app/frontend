@@ -29,10 +29,23 @@ interface ViewModelProps {
 }
 
 /**
- * View 3D model
+ * ViewModel
+ * @description Interactive 3D model viewer using Three.js with rotation and scale controls
+ *
+ * @param name - Unique model name used as the React key
+ * @param href - Path to the GLTF model file
+ * @param rotX - Initial rotation on the X axis
+ * @param rotY - Initial rotation on the Y axis
+ * @param rotZ - Initial rotation on the Z axis
+ * @param spdX - Rotation speed on the X axis per frame
+ * @param spdY - Rotation speed on the Y axis per frame
+ * @param spdZ - Rotation speed on the Z axis per frame
+ * @param scale - Model scale factor
+ * @returns A canvas element rendering the 3D model with ambient and directional lighting
+ *
  * @example
- * return <ViewModel />
-*/
+ * <ViewModel name="car" href="/models/car.glb" rotY={Math.PI / 4} spdY={0.5} />
+ */
 const ViewModel: React.FC<ViewModelProps & {
   /** Model name for ID */
   name: string;
@@ -69,6 +82,7 @@ const ViewModel: React.FC<ViewModelProps & {
  * Model component
  * @example
  * return <Model />
+ * @returns 3D model rendered inside a Canvas
 */
 const Model: React.FC<ViewModelProps> = ({
   rotX=0,
@@ -98,7 +112,10 @@ const Model: React.FC<ViewModelProps> = ({
     rotZ
   ]);
 
-  useFrame((_, delta) => {
+  useFrame((
+		_,
+		delta
+	) => {
     if (!meshRef?.current)
       return;
 

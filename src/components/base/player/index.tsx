@@ -5,6 +5,18 @@ import { BiError, BiPlay } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
 import Picture from "../../content/picture";
 
+/**
+ * Player
+ * @description 3D game player that loads and displays a game in an iframe with a play button overlay and loading/error states
+ *
+ * @param gameId - ID of the game to load in the player
+ * @param ref - Ref forwarded to the outer container div
+ * @param picture - Picture data object used as a thumbnail background before playback
+ * @returns An aspect-video container that shows a play button overlay or an embedded game iframe
+ *
+ * @example
+ * <Player gameId={42} picture={gamePicture} />
+ */
 const Player: React.FC<{
 	/** Game id */
 	gameId?: number;

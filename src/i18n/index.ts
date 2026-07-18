@@ -21,6 +21,11 @@ import ruJams from "@/pages/jams/i18n/ru.json";
 import enAuth from "@/pages/auth/i18n/en.json";
 import ruAuth from "@/pages/auth/i18n/ru.json";
 
+/**
+ * en
+ * @description English translation strings
+ * @returns Merged English translation object from all feature modules
+ */
 const en = {
 	...enGlobal,
 	...enComponents,
@@ -32,6 +37,11 @@ const en = {
 	...enJams,
 	...enAuth
 };
+/**
+ * ru
+ * @description Russian translation strings
+ * @returns Merged Russian translation object from all feature modules
+ */
 const ru = {
 	...ruGlobal,
 	...ruComponents,
@@ -44,6 +54,11 @@ const ru = {
 	...ruAuth
 };
 
+/**
+ * resources
+ * @description i18n resource bundle mapping language codes to translation objects
+ * @returns Resource bundle object with language codes as keys
+ */
 const resources = {
 	en: { translation: en },
 	ru: { translation: ru }

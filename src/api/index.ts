@@ -3,6 +3,11 @@ import * as Sessions from "./sessions";
 import * as Comments from "./comments";
 
 import axios from "axios";
+/**
+ * apiInstance
+ * @description Axios instance configured with credentials, base URL, and interceptors for auth token handling and token refresh
+ * @returns Configured axios instance
+ */
 export const apiInstance = axios.create({
 	withCredentials: true,
 	baseURL: "/api/v1",
@@ -43,6 +48,11 @@ apiInstance.interceptors.response.use(
 	},
 );
 
+/**
+ * apiFileInstance
+ * @description Axios instance for file uploads with separate response interceptor that returns raw response data
+ * @returns Configured axios instance for file operations
+ */
 export const apiFileInstance = apiInstance;
 apiFileInstance.interceptors.response.use(
 	(config) => config,
@@ -71,6 +81,11 @@ apiFileInstance.interceptors.response.use(
 	},
 );
 
+/**
+ * Routes
+ * @description API route paths for core application endpoints
+ * @returns Route path constants
+ */
 const Routes = {
 	sessions: {
 		list: `/sessions`,
@@ -83,11 +98,17 @@ const Routes = {
 	},
 	comments: {
 		details: (id: number) => `/comments/${id}`,
-		answers: (id: number, commentid: number) =>
-			`/comments/${id}/${commentid}`,
+		answers: (
+			id: number,
+			commentId: number
+		) =>
+			`/comments/${id}/${commentId}`,
 		create: (id: number) => `/comments/${id}`,
-		reply: (id: number, commentid: number) =>
-			`/comments/${id}/${commentid}`,
+		reply: (
+			id: number,
+			commentId: number
+		) =>
+			`/comments/${id}/${commentId}`,
 		like: (id: number) => `/comments/${id}/like`,
 	},
 	search: `/search`,

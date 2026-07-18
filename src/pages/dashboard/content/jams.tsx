@@ -11,16 +11,21 @@ import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
 import GameProps from "@/pages/games/api";
 import { useQuery } from "@tanstack/react-query";
-import { jams_paths } from "@/pages/jams/routes";
+import { jamsPaths } from "@/pages/jams/routes";
 import { useMemo } from "react";
 
+/**
+ * Jams
+ * @description Dashboard tab displaying jams with date ranges, sorting, and pagination
+ * @returns JSX element with jams table
+ */
 const Jams: React.FC = () => {
 	const { t } = useTranslation();
 	const navigator = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const max = 10;
-	const current_page = Number(searchParams.get("page") || 1);
+	const currentPage = Number(searchParams.get("page") || 1);
 	const sort = searchParams.get("sort");
 	const jams = searchParams.get("jams");
 	const searchQS = searchParams.get("search");
@@ -30,7 +35,7 @@ const Jams: React.FC = () => {
 		queryFn: async () => {
 			const search = new URLSearchParams();
 
-			search.set("offset", String((current_page - 1) * max));
+			search.set("offset", String((currentPage - 1) * max));
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
 			if (jams) search.set("jams", jams);
@@ -50,7 +55,10 @@ const Jams: React.FC = () => {
 					{
 						title: t("dashboard.table.jams.jam"),
 						dataIndex: "id",
-						render: (data, jam) => (
+						render: (
+							data,
+							jam
+						) => (
 							<Link
 								to={paths.jams.details(jam?.id)}
 								className="group flex items-center gap-2 w-fit"
@@ -76,7 +84,10 @@ const Jams: React.FC = () => {
 							"dashboard.table.jams.started_to_finished",
 						),
 						dataIndex: "date_created",
-						render: (_, row) => (
+						render: (
+							_,
+							row
+						) => (
 							<div className="flex items-center gap-1 text-default">
 								<p>{dayjs(row.date_started)?.isValid() && dayjs(row.date_started).format("HH:mm DD.MM.YYYY")}</p>
 								<p>—</p>
@@ -89,7 +100,10 @@ const Jams: React.FC = () => {
 							"dashboard.table.jams.vote_started_to_finished",
 						),
 						dataIndex: "date_vote_started",
-						render: (_, row) => (
+						render: (
+							_,
+							row
+						) => (
 							<div className="flex items-center gap-1 text-default">
 								<p>{dayjs(row.date_vote_started)?.isValid() && dayjs(row.date_vote_started).format("HH:mm DD.MM.YYYY")}</p>
 								<p>—</p>
@@ -104,7 +118,7 @@ const Jams: React.FC = () => {
 					<div className="w-full flex items-center justify-end gap-4">
 						<Components.Button
 							variant="primary"
-							onClick={() => navigator(jams_paths.create)}
+							onClick={() => navigator(jamsPaths.create)}
 						>
 							{t("buttons.add_jam")}
 							<BiPlus />
@@ -114,9 +128,12 @@ const Jams: React.FC = () => {
 				footer={
 					<Components.Pagination
 						total={query?.data?.total || 1}
-						current={current_page}
-						per_page={max}
-						onChange={(offset, page) => {
+						current={currentPage}
+						perPage={max}
+						onChange={(
+						offset,
+						page
+					) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();

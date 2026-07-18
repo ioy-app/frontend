@@ -10,6 +10,15 @@ import { useQuery } from "@tanstack/react-query";
 import { apiInstance } from "@/api";
 import { useMemo } from "react";
 
+/**
+ * Home
+ * @description Main home page layout with outlet for nested routes
+ *
+ * @returns Main home page component
+ *
+ * @example
+ * <Home />
+ */
 export default function Home() {
 	return (
 		<div className="flex flex-col gap-4 w-full">

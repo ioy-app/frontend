@@ -7,16 +7,26 @@ import { useQuery } from "@tanstack/react-query";
 import { apiInstance } from "@/api";
 import { useEffect } from "react";
 
+/**
+ * ScrollToTop
+ * @description Scrolls the window to the top whenever the route pathname changes
+ * @returns null
+ */
 export const ScrollToTop = () => {
-  const { pathname } = useLocation();
+	const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
 
-  return null;
+	return null;
 };
 
+/**
+ * Content
+ * @description Main layout component that handles token refresh, renders sidebar, footer, and nested routes
+ * @returns JSX element with sidebar and outlet layout
+ */
 export default function Content() {
 	const dispatch = useDispatch();
 	const { data, isError } = useQuery({

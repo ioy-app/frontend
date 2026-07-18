@@ -4,10 +4,20 @@ import Tag from "../tag";
 import { BiTrophy } from "react-icons/bi";
 
 /**
- * Vote component
+ * Vote
+ * @description Voting score component for game jam nominations with 3 tier selection
+ *
+ * @param nomination - Name of the nomination category
+ * @param jam_id - ID of the jam
+ * @param game_id - ID of the game being voted on
+ * @param onChange - Callback triggered with the selected score value
+ * @param disabled - Prevents changing the vote selection
+ * @param score - Pre-selected vote score (1-3)
+ * @returns A card with a nomination tag and three clickable vote tier icons
+ *
  * @example
- * return <Vote />
-*/
+ * <Vote nomination="Best Art" jam_id={1} game_id={2} onChange={(score) => submitVote(score)} />
+ */
 const Vote: React.FC<{
   nomination: string;
   jam_id: number;

@@ -6,6 +6,22 @@ import { useQuery } from "@tanstack/react-query";
 import { BiSolidCrown } from "react-icons/bi";
 import { FaFireAlt } from "react-icons/fa";
 
+/**
+ * Game
+ * @description Displays a game card with avatar, optional jam result badge, hype indicator, and title. Optionally wrapped in a link to the game page.
+ *
+ * @param dataSource - Game data object containing id, title, is_avatar, jam_result, and hype status
+ * @param preview - URL of a preview image to display instead of the default avatar
+ * @param nolink - Disables the navigation link to the game page
+ * @param size - Avatar size in Tailwind size units (default: 24)
+ * @param onClick - Callback fired when the card is clicked (only works in nolink mode) with the game id
+ * @param className - Additional CSS class names
+ * @returns A game card with avatar, badges, and title, optionally wrapped in a link
+ *
+ * @example
+ * <Game dataSource={gameData} size={32} />
+ * <Game dataSource={gameData} nolink onClick={(id) => handleSelect(id)} />
+ */
 const Game: React.FC<{
 	/** Game data */
 	dataSource: GameProps;

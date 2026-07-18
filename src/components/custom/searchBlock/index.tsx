@@ -5,10 +5,17 @@ import { BiSearch } from "react-icons/bi";
 import { useEffect } from "react";
 
 /**
- * Search block
+ * SearchBlock
+ * @description Search input block with a text field and submit button
+ *
+ * @param onSubmit - Callback triggered with the search value on form submission
+ * @param value - Initial/pre-filled search value
+ * @param disabled - Disables the input and button
+ * @returns A form with a search input and a primary submit button
+ *
  * @example
- * return <SearchBlock />
-*/
+ * <SearchBlock onSubmit={(data) => handleSearch(data)} value="query" />
+ */
 const SearchBlock: React.FC<{
   onSubmit: (props: {
     search?: string;

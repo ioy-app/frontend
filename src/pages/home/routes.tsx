@@ -6,24 +6,39 @@ import Games from "@/pages/games";
 import Jams from "@/pages/jams";
 import Pictures from "@/pages/pictures";
 
-export const home_paths = {
+/**
+ * Home route paths
+ * @description Paths for static pages (about, donut, terms)
+ * @returns Route path constants
+ */
+export const homePaths = {
 	about: "/about",
 	donut: "/donut",
 	terms: "/terms",
 };
 
+/**
+ * home
+ * @description Route definitions for the home section pages
+ * @returns Array of RouteObject configurations
+ */
 const home: RouteObject[] = [
 	{
-		path: home_paths.about,
+		path: homePaths.about,
 		element: <About />,
 	},
 	{
-		path: home_paths.donut,
+		path: homePaths.donut,
 		element: <Donut />,
 	},
 ];
 
-export const home_children: RouteObject[] = [
+/**
+ * Home child routes
+ * @description Nested route definitions for home page tabs (games, jams, feed, pictures)
+ * @returns Array of RouteObject configurations
+ */
+export const homeChildren: RouteObject[] = [
 	{
 		index: true,
 		element: <Games />
@@ -42,4 +57,9 @@ export const home_children: RouteObject[] = [
 	}
 ];
 
+/**
+ * Home routes
+ * @description Route definitions for static pages (about, donut)
+ * @returns Array of RouteObject configurations
+ */
 export default home;

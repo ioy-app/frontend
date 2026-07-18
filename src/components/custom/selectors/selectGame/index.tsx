@@ -12,10 +12,17 @@ import { useTranslation } from "react-i18next";
 import { BiBox, BiSearchAlt2, BiXCircle } from "react-icons/bi";
 
 /**
- * Game selector
+ * SelectGame
+ * @description Single game selector with search dropdown and animated results
+ *
+ * @param value - Pre-selected game ID
+ * @param disabled - Disables the search input
+ * @param onChange - Callback triggered with the selected game ID
+ * @returns A search input with dropdown results or the selected game preview
+ *
  * @example
- * return <SelectGame />
-*/
+ * <SelectGame value={gameId} onChange={(id) => setSelectedGame(id)} />
+ */
 const SelectGame: React.FC<{
   value?: number;
   disabled?: boolean;
@@ -132,7 +139,10 @@ const SelectGame: React.FC<{
           >
             <Spin loading={query?.isLoading && query?.isEnabled}>
               <div className="flex flex-col gap-4 pt-2">
-                {query?.data?.items?.map?.(({ title, ...dataSource }, i) => (
+                {query?.data?.items?.map?.(({
+						title,
+						...dataSource
+					}, i) => (
                   <div
                     className="w-full flex gap-4 items-center py-1 px-1 hover:bg-primary/20 rounded-2xl cursor-pointer"
                     onClick={() => {

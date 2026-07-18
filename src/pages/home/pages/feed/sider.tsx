@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 
 /**
- * Sider of feed
- * @example
- * return <FeedSider />
-*/
+ * FeedSider
+ * @description Sidebar for the feed page with content category links
+ * @returns JSX element with feed navigation sidebar
+ */
 const FeedSider: React.FC<{}> = ({}) => {
   const { t } = useTranslation();
   return (

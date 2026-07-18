@@ -7,11 +7,10 @@ import { Select } from "@/components";
 import { useMemo } from "react";
 
 /**
- * Dashboard instances filters
- *
- * @example
- * <DashboardFilterInstances />
-*/
+ * DashboardFilterInstances
+ * @description Filter panel for the instances dashboard tab with status, type, and sort options
+ * @returns JSX element with instances filter controls
+ */
 const DashboardFilterInstances: React.FC = () => {
 	const methods = useFormContext();
 	const { t } = useTranslation();

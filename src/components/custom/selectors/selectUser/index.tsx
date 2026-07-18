@@ -10,15 +10,28 @@ import { useMutation } from "@tanstack/react-query";
 import { FormProvider, useForm } from "react-hook-form";
 
 /**
- * Multiple select users
+ * SelectUser
+ * @description Multi-user selector that searches by login and displays selected users as removable chips
+ *
+ * @param name - Form field name for the selected user IDs
+ * @param label - Label text displayed above the search input
+ * @param placeholder - Placeholder text for the search input
+ * @param setValue - Form setter function to update the field value
+ * @param disabled - Disables the search input
+ * @param initial - Initial list of users to pre-select
+ * @returns A bordered input with search and a list of selected user chips
+ *
  * @example
- * return <SelectUser />
+ * <SelectUser name="authors" label="Authors" placeholder="Search users..." setValue={setValue} />
  */
 const SelectUser: React.FC<{
 	name: string;
 	label?: string;
 	placeholder?: string;
-	setValue: (key: string, value: any) => void;
+	setValue: (
+		key: string,
+		value: any
+	) => void;
 	disabled?: boolean;
 	initial?: UserProps[];
 }> = ({
@@ -34,7 +47,9 @@ const SelectUser: React.FC<{
 	const { notify } = useNotify();
 	const methods = useForm();
 	
-	/** Search userdata by login */
+	/** Search userdata by login
+	 * @returns Mutation object for searching and adding users by login
+	 */
 	const search = useMutation({
 		mutationKey: [ "selector", "user" ],
 		mutationFn: async (username: string) => {
@@ -60,7 +75,10 @@ const SelectUser: React.FC<{
 
 	/** setValue event */
 	useEffect(() => {
-		const ids = (localValue || [])?.map((user, i) => user?.id);
+		const ids = (localValue || [])?.map((
+			user,
+			i
+		) => user?.id);
 		setValue(name, ids);
 		console.log(ids);
 	}, [ localValue ]);
@@ -92,7 +110,10 @@ const SelectUser: React.FC<{
 				</label>
 			</FormProvider>
 			<div className="flex gap-4 flex-wrap">
-				{localValue?.map?.((user: UserProps, i: number) => (
+				{localValue?.map?.((
+						user: UserProps,
+						i: number
+					) => (
 					<div
 						className="flex gap-2 items-center p-2 pr-4 border border-br rounded-full w-fit cursor-pointer hover:animate-pulse hover:border-second hover:text-second"
 						onClick={() => {

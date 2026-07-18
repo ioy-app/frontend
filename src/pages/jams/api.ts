@@ -2,6 +2,10 @@ import { apiInstance } from "@/api";
 import jsonToFormData from "@/utils/jsonToFormData";
 import UserProps from "@/pages/users/api";
 
+/**
+ * JamProps
+ * @description Interface representing a jam entity with id, title, description, author, and status
+ */
 export default interface JamProps {
 	id: number;
 	title: string;
@@ -19,6 +23,11 @@ export default interface JamProps {
 	date_updated?: Date;
 }
 
+/**
+ * Routes
+ * @description API route paths for jams endpoints
+ * @returns Route path constants
+ */
 const Routes = {
 	list: `/jams`,
 	details: (id: number | string) => `/jams/${id}`,
@@ -33,13 +42,16 @@ const Routes = {
  *
  * @param date_from - From
  * @param date_to - To
- * @returns
+ * @returns Promise with list of jams within date range
 */
-export const jams_list = (date_from: string, date_to: string) =>
+export const jams_list = (
+	dateFrom: string,
+	dateTo: string
+) =>
 	apiInstance.get(Routes.list, {
 		params: {
-			date_from,
-			date_to
+			date_from: dateFrom,
+			date_to: dateTo
 		}
 	});
 
@@ -47,7 +59,7 @@ export const jams_list = (date_from: string, date_to: string) =>
  * Create new jam
  *
  * @param props - Jam properties
- * @returns
+ * @returns Promise with created jam data
 */
 export const jams_create = (props: Record<string, any>) =>
 	apiInstance.post(Routes.list, jsonToFormData(props));
@@ -57,16 +69,19 @@ export const jams_create = (props: Record<string, any>) =>
  *
  * @param id - ID Jam
  * @param props - Jam properties
- * @returns
+ * @returns Promise with updated jam data
 */
-export const jams_edit = (id: number, props: Record<string, any>) =>
+export const jams_edit = (
+	id: number,
+	props: Record<string, any>
+) =>
 	apiInstance.put(Routes.details(id), jsonToFormData(props));
 
 /**
  * Get jam details
  *
  * @param id - ID Jam
- * @returns
+ * @returns Promise with jam details data
 */
 export const jams_details = (id: number) =>
 	apiInstance.get(Routes.details(id));
@@ -75,7 +90,7 @@ export const jams_details = (id: number) =>
  * Delete jam by ID
  *
  * @param id - ID Jam
- * @returns
+ * @returns Promise with deletion confirmation
 */
 export const jams_delete = (id: number) =>
 	apiInstance.delete(Routes.details(id));
@@ -84,7 +99,7 @@ export const jams_delete = (id: number) =>
  * Join to jam by ID
  *
  * @param id - ID Jam
- * @returns
+ * @returns Promise with join confirmation
 */
 export const jams_join = (id: number) =>
 	apiInstance.post(Routes.join(id));
@@ -93,7 +108,7 @@ export const jams_join = (id: number) =>
  * Leave to jam by ID
  *
  * @param id - ID Jam
- * @returns
+ * @returns Promise with leave confirmation
 */
 export const jams_leave = (id: number) =>
 	apiInstance.post(Routes.leave(id));
@@ -103,7 +118,10 @@ export const jams_leave = (id: number) =>
  *
  * @param id - ID Jam
  * @param params - Filters
- * @returns
+ * @returns Promise with list of games in the jam
 */
-export const jams_games = (id: number, params?: Record<string, any> | URLSearchParams) =>
+export const jams_games = (
+	id: number,
+	params?: Record<string, any> | URLSearchParams
+) =>
 	apiInstance.get(Routes.games(id), { params });

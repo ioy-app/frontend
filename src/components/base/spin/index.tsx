@@ -1,5 +1,17 @@
 import { Logo } from "@/icons";
 
+/**
+ * Spin
+ * @description Loading spinner component that displays an animated logo while loading, or renders children when not loading
+ *
+ * @param children - Content to render when not in loading state
+ * @param loading - Whether the spinner is active (shows animated logo instead of children)
+ * @param logo - Custom logo image source to use as the spinner (defaults to the app Logo)
+ * @returns An animated spinning logo when loading, or the children content otherwise
+ *
+ * @example
+ * <Spin loading={isLoading}>Content loaded!</Spin>
+ */
 const Spin: React.FC<{
 	/** Content */
 	children?: React.ReactNode;

@@ -7,6 +7,17 @@ import { useModal } from "@/hooks";
 import Button from "../button";
 import { useTranslation } from "react-i18next";
 
+/**
+ * LinkifyText
+ * @description Automatically detects and converts URLs and hashtags in text into clickable links and tags, with a redirect confirmation modal for external URLs
+ *
+ * @param children - Text content to scan for URLs and hashtags
+ * @param className - Additional CSS class names for the wrapper element
+ * @returns A paragraph element with auto-linked URLs and hashtag tags
+ *
+ * @example
+ * <LinkifyText>Visit https://example.com for more info</LinkifyText>
+ */
 const LinkifyText: React.FC<{
 	children: React.ReactNode;
 	className?: string;

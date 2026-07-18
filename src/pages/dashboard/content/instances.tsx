@@ -9,17 +9,22 @@ import * as Components from "@/components";
 import dayjs from "dayjs";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { games_paths } from "@/pages/games/routes";
+import { gamesPaths } from "@/pages/games/routes";
 import { paths } from "@/routes";
 import { useQuery } from "@tanstack/react-query";
-import { pictures_paths } from "@/pages/pictures/routes";
+import { picturesPaths } from "@/pages/pictures/routes";
 
+/**
+ * Games
+ * @description Dashboard tab displaying games and pictures instances with filtering, sorting, and pagination
+ * @returns JSX element with instances table
+ */
 const Games: React.FC = () => {
 	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const max = 10;
-	const current_page = Number(searchParams.get("page") || 1);
+	const currentPage = Number(searchParams.get("page") || 1);
 	const status = searchParams.get("status");
 	const sort = searchParams.get("sort");
 	const searchQS = searchParams.get("search");
@@ -30,7 +35,7 @@ const Games: React.FC = () => {
 		queryFn: async () => {
 			const search = new URLSearchParams();
 
-			search.set("offset", String((current_page - 1) * max));
+			search.set("offset", String((currentPage - 1) * max));
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
 			if (status) search.set("status", status);
@@ -49,7 +54,10 @@ const Games: React.FC = () => {
 					{
 						title: "",
 						dataIndex: "id",
-						render: (_, instance) => {
+						render: (
+						_,
+						instance
+					) => {
 							switch(instance?.type) {
 								case "game":
 									return (
@@ -133,7 +141,7 @@ const Games: React.FC = () => {
 				loading={query?.isPending}
 				header={
 					<div className="w-full flex items-center justify-end gap-4">
-						<NavLink to={games_paths.create}>
+						<NavLink to={gamesPaths.create}>
 							<Components.Button
 								variant="primary"
 							>
@@ -141,7 +149,7 @@ const Games: React.FC = () => {
 								<BiPlus />
 							</Components.Button>
 						</NavLink>
-						<NavLink to={pictures_paths.create}>
+						<NavLink to={picturesPaths.create}>
 							<Components.Button
 								variant="primary"
 							>
@@ -154,9 +162,12 @@ const Games: React.FC = () => {
 				footer={
 					<Components.Pagination
 						total={query?.data?.total || 1}
-						current={current_page}
-						per_page={max}
-						onChange={(_, page) => {
+						current={currentPage}
+						perPage={max}
+						onChange={(
+						_,
+						page
+					) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();

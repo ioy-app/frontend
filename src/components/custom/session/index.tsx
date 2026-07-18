@@ -11,6 +11,22 @@ interface SessionLocalProps extends SessionProps {
 	disabled?: boolean;
 }
 
+/**
+ * Session
+ * @description Displays a user session with browser info, IP, dates, and a delete button
+ *
+ * @param id - Session identifier
+ * @param ip - IP address of the session
+ * @param user_agent - Browser user agent string
+ * @param date_created - Session creation date
+ * @param date_expires - Session expiration date
+ * @param onDelete - Callback triggered when the delete button is clicked
+ * @param disabled - Disables the delete button
+ * @returns A session card with browser/OS info, IP, dates, and delete action
+ *
+ * @example
+ * <Session id={1} ip="127.0.0.1" user_agent="Mozilla/5.0" onDelete={(id) => handleDelete(id)} />
+ */
 const Session: React.FC<SessionLocalProps> = ({
 	id,
 	ip,
@@ -25,12 +41,12 @@ const Session: React.FC<SessionLocalProps> = ({
 	const os = parse.getOS();
 	const browser = parse.getBrowser();
 
-	const date_created_text = date_created
+	const dateCreatedText = date_created
 		? dayjs(date_created)
 				.locale("ru")
 				.format("HH:mm DD.MM.YYYY")
 		: t("undefined");
-	const date_range_text = date_expires
+	const dateRangeText = date_expires
 		? t("sessions.days", {
 				count: dayjs(date_expires).diff(Date.now(), "days"),
 			})
@@ -50,10 +66,10 @@ const Session: React.FC<SessionLocalProps> = ({
 				<div>
 					<p>{ip}</p>
 					<p className="text-placeholder">
-						{date_created_text}
+						{dateCreatedText}
 					</p>
 				</div>
-				<p>{date_range_text}</p>
+				<p>{dateRangeText}</p>
 				<Button
 					variant="danger"
 					onClick={() => onDelete(id)}

@@ -50,6 +50,15 @@ import UserProps from "../api";
 import { StoreProps } from "@/stories";
 import { FEATURE_JAMS } from "@/features";
 
+/**
+ * Edit
+ * @description User profile settings modal with avatar, login, description, privacy, notifications, email, and session management
+ *
+ * @param onClose - Callback when the modal is closed, optionally with updated login
+ * @param login - Current user login
+ * @param navigator - React Router navigate function
+ * @returns JSX element with profile settings form
+ */
 const Edit: React.FC<{
 	onClose: (login?: string) => void;
 	login?: string;

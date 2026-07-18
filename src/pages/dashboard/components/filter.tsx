@@ -20,11 +20,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useNotify } from "@/hooks";
 
 /**
- * Filters for dashboard
+ * DashboardFilters
+ * @description Collapsible floating filter panel for the dashboard with search, tab-specific filters, and clear functionality
  *
- * @example
- * <DashboardFilters tab="instances" />
-*/
+ * @param tab - Active dashboard tab to determine which filter options to show
+ * @returns JSX element with animated filter panel
+ */
 const DashboardFilters: React.FC<{
 	tab?: string;
 }> = ({
@@ -41,17 +42,17 @@ const DashboardFilters: React.FC<{
 	const submit = useMutation({
 		mutationKey: [ "dashboard", tab, "filters", "submit" ],
 		mutationFn: async (data: Record<string, unknown>) => {
-			const us = new URLSearchParams();
+			const urlParams = new URLSearchParams();
 			for (const [ key, value ] of Object.entries(data || {})) {
 				if (!value)
 					continue;
 
-				us.set(key, String(value));
+				urlParams.set(key, String(value));
 			}
 
-			return us;
+			return urlParams;
 		},
-		onSuccess: (us: URLSearchParams) => setSearchParams(us),
+		onSuccess: (urlParams: URLSearchParams) => setSearchParams(urlParams),
 		onError: (err) => notify(err?.message?.toString?.() || err)
 	});
 
