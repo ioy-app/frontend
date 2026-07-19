@@ -87,6 +87,7 @@ const Pictures: React.FC<{}> = ({}) => {
 					next={() => query.fetchNextPage()}
 					hasMore={query.hasNextPage}
 					loader={(<Spin loading />)}
+					scrollableTarget="scrollable-content"
 					endMessage={(
 						<div className="flex flex-col justify-center items-center py-4 gap-2 text-xl text-text/35">
 							<ViewModel

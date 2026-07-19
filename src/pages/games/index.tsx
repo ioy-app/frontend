@@ -78,6 +78,7 @@ const Games: React.FC<{}> = ({}) => {
 					</div>
 				)}
 			</Spin>
+			
 			<Spin loading={query?.isPending}>
 				<InfiniteScroll
 					className="grid grid-cols-5 gap-4 max-lg:grid-cols-3 max-md:grid-cols-2"
@@ -85,6 +86,7 @@ const Games: React.FC<{}> = ({}) => {
 					next={() => query.fetchNextPage()}
 					hasMore={query.hasNextPage}
 					loader={(<Spin loading/>)}
+					scrollableTarget="scrollable-content"
 					endMessage={(
 						<div className="flex flex-col justify-center items-center py-4 gap-2 text-xl text-text/35">
 							<ViewModel
@@ -100,6 +102,7 @@ const Games: React.FC<{}> = ({}) => {
 					{items?.map((item) => (
 						<Game
 							dataSource={item}
+							ket={item?.id}
 							size="full"
 						/>
 					))}
