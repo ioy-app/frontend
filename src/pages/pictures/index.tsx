@@ -53,9 +53,9 @@ const Pictures: React.FC<{}> = ({}) => {
 	return (
 		<>
 			<Meta
-				title="ioy.app"
+				title={t("pictures.title")}
 				description={t("about.description")}
-				url=""
+				url="https://ioy.app/pictures"
 			/>
 			<SearchBlock
 				onSubmit={(data) => {

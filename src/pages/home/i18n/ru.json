@@ -1,4 +1,11 @@
 {
+	"home": {
+		"titles": {
+			"games": "Игры",
+			"pictures": "Картинки",
+			"jams": "Джемы"
+		}
+	},
 	"about": {
 		"title": "О проекте",
 		"titles": {

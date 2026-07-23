@@ -20,6 +20,10 @@ import enJams from "@/pages/jams/i18n/en.json";
 import ruJams from "@/pages/jams/i18n/ru.json";
 import enAuth from "@/pages/auth/i18n/en.json";
 import ruAuth from "@/pages/auth/i18n/ru.json";
+import ruFooter from "@/components/custom/footer/i18n/ru.json";
+import enFooter from "@/components/custom/footer/i18n/en.json";
+import ruAuth from "@/pages/auth/i18n/ru.json";
+import enAuth from "@/pages/auth/i18n/en.json";
 
 /**
  * en
@@ -35,6 +39,8 @@ const en = {
 	...enDashboard,
 	...enGames,
 	...enJams,
+	...enAuth,
+	...enFooter,
 	...enAuth
 };
 /**
@@ -51,6 +57,8 @@ const ru = {
 	...ruDashboard,
 	...ruGames,
 	...ruJams,
+	...ruAuth,
+	...ruFooter,
 	...ruAuth
 };
 

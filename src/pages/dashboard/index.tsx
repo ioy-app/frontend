@@ -55,20 +55,11 @@ export default function Dashboard() {
 	}, [ t, tab ]);
 
 	return (
-		<div className="w-full">
-			<div className="w-full justify-between flex gap-2 items-start mb-4">
-				<Components.Button
-					variant="text"
-					onClick={() => navigate(paths.users.details(login))}
-				>
-					<BiChevronsLeft />
-					{t("buttons.back")}
-				</Components.Button>
-				<DashboardFilters
-					tab={tab}
-					key={tab}
-				/>
-			</div>
+		<div className="flex-1">
+			<DashboardFilters
+				tab={tab}
+				key={tab}
+			/>
 			<Components.Tabs
 				headers={tabs}
 				value={tab}

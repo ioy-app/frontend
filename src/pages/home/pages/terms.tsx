@@ -1,8 +1,5 @@
-import pdfCookie from "@/../assets/policies/ru/cookie.pdf";
-import pdfTerms from "@/../assets/policies/ru/terms.pdf";
-import pdfPrivacy from "@/../assets/policies/ru/privacy.pdf";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Meta } from "@/components";
 
 /**
@@ -12,20 +9,19 @@ import { Meta } from "@/components";
  */
 export default function Terms() {
 	const { t } = useTranslation();
-	const prefersDarkMode =
-		window.matchMedia &&
+	const prefersDarkMode = window.matchMedia &&
 		window.matchMedia("(prefers-color-scheme: dark)")
 			.matches;
-	const [darkMode, setDarkMode] = useState<
-		"dark" | "light"
-	>(
+	const [ darkMode ] = useState<"dark" | "light">(
 		(localStorage.getItem("theme") ||
-			(prefersDarkMode && "dark")) as "dark" | "light",
+			(prefersDarkMode && "dark")) as "dark" | "light"
 	);
-	
-	if (darkMode == "dark")
-		document.documentElement.classList.add("dark");
 
+	useEffect(() => {
+		if (darkMode == "dark")
+			document.documentElement.classList.add("dark");
+	}, [ darkMode ]);
+	
 	return (
 		<>
 			<Meta

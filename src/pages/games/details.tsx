@@ -96,7 +96,7 @@ export default function GamePage() {
 				["games", id],
 				(current: GameProps) => ({
 					...current,
-					is_like,
+					is_like: isLiked,
 				}),
 			);
 		},
@@ -332,7 +332,7 @@ export default function GamePage() {
 													<Tag
 														title={tag}
 														key={i}
-														link="/"
+														link="/games"
 													/>
 												),
 											)}

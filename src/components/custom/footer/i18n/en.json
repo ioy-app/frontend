@@ -1,5 +1,7 @@
 {
-	"about": "About",
-	"terms": "Terms & Privacy",
-	"donut": "Support page"
+	"footer": {
+		"about": "About",
+		"terms": "Terms & Privacy",
+		"donut": "Support page"
+	}
 }

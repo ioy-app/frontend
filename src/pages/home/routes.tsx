@@ -1,9 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import About from "./pages/about";
 import Donut from "./pages/donut";
-import Feed from "./pages/feed";
 import Games from "@/pages/games";
-import Jams from "@/pages/jams";
 import Pictures from "@/pages/pictures";
 
 /**
@@ -31,6 +29,14 @@ const home: RouteObject[] = [
 		path: homePaths.donut,
 		element: <Donut />,
 	},
+	{
+		path: "/pictures",
+		element: <Pictures />
+	},
+	{
+		path: "/games",
+		element: <Games />
+	}
 ];
 
 /**
@@ -42,18 +48,6 @@ export const homeChildren: RouteObject[] = [
 	{
 		index: true,
 		element: <Games />
-	},
-	{
-		path: "/jams",
-		element: <Jams />
-	},
-	{
-		path: "/feed",
-		element: <Feed />
-	},
-	{
-		path: "/pictures",
-		element: <Pictures />
 	}
 ];
 

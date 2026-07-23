@@ -1,4 +1,11 @@
 {
+	"home": {
+		"titles": {
+			"games": "Games",
+			"pictures": "Pictures",
+			"jams": "Jams"
+		}
+	},
 	"about": {
 		"title": "About",
 		"titles": {

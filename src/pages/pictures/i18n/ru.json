@@ -1,5 +1,6 @@
 {
 	"pictures": {
+		"title": "Картинки",
 		"titles": {
 			"create": "Новая картинка",
 			"edit": "Редактировать {{title}}"

@@ -98,7 +98,7 @@ const DashboardFilters: React.FC<{
 
 	return (
 			<div
-				className={`flex gap-2 items-center flex-col justify-end bg-back z-10 border border-br fixed right-6 top-6 ${isOpen && "rounded-3xl" || "rounded-full"}`}
+				className={`flex gap-2 items-center flex-col justify-end bg-back z-10 border border-br fixed right-6 top-1.5 ${isOpen && "rounded-3xl" || "rounded-full"}`}
 			>
 				<FormProvider {...methods}>
 					<form onSubmit={methods.handleSubmit((data) => submit.mutate(data))}>

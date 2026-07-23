@@ -71,7 +71,11 @@ export default function Edit() {
 			label: t(record.label),
 		}));
 
-	const methods = useForm();
+	const methods = useForm({
+		defaultValues: {
+			status: "public"
+		}
+	});
 
 	// Get jamdata:
 	const jamId = (params?.jam_id && Number(params.jam_id)) || methods?.watch("jam_id");

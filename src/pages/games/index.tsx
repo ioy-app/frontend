@@ -51,9 +51,9 @@ const Games: React.FC<{}> = ({}) => {
 	return (
 		<>
 			<Meta
-				title="ioy.app"
+				title={t("games.title")}
 				description={t("about.description")}
-				url=""
+				url="https://ioy.app/games"
 			/>
 			<SearchBlock
 				onSubmit={(data) => {
@@ -77,18 +77,22 @@ const Games: React.FC<{}> = ({}) => {
 						))}
 					</div>
 				)}
-			</Spin>
-			
+			</Spin>	
 			<Spin loading={query?.isPending}>
 				<InfiniteScroll
 					className="grid grid-cols-5 gap-4 max-lg:grid-cols-3 max-md:grid-cols-2"
 					dataLength={items?.length}
 					next={() => query.fetchNextPage()}
 					hasMore={query.hasNextPage}
-					loader={(<Spin loading/>)}
+					loader={(
+						<Spin
+							loading
+							className="col-span-5"
+						/>
+					)}
 					scrollableTarget="scrollable-content"
 					endMessage={(
-						<div className="flex flex-col justify-center items-center py-4 gap-2 text-xl text-text/35">
+						<div className="flex flex-col justify-center items-center py-4 gap-2 text-xl text-text/35 col-span-5">
 							<ViewModel
 								name="rocket-pictures"
 								href="/resources/gltf/computer.gltf"

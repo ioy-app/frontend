@@ -186,96 +186,55 @@ export default function Profile() {
 							</p>
 						)}
 					</div>
-					{token && (
+					{(!!token && !isMe) && (
 						<div className="flex gap-4">
-							{isMe ? (
-								<>
-									<Button
-										variant="default"
-										htmlType="button"
-										onClick={() =>
-											navigator(dashboardPaths.list)
-										}
-									>
-										<BiGridAlt />
-										{t("buttons.dashboard")}
-									</Button>
-									<Button
-										variant="default"
-										onClick={() => {
-											modal("", (onClose) => (
-												<Edit
-													onClose={(login?: string) => {
-														try {
-															if (login)
-																navigator(
-																	paths.users.details(login),
-																);
-															refetch();
-														} catch (err) {}
-														onClose && onClose();
-													}}
-													login={login}
-													navigator={navigator}
-												/>
-											));
-										}}
-									>
-										<BiCog />
-										{t("buttons.settings")}
-									</Button>
-								</>
-							) : (
-								<>
-									<Button
-										onClick={handleSubscribe}
-										variant={
-											data?.controls?.is_subscribe
-												? "second"
-												: "primary"
-										}
-									>
-										{!data?.controls?.is_subscribe
-											? t("buttons.subscribe")
-											: t("buttons.unsubscribe")}
-										{!data?.controls?.is_subscribe ? (
-											<BiUserPlus />
-										) : (
-											<BiUserMinus />
-										)}
-									</Button>
-									<Button
-										onClick={() => modal("", (onClose) => (
-											<Report
-												type="user"
-												target_id={data?.id}
-												Instance={(
-													<div className="flex flex-col gap-4 items-center justify-center">
-														<div>
-															<User
-																login={login}
-																dataSource={{
-																	is_avatar: data?.is_avatar,
-																}}
-																size="large"
-																hideLogin
-																className="transition-all w-full h-full"
-																nolink
+							<Button
+								onClick={handleSubscribe}
+								variant={
+									data?.controls?.is_subscribe
+										? "second"
+										: "primary"
+								}
+							>
+								{!data?.controls?.is_subscribe
+									? t("buttons.subscribe")
+									: t("buttons.unsubscribe")}
+								{!data?.controls?.is_subscribe ? (
+									<BiUserPlus />
+								) : (
+									<BiUserMinus />
+								)}
+							</Button>
+							<Button
+								onClick={() => modal("", (onClose) => (
+									<Report
+										type="user"
+										target_id={data?.id}
+										Instance={(
+											<div className="flex flex-col gap-4 items-center justify-center">
+												<div>
+													<User
+														login={login}
+														dataSource={{
+															is_avatar: data?.is_avatar,
+														}}
+														size="large"
+														hideLogin
+														className="transition-all w-full h-full"
+														nolink
 
-															/>
-														</div>
-														<p className="text-title">{login}</p>
-													</div>
-												)}
-												onClose={onClose}
-											/>
-										))}
-									>
-										{t("buttons.report")}
-										<BiCommentError />
-									</Button>
-								</>
-							)}
+													/>
+												</div>
+												<p className="text-title">{login}</p>
+											</div>
+										)}
+										onClose={onClose}
+									/>
+								))}
+							>
+								{t("buttons.report")}
+								<BiCommentError />
+							</Button>
 						</div>
 					)}
 					<div className="flex flex-col gap-4 w-full">

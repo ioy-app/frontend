@@ -1,5 +1,6 @@
 {
 	"games": {
+		"title": "Games",
 		"titles": {
 			"create": "Create Game",
 			"edit": "Edit {{title}}"

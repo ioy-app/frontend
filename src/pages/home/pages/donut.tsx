@@ -16,9 +16,6 @@ import { BiRightArrowAlt } from "react-icons/bi";
  */
 export default function Donut({}) {
 	const { t } = useTranslation();
-	useEffect(() => {
-		document.title = t("donut.title");
-	}, [ t ]);
 
 	return (
 		<div className="flex-1 gap-4 flex justify-center flex-col items-center w-full min-h-full">

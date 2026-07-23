@@ -53,7 +53,7 @@ export default function Content() {
 		<div className="flex max-md:flex-col-reverse w-full min-h-screen h-screen bg-back text-text">
 			<Components.Sider collapse />
 			<div id="scrollable-content" className="flex flex-col w-full flex-1 overflow-y-auto">
-				<main className="flex-1 p-4 pb-0 gap-4 flex flex-col w-full min-h-full">
+				<main className="p-4 pb-0 gap-4 flex flex-col w-full min-h-full h-full">
 					<ScrollToTop />
 					<Outlet />
 					<Components.Footer />

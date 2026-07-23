@@ -190,7 +190,7 @@ const Select: React.FC<SelectComponentProps & {
 					style={{
 						top: (rect?.top + rect?.height) + "px",
 						left: rect?.left + "px",
-						width: rect?.width + "px"
+						minWidth: rect?.width + "px"
 					}}
 				>
 					{!options?.length && (

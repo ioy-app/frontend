@@ -13,7 +13,7 @@ import Picture from "../../content/picture";
  */
 const useMasonryColumns = ({
 	items,
-	minWidth=280,
+	minWidth=150,
 	gap=16
 }) => {
 	const refElem = useRef(null);
