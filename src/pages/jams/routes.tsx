@@ -4,7 +4,12 @@ import JamDetails from "./details";
 import JamEdit from "./edit";
 import { GameEdit } from "@/pages";
 
-export const jams_paths = {
+/**
+ * jamsPaths
+ * @description Route path constants for the jams section
+ * @returns Route path constants
+ */
+export const jamsPaths = {
 	list: "/j",
 	details: (id: number | string) => `/j/${id}`,
 	edit: (id: number | string) => `/j/${id}/edit`,
@@ -12,23 +17,33 @@ export const jams_paths = {
 	create_game: (id: number | string) => `/j/${id}/create`
 };
 
+/**
+ * jams
+ * @description Route definitions for the jam pages
+ * @returns Array of RouteObject configurations
+ */
 const jams: RouteObject[] = [
 	{
-		path: jams_paths.create,
+		path: jamsPaths.create,
 		element: <JamEdit />,
 	},
 	{
-		path: jams_paths.details(":id"),
+		path: jamsPaths.details(":id"),
 		element: <JamDetails />,
 	},
 	{
-		path: jams_paths.edit(":id"),
+		path: jamsPaths.edit(":id"),
 		element: <JamEdit />,
 	},
 	{
-		path: jams_paths.create_game(":jam_id"),
+		path: jamsPaths.create_game(":jam_id"),
 		element: <GameEdit />
 	}
 ];
 
+/**
+ * Jams routes
+ * @description Default export of jam route definitions
+ * @returns Array of RouteObject configurations
+ */
 export default jams;

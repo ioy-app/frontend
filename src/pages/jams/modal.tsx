@@ -8,10 +8,13 @@ import { BiX } from "react-icons/bi";
 import imgEmpty from "@/icons/empty.svg";
 
 /**
- * Modal window for jams
- * @example
- * return <ModalJams />
-*/
+ * ModalJams
+ * @description Modal displaying jams for a specific date with clickable jam list
+ *
+ * @param onClose - Callback when a jam is selected or modal is closed, optionally with jam ID
+ * @param date - Date string to fetch jams for (YYYY-MM-DD)
+ * @returns JSX element with jams list for the selected date
+ */
 const ModalJams: React.FC<{
   onClose: (jam_id?: number) => void;
   date: string;
@@ -40,7 +43,10 @@ const ModalJams: React.FC<{
       </div>
       <Spin loading={query.status == "pending"}>
         <div className="flex flex-col gap-4 w-full">
-          {query?.data?.items?.map((jam, i) => (
+          {query?.data?.items?.map((
+									jam,
+									i
+								) => (
             <div
               className="group flex items-center gap-2 w-fit cursor-pointer"
               key={i}

@@ -1,7 +1,0 @@
-{
-	"title": "Verify code",
-	"description": "Send verify code to apply action",
-	"errors": {
-		"exists": "No found code"
-	}
-}

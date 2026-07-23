@@ -16,6 +16,11 @@ import { useEffect, useMemo } from "react";
 import AIReports from "./content/ai_reports";
 import DashboardFilters from "./components/filter";
 
+/**
+ * Dashboard
+ * @description Admin dashboard with tabbed content for instances, jams, following, likes, reports, and AI reports
+ * @returns JSX element with tabbed dashboard layout and filters
+ */
 export default function Dashboard() {
 	const { t } = useTranslation();
 	const params = useParams();
@@ -50,20 +55,11 @@ export default function Dashboard() {
 	}, [ t, tab ]);
 
 	return (
-		<div className="w-full">
-			<div className="w-full justify-between flex gap-2 items-start mb-4">
-				<Components.Button
-					variant="text"
-					onClick={() => navigate(paths.users.details(login))}
-				>
-					<BiChevronsLeft />
-					{t("buttons.back")}
-				</Components.Button>
-				<DashboardFilters
-					tab={tab}
-					key={tab}
-				/>
-			</div>
+		<div className="flex-1">
+			<DashboardFilters
+				tab={tab}
+				key={tab}
+			/>
 			<Components.Tabs
 				headers={tabs}
 				value={tab}

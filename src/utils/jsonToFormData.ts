@@ -1,13 +1,30 @@
 /**
- * Convert JSON object to FormData
- * 
- * @param obj - Object data
- * @param parentKey - Parent key name
+	* Convert JSON object to FormData
+	*
+	* @param obj - Object data
+	* @param parentKey - Parent key name
+	* @returns FormData object
+	*
+	* @example
+	* jsonToFormData({ name: "test", files: [file1, file2] })
 */
-const jsonToFormData = (obj: Record<string, any>, parentKey: string = ""): FormData => {
+const jsonToFormData = (
+	obj: Record<string, any>,
+	parentKey: string = ""
+): FormData => {
 	const formData = new FormData();
 	
-	const process = (value: any, key: string) => {
+	/**
+	* Process value and append to FormData
+	* @description Recursively handles arrays, objects, files, and primitives
+	*
+	* @param value - Value to process
+	* @param key - FormData key name
+	*/
+	const process = (
+		value: any,
+		key: string
+	) => {
 		if (value === null || value === undefined)
 			return;
 
@@ -23,7 +40,7 @@ const jsonToFormData = (obj: Record<string, any>, parentKey: string = ""): FormD
 				});
 			} else if (typeof(value) === "object" && !(value instanceof File || value instanceof Blob)) {
 				Object.entries(value)
-					.forEach(([ k, v ]) => process(v, `${key}[${k}]`));
+				.forEach(([ k, value ]) => process(value, `${key}[${k}]`));
 			} else formData.append(key, value);
 			
 			return;

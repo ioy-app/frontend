@@ -1,3 +1,17 @@
+/**
+ * Checkbox
+ * @description Custom toggle checkbox input with a circular design and optional label
+ *
+ * @param name - Name attribute for the checkbox input
+ * @param placeholder - Helper text displayed next to the checkbox
+ * @param onChange - Change event handler for the checkbox input
+ * @param ref - Ref forwarded to the underlying input element
+ * @param disabled - Whether the checkbox is disabled
+ * @returns A styled checkbox with a circular indicator and optional placeholder text
+ *
+ * @example
+ * <Checkbox name="agree" placeholder="I agree to the terms" onChange={handleChange} />
+ */
 const Checkbox: React.FC<{
 	/** Name */
 	name: string;

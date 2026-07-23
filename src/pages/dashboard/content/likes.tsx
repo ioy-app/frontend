@@ -9,13 +9,18 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { StoreProps } from "@/stories";
 
+/**
+ * Likes
+ * @description Dashboard tab displaying liked games and pictures with filtering and pagination
+ * @returns JSX element with likes table
+ */
 const Likes: React.FC = () => {
 	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const { login } = useSelector((state: StoreProps) => state.login);
 
 	const max = 10;
-	const current_page = Number(searchParams.get("page") || 1);
+	const currentPage = Number(searchParams.get("page") || 1);
 	const status = searchParams.get("status");
 	const sort = searchParams.get("sort");
 	const searchQS = searchParams.get("search");
@@ -26,7 +31,7 @@ const Likes: React.FC = () => {
 		queryFn: async () => {
 			const search = new URLSearchParams();
 
-			search.set("offset", String((current_page - 1) * max));
+			search.set("offset", String((currentPage - 1) * max));
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
 			if (status) search.set("status", status);
@@ -45,8 +50,11 @@ const Likes: React.FC = () => {
 					{
 						title: null,
 						dataIndex: "id",
-						render: (_, instance) => {
-							switch(instance?.type) {
+					render: (
+						_,
+						instance
+					) => {
+						switch(instance?.type) {
 								case "game":
 									return (
 										<NavLink
@@ -99,7 +107,10 @@ const Likes: React.FC = () => {
 					{
 						title: t("dashboard.table.instances.author"),
 						dataIndex: "creater_data",
-						render: (data, instance) => (
+						render: (
+							data,
+							instance
+						) => (
 							<Components.User
 								login={data.login}
 								dataSource={data}
@@ -134,9 +145,12 @@ const Likes: React.FC = () => {
 				footer={
 					<Components.Pagination
 						total={query?.data?.total || 1}
-						current={current_page}
-						per_page={max}
-						onChange={(_, page) => {
+						current={currentPage}
+						perPage={max}
+						onChange={(
+						_,
+						page
+					) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();

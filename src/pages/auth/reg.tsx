@@ -1,15 +1,19 @@
 import * as Icons from "@/icons";
 import { FormProvider, useForm } from "react-hook-form";
 import { Input, Button, Checkbox } from "@/components";
-import { auth_reg } from "./api";
+import { auth_register } from "./api";
 import { useNotify } from "@/hooks";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
 import { useMutation } from "@tanstack/react-query";
 
 /**
- * Auth, reg form
-*/
+ * Reg
+ * @description Registration form with login, email, and terms acceptance checkbox
+ *
+ * @param onClose - Callback when registration is completed or modal is closed
+ * @returns JSX element with registration form
+ */
 export default function Reg({ onClose }: { onClose?: () => void; }) {
 	const methods = useForm();
 	const { notify } = useNotify();
@@ -20,7 +24,7 @@ export default function Reg({ onClose }: { onClose?: () => void; }) {
 		mutationFn: async (data: {
 			email: string;
 			login: string;
-		}) => (await auth_reg(data)),
+		}) => (await auth_register(data)),
 		onError: (err) => notify(t(err?.message?.toString?.())),
 		onSuccess: () => {
 			notify(t("auth.reg"), "success");

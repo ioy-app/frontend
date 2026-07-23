@@ -6,11 +6,10 @@ import { Select } from "@/components";
 import { useMemo } from "react";
 
 /**
- * Dashboard pictures filters
- *
- * @example
- * <DashboardFilterPictures />
-*/
+ * DashboardFilterPictures
+ * @description Filter panel for the pictures dashboard tab with status and sort options
+ * @returns JSX element with pictures filter controls
+ */
 const DashboardFilterPictures: React.FC = () => {
 	const methods = useFormContext();
 	const { t } = useTranslation();

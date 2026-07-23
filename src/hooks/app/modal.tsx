@@ -1,6 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+/**
+ * ModalProps
+ * @description Props for a modal window in the modal stack
+ */
 export interface ModalProps {
 	id: string;
 	message?: React.FC<ModalProps> | string;
@@ -8,7 +12,22 @@ export interface ModalProps {
 	onClose?: () => void;
 }
 
+/**
+ * ModalContext
+ * @description React context for the modal system
+ * @returns ModalContext instance for managing modal state
+ */
 const ModalContext = createContext(null);
+/**
+ * ModalProvider
+ * @description Context provider that manages a stack of modal windows with animated open/close
+ *
+ * @param children - Child components that can access the modal context
+ * @returns Provider component that renders modal overlays on top of children
+ *
+ * @example
+ * <ModalProvider><App /></ModalProvider>
+ */
 export const ModalProvider: React.FC<{
 	children?: React.ReactNode;
 }> = ({ children }) => {
@@ -36,7 +55,10 @@ export const ModalProvider: React.FC<{
 		<ModalContext.Provider value={{ modal }}>
 			{children}
 			<AnimatePresence>
-				{stack?.map((prop, i) => {
+				{stack?.map((
+				prop,
+				i
+			) => {
 					const { id, message: Message, footer } = prop;
 					const onClose = () => {
 						if (i == 0) document.body.style.overflow = "";
@@ -100,5 +122,14 @@ export const ModalProvider: React.FC<{
 	);
 };
 
+/**
+ * useModal
+ * @description Hook to access the modal context for opening and closing modals
+ * @returns Object with a modal function to open new modals
+ *
+ * @example
+ * const { modal } = useModal();
+ * modal(<MyContent />, (close) => <Button onClick={close}>Close</Button>);
+ */
 const useModal = () => useContext(ModalContext);
 export default useModal;

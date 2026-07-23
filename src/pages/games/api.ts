@@ -5,6 +5,10 @@ import {
 import jsonToFormData from "@/utils/jsonToFormData";
 import UserProps from "@/pages/users/api";
 
+/**
+ * GameProps
+ * @description Interface representing a game entity with id, title, description, author, tags, and status
+ */
 export default interface GameProps {
 	id: number;
 	title: string;
@@ -24,6 +28,11 @@ export default interface GameProps {
 	date_updated?: Date;
 }
 
+/**
+ * Routes
+ * @description API route paths for games endpoints
+ * @returns Route path constants
+ */
 const Routes = {
 	list: `/games`,
 	tags: "/games/tags",
@@ -40,7 +49,7 @@ const Routes = {
  * Get games list
  *
  * @param params - Filters
- * @returns
+ * @returns Promise with list of games
 */
 export const games_list = (params?: Record<string, any> | URLSearchParams) =>
 	apiInstance.get(Routes.list, { params });
@@ -48,7 +57,7 @@ export const games_list = (params?: Record<string, any> | URLSearchParams) =>
 /**
  * Get popular tags by games
  *
- * @returns
+ * @returns Promise with list of popular tags
 */
 export const games_tags = () =>
 	apiInstance.get(Routes.tags);
@@ -57,7 +66,7 @@ export const games_tags = () =>
  * Get game details by ID
  *
  * @param id - ID Game
- * @returns
+ * @returns Promise with game details data
 */
 export const games_details = (id: number) =>
 	apiInstance.get(Routes.details(id));
@@ -66,7 +75,7 @@ export const games_details = (id: number) =>
  * Delete game by ID
  *
  * @param id - ID Game
- * @returns
+ * @returns Promise with deletion confirmation
 */
 export const games_delete = (id: number) =>
 	apiInstance.delete(Routes.details(id));
@@ -75,7 +84,7 @@ export const games_delete = (id: number) =>
  * Like/Dislike game by ID
  *
  * @param id - ID Game
- * @returns
+ * @returns Promise with like status response
 */
 export const games_like = (id: number) =>
 	apiInstance.post(Routes.like(id));
@@ -84,7 +93,7 @@ export const games_like = (id: number) =>
  * Get game icon
  *
  * @param id - ID Game
- * @returns
+ * @returns Promise with object URL for the game icon
 */
 export const games_icon = async (id: number) =>
 	URL.createObjectURL(await apiFileInstance.get(Routes.icon(id), {
@@ -95,7 +104,7 @@ export const games_icon = async (id: number) =>
  * Added new game
  *
  * @param props - Game properties
- * @returns
+ * @returns Promise with created game data
 */
 export const games_create = (props: Record<string, any>) =>
 	apiInstance.post(Routes.create, jsonToFormData(props));
@@ -105,16 +114,19 @@ export const games_create = (props: Record<string, any>) =>
  *
  * @param id - ID Game
  * @param props - Game properties
- * @returns
+ * @returns Promise with updated game data
 */
-export const games_edit = (id: number, props: Record<string, any>) =>
+export const games_edit = (
+	id: number,
+	props: Record<string, any>
+) =>
 	apiInstance.put(Routes.details(id), jsonToFormData(props));
 
 /**
  * Get user's votes by game
  *
  * @param id - ID Game
- * @returns
+ * @returns Promise with list of user votes
 */
 export const games_votes_list = (id: number) =>
 	apiInstance.get(Routes.votes(id));
@@ -125,7 +137,7 @@ export const games_votes_list = (id: number) =>
  * @param id - ID Game
  * @param nomination - Nomination title
  * @param score - Score (1, 2, 3)
- * @returns
+ * @returns Promise with vote confirmation
 */
 export const games_votes_put = (
 	id: number,

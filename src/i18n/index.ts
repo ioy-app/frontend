@@ -20,7 +20,16 @@ import enJams from "@/pages/jams/i18n/en.json";
 import ruJams from "@/pages/jams/i18n/ru.json";
 import enAuth from "@/pages/auth/i18n/en.json";
 import ruAuth from "@/pages/auth/i18n/ru.json";
+import ruFooter from "@/components/custom/footer/i18n/ru.json";
+import enFooter from "@/components/custom/footer/i18n/en.json";
+import ruAuth from "@/pages/auth/i18n/ru.json";
+import enAuth from "@/pages/auth/i18n/en.json";
 
+/**
+ * en
+ * @description English translation strings
+ * @returns Merged English translation object from all feature modules
+ */
 const en = {
 	...enGlobal,
 	...enComponents,
@@ -30,8 +39,15 @@ const en = {
 	...enDashboard,
 	...enGames,
 	...enJams,
+	...enAuth,
+	...enFooter,
 	...enAuth
 };
+/**
+ * ru
+ * @description Russian translation strings
+ * @returns Merged Russian translation object from all feature modules
+ */
 const ru = {
 	...ruGlobal,
 	...ruComponents,
@@ -41,9 +57,16 @@ const ru = {
 	...ruDashboard,
 	...ruGames,
 	...ruJams,
+	...ruAuth,
+	...ruFooter,
 	...ruAuth
 };
 
+/**
+ * resources
+ * @description i18n resource bundle mapping language codes to translation objects
+ * @returns Resource bundle object with language codes as keys
+ */
 const resources = {
 	en: { translation: en },
 	ru: { translation: ru }

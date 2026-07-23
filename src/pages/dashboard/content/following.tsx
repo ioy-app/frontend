@@ -8,12 +8,17 @@ import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
 import { useQuery } from "@tanstack/react-query";
 
+/**
+ * Following
+ * @description Dashboard tab displaying the user's following list with pagination
+ * @returns JSX element with following table
+ */
 const Following: React.FC = () => {
 	const { t } = useTranslation();
 	const [searchParams, setSearchParams] = useSearchParams();
 	const { login } = useSelector((state: StoreProps) => state.login);
 	const max = 10;
-	const current_page = Number(searchParams.get("page") || 1);
+	const currentPage = Number(searchParams.get("page") || 1);
 	const sort = searchParams.get("sort");
 
 	const query = useQuery({
@@ -22,7 +27,7 @@ const Following: React.FC = () => {
 			const search = new URLSearchParams();
 			search.set(
 				"offset",
-				String((current_page - 1) * max),
+				String((currentPage - 1) * max),
 			);
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
@@ -39,7 +44,10 @@ const Following: React.FC = () => {
 					{
 						title: t("dashboard.table.following.user"),
 						dataIndex: "id",
-						render: (_, user) => (
+						render: (
+							_,
+							user
+						) => (
 							<Link
 								to={paths.users.details(user?.login)}
 								className="group flex items-center gap-2 w-fit"
@@ -63,9 +71,12 @@ const Following: React.FC = () => {
 				footer={
 					<Components.Pagination
 						total={query?.data?.total || 1}
-						current={current_page}
-						per_page={max}
-						onChange={(offset, page) => {
+						current={currentPage}
+						perPage={max}
+						onChange={(
+						offset,
+						page
+					) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();

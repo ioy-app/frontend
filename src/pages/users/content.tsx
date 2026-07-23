@@ -34,6 +34,16 @@ import {
 	useSearchParams,
 } from "react-router-dom";
 
+/**
+ * UserContent
+ * @description Paginated content viewer for a user's games, pictures, or subscribers with sort options
+ *
+ * @param id - Content type identifier ("games", "pictures", or "subscribers")
+ * @param fn - API function to fetch the content list
+ * @param login - User login to fetch content for
+ * @param onClose - Callback when content is selected or viewer is closed
+ * @returns JSX element with paginated content grid
+ */
 export default function UserContent({
 	id,
 	fn,
@@ -43,23 +53,23 @@ export default function UserContent({
 	id: string;
 	fn: (
 		login: string,
-		us: URLSearchParams,
+		urlParams: URLSearchParams,
 	) => Promise<Response>;
 }) {
 	const { t } = useTranslation();
 	const [page, setPage] = useState<number>(1);
-	const per_page = 40;
+	const perPage = 40;
 	const [order, setOrder] = useState<string>("new");
 
 	const query = useQuery({
 		queryKey: ["user", login, "content", id, page, order],
 		queryFn: async () => {
-			const us = new URLSearchParams();
-			us.set("offset", String((page - 1) * per_page));
-			us.set("limit", String(per_page));
+			const urlParams = new URLSearchParams();
+			urlParams.set("offset", String((page - 1) * perPage));
+			urlParams.set("limit", String(perPage));
 			us.set("sort", String(order));
 
-			const response = await fn(login, us);
+			const response = await fn(login, urlParams);
 			return response;
 		},
 	});
@@ -105,7 +115,10 @@ export default function UserContent({
 					) : (
 						<div className="grid grid-cols-5 max-lg::grid-cols-4 max-md:grid-cols-3 gap-4 w-full h-fit">
 							{query?.data?.items?.map(
-								(item: GameProps | UserProps, i: number) => {
+								(
+							item: GameProps | UserProps,
+							i: number
+						) => {
 									switch (id) {
 										case "subscribers":
 											return (
@@ -163,8 +176,11 @@ export default function UserContent({
 					<Pagination
 						current={page}
 						total={query?.data?.total}
-						per_page={per_page}
-						onChange={(offset, page) => setPage(page)}
+						perPage={perPage}
+						onChange={(
+							offset,
+							page
+						) => setPage(page)}
 						disabled={query?.status == "pending"}
 					/>
 				</div>

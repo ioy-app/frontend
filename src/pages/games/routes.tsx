@@ -2,25 +2,40 @@ import { RouteObject } from "react-router-dom";
 import Game from "./details";
 import GameEdit from "./edit";
 
-export const games_paths = {
+/**
+ * gamesPaths
+ * @description Route path constants for the games section
+ * @returns Route path constants
+ */
+export const gamesPaths = {
 	details: (id: number | string) => `/g/${id}`,
 	edit: (id: number | string) => `/g/${id}/edit`,
 	create: `/g/create`,
 };
 
+/**
+ * games
+ * @description Route definitions for the game pages
+ * @returns Array of RouteObject configurations
+ */
 const games: RouteObject[] = [
 	{
-		path: games_paths.create,
+		path: gamesPaths.create,
 		element: <GameEdit />,
 	},
 	{
-		path: games_paths.details(":id"),
+		path: gamesPaths.details(":id"),
 		element: <Game />,
 	},
 	{
-		path: games_paths.edit(":id"),
+		path: gamesPaths.edit(":id"),
 		element: <GameEdit />,
 	},
 ];
 
+/**
+ * Games routes
+ * @description Default export of game route definitions
+ * @returns Array of RouteObject configurations
+ */
 export default games;

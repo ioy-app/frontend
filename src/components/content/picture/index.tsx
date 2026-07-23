@@ -6,6 +6,21 @@ import { useQuery } from "@tanstack/react-query";
 import { BiSolidCrown } from "react-icons/bi";
 import { FaFireAlt } from "react-icons/fa";
 
+/**
+ * Picture
+ * @description Displays a picture/image card with the image, optional jam result badge, hype indicator, and title. Optionally wrapped in a link to the picture page.
+ *
+ * @param dataSource - Game/picture data object containing id, title, jam_result, and hype status
+ * @param preview - URL of a preview image to display instead of the default image
+ * @param nolink - Disables the navigation link to the picture page
+ * @param size - Image card width in Tailwind size units (default: 24)
+ * @param onClick - Callback fired when the card is clicked with the picture id
+ * @returns A picture card with image, badges, and title, optionally wrapped in a link
+ *
+ * @example
+ * <Picture dataSource={pictureData} size={32} />
+ * <Picture dataSource={pictureData} nolink onClick={(id) => handleSelect(id)} />
+ */
 const Picture: React.FC<{
 	/** Game data */
 	dataSource: GameProps;

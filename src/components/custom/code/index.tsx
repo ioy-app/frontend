@@ -5,8 +5,23 @@ import { useNotify } from "@/hooks";
 import { useTranslation } from "react-i18next";
 import { apiInstance } from "@/api";
 
+/**
+ * length
+ * @description Default number of digits for the verification code
+ */
 const length: number = 6; // Code default length
 
+/**
+ * Code
+ * @description Verification code input form with 6 digit fields, paste support, and auto-submit
+ *
+ * @param onSubmit - Callback triggered with the API response on successful code verification
+ * @param onCancel - Callback triggered when the back/cancel button is clicked
+ * @returns A form with 6 numeric input fields, back and submit buttons
+ *
+ * @example
+ * <Code onSubmit={(data) => handleSuccess(data)} onCancel={() => goBack()} />
+ */
 const Code: React.FC<{
 	/** Submit event */
 	onSubmit: (data: Record<string, any>) => void;
@@ -66,7 +81,10 @@ const Code: React.FC<{
 
 		if (digits.length === 0) return;
 
-		digits.forEach((digit, idx) => {
+		digits.forEach((
+			digit,
+			idx
+		) => {
 			if (idx < length)
 				methods.setValue(`code.${idx}`, digit);
 		});
@@ -98,7 +116,10 @@ const Code: React.FC<{
 					{t("codes.description")}
 				</p>
 				<div className="flex flex-row gap-4 items-center w-full">
-					{Array.from({ length }, (_: any, i: number) => (
+					{Array.from({ length }, (
+						_,
+						i: number
+					) => (
 						<Input
 							{...methods.register(`code.${i}`)}
 							disabled={isLoading}

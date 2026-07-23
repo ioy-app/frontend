@@ -13,9 +13,17 @@ interface initialStateProps {
 	is_donut?: boolean;
 }
 
+/**
+ * fetchMe
+ * @description Async thunk to fetch current user profile
+ * @returns Promise with user data
+ */
 export const fetchMe = createAsyncThunk(
 	"login/fetchMe",
-	async (_, { rejectWithValue }) => {
+	async (
+		_,
+		{ rejectWithValue }
+	) => {
 		try {
 			const response = await profile_me();
 			return response;
@@ -37,11 +45,18 @@ const initialState: initialStateProps = {
 	roledata: {},
 };
 
+/**
+ * authSlice
+ * @description Redux slice for authentication state
+ * @returns Redux slice with actions and reducer for auth management
+ */
 const authSlice = createSlice({
 	name: "login",
 	initialState,
 	reducers: {
-		setLogin: (state, { payload }) => {
+		setLogin: (state, {
+			payload
+		}) => {
 			state.id = payload?.id;
 			state.token = payload?.token;
 			state.login = payload?.login;
@@ -50,7 +65,9 @@ const authSlice = createSlice({
 			state.loading = false;
 			localStorage.setItem("token", payload?.token);
 		},
-		setToken: (state, { payload }) => {
+		setToken: (state, {
+			payload
+		}) => {
 			state.token = payload?.token;
 			if (!state.token) {
 				state.id = null;
@@ -68,7 +85,9 @@ const authSlice = createSlice({
 			state.is_avatar = false;
 			state.is_donut = false;
 		},
-		changeLogin: (state, { payload }) => {
+		changeLogin: (state, {
+			payload
+		}) => {
 			state.login = payload.login;
 		},
 		getMe: (state) => {
@@ -104,7 +123,15 @@ const authSlice = createSlice({
 				fetchMe.fulfilled,
 				(
 					state,
-					{ payload: { id, login, is_avatar, roledata, is_donut } },
+					{
+						payload: {
+							id,
+							login,
+							is_avatar,
+							roledata,
+							is_donut
+						}
+					},
 				) => {
 					state.login = login;
 					state.id = id;
@@ -114,7 +141,12 @@ const authSlice = createSlice({
 					state.roledata = roledata;
 				},
 			)
-			.addCase(fetchMe.rejected, (state, action) => {
+			.addCase(
+				fetchMe.rejected,
+				(
+					state,
+					action
+				) => {
 				state.login = null;
 				state.id = null;
 				state.loading = false;

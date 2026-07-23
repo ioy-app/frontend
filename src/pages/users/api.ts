@@ -6,6 +6,10 @@ type ControlsProps = {
 	is_me: boolean;
 }
 
+/**
+ * UserProps
+ * @description Interface representing a user entity with id, login, subscribers, and ban information
+ */
 export default interface UserProps {
 	id: number;
 	login: string;
@@ -17,6 +21,10 @@ export default interface UserProps {
 	controls?: ControlsProps;
 }
 
+/**
+ * Session
+ * @description User session data from the API
+ */
 export interface Session {
 	/** ID */
 	id: number;
@@ -32,6 +40,11 @@ export interface Session {
 	token?: string;
 }
 
+/**
+ * Routes
+ * @description API route paths for users endpoints
+ * @returns Route path constants
+ */
 const Routes = {
 	self: `/users/self`,
 	details: (login: string) => `/users/${login}`,
@@ -54,7 +67,7 @@ const Routes = {
  * Get user's details
  *
  * @param login - Login
- * @returns
+ * @returns Promise with user details data
 */
 export const users_details = (login: string) =>
 	apiInstance.get(Routes.details(login));
@@ -62,7 +75,7 @@ export const users_details = (login: string) =>
 /**
  * Get self details
  *
- * @returns
+ * @returns Promise with current user's data
 */
 export const users_me = () =>
 	apiInstance.get(Routes.self);
@@ -71,7 +84,7 @@ export const users_me = () =>
  * Subscribe to user
  *
  * @param login - Login
- * @returns
+ * @returns Promise with subscription status response
 */
 export const users_subscribe = (login: string) =>
 	apiInstance.post(Routes.subscribe(login));
@@ -81,9 +94,12 @@ export const users_subscribe = (login: string) =>
  *
  * @param login - Login
  * @param params - Filters
- * @returns
+ * @returns Promise with list of user's games
 */
-export const users_games = (login: string, params?: Record<string, any> | URLSearchParams) =>
+export const users_games = (
+	login: string,
+	params?: Record<string, any> | URLSearchParams
+) =>
 	apiInstance.get(Routes.games(login), {
 		params
 	});
@@ -93,9 +109,12 @@ export const users_games = (login: string, params?: Record<string, any> | URLSea
  *
  * @param login - Login
  * @param params - Filters
- * @returns
+ * @returns Promise with list of user's pictures
 */
-export const users_pictures = (login: string, params?: Record<string, any> | URLSearchParams) =>
+export const users_pictures = (
+	login: string,
+	params?: Record<string, any> | URLSearchParams
+) =>
 	apiInstance.get(Routes.pictures(login), {
 		params
 	});
@@ -105,9 +124,12 @@ export const users_pictures = (login: string, params?: Record<string, any> | URL
  *
  * @param login - Login
  * @param params - Filters
- * @returns
+ * @returns Promise with list of user's likes
 */
-export const users_likes = (login: string, params?: Record<string, any> | URLSearchParams) =>
+export const users_likes = (
+	login: string,
+	params?: Record<string, any> | URLSearchParams
+) =>
 	apiInstance.get(Routes.likes(login), {
 		params
 	});
@@ -117,9 +139,12 @@ export const users_likes = (login: string, params?: Record<string, any> | URLSea
  *
  * @param login - Login
  * @param params - Filters
- * @returns
+ * @returns Promise with list of user's subscriptions
 */
-export const users_following = (login: string, params?: Record<string, any> | URLSearchParams) =>
+export const users_following = (
+	login: string,
+	params?: Record<string, any> | URLSearchParams
+) =>
 	apiInstance.get(Routes.subscribers(login), {
 		params
 	});
@@ -129,9 +154,12 @@ export const users_following = (login: string, params?: Record<string, any> | UR
  *
  * @param login - Login
  * @param params - Filters
- * @returns
+ * @returns Promise with list of user's jams
 */
-export const users_jams = (login: string, params?: Record<string, any> | URLSearchParams) =>
+export const users_jams = (
+	login: string,
+	params?: Record<string, any> | URLSearchParams
+) =>
 	apiInstance.get(Routes.jams(login), {
 		params
 	});
@@ -141,9 +169,12 @@ export const users_jams = (login: string, params?: Record<string, any> | URLSear
  *
  * @param login - Login
  * @param props - Properties
- * @returns
+ * @returns Promise with updated user data
 */
-export const users_edit = (login: string, props: Record<string, any>) =>
+export const users_edit = (
+	login: string,
+	props: Record<string, any>
+) =>
 	apiInstance.put(Routes.details(login), jsonToFormData(props));
 
 /**
@@ -151,18 +182,21 @@ export const users_edit = (login: string, props: Record<string, any>) =>
  *
  * @param current_email - Current email
  * @param new_email - New email
- * @returns
+ * @returns Promise with email change confirmation
 */
-export const users_edit_email = (current_email: string, new_email: string) =>
+export const users_edit_email = (
+	currentEmail: string,
+	newEmail: string
+) =>
 	apiInstance.put(Routes.email, {
-		current_email,
-		email: new_email
+		current_email: currentEmail,
+		email: newEmail
 	});
 
 /**
  * Delete user's account
  *
- * @returns
+ * @returns Promise with account deletion confirmation
 */
 export const users_delete = () =>
 	apiInstance.post(Routes.delete);

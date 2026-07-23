@@ -14,6 +14,7 @@ import { RefCallBack } from "react-hook-form";
  * Component for select date
  * @example
  * return <DatePicker />
+ * @returns Date picker input with calendar icon and formatted display
 */
 const DatePicker: React.FC<{
   /** Change event */

@@ -1,5 +1,10 @@
 import { apiInstance } from "@/api";
 
+/**
+ * Routes
+ * @description API route paths for authentication endpoints
+ * @returns Route path constants
+ */
 const Routes = {
 	login: `/auth/login`,
 	reg: `/auth/reg`,
@@ -10,7 +15,7 @@ const Routes = {
  * Login
  *
  * @param email - User's email
- * @returns
+ * @returns Promise with login response data
 */
 export const auth_login = (email: string) =>
 	apiInstance.post(Routes.login, { email });
@@ -19,9 +24,9 @@ export const auth_login = (email: string) =>
  * Registration new user
  *
  * @param data - Creds for new user
- * @returns
+ * @returns Promise with registration response data
 */
-export const auth_reg = (
+export const auth_register = (
 	data: {
 		login: string;
 		email: string;
@@ -33,7 +38,7 @@ export const auth_reg = (
  * Verify created account
  *
  * @param code - Verification code
- * @returns
+ * @returns Promise with verification response data
 */
 export const auth_verify = (code: string) =>
 	apiInstance.get(Routes.verify, {

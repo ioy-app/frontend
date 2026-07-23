@@ -17,15 +17,20 @@ import { useTranslation } from "react-i18next";
 import { paths } from "@/routes";
 import GameProps from "@/pages/games/api";
 import { useQuery } from "@tanstack/react-query";
-import { pictures_paths } from "@/pages/pictures/routes";
+import { picturesPaths } from "@/pages/pictures/routes";
 
+/**
+ * Pictures
+ * @description Dashboard tab displaying pictures with status, sorting, and pagination
+ * @returns JSX element with pictures table
+ */
 const Pictures: React.FC = () => {
 	const { t } = useTranslation();
 	const navigator = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const max = 10;
-	const current_page = Number(searchParams.get("page") || 1);
+	const currentPage = Number(searchParams.get("page") || 1);
 	const status = searchParams.get("status");
 	const sort = searchParams.get("sort");
 	const searchQS = searchParams.get("search");
@@ -35,7 +40,7 @@ const Pictures: React.FC = () => {
 		queryFn: async () => {
 			const search = new URLSearchParams();
 
-			search.set("offset", String((current_page - 1) * max));
+			search.set("offset", String((currentPage - 1) * max));
 			search.set("limit", String(max));
 			if (sort) search.set("sort", sort);
 			if (status) search.set("status", status);
@@ -53,7 +58,10 @@ const Pictures: React.FC = () => {
 					{
 						title: t("dashboard.table.pictures.picture"),
 						dataIndex: "id",
-						render: (data, game) => (
+						render: (
+							data,
+							game
+						) => (
 							<Link
 								to={paths.pictures.details(game?.id)}
 								className="group flex items-center gap-2 w-50"
@@ -105,12 +113,15 @@ const Pictures: React.FC = () => {
 				]}
 				data={query?.data?.items}
 				loading={query?.isPending}
-				control={(row, i) => (
+				control={(
+				row,
+				i
+			) => (
 					<>
 						<Components.Button
 							variant="second"
 							onClick={() =>
-								navigator(pictures_paths.edit(row?.id))
+								navigator(picturesPaths.edit(row?.id))
 							}
 						>
 							<BiEditAlt />
@@ -121,7 +132,7 @@ const Pictures: React.FC = () => {
 					<div className="w-full flex items-center justify-end gap-4">
 						<Components.Button
 							variant="primary"
-							onClick={() => navigator(pictures_paths.create)}
+							onClick={() => navigator(picturesPaths.create)}
 						>
 							<BiPlus />
 							{t("buttons.add")}
@@ -131,9 +142,12 @@ const Pictures: React.FC = () => {
 				footer={
 					<Components.Pagination
 						total={query?.data?.total || 1}
-						current={current_page}
-						per_page={max}
-						onChange={(offset, page) => {
+						current={currentPage}
+						perPage={max}
+						onChange={(
+						offset,
+						page
+					) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();

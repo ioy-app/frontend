@@ -29,6 +29,11 @@ import { useTranslation } from "react-i18next";
 import { BiChevronsLeft, BiX } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 
+/**
+ * JamEdit
+ * @description Jam creation and editing form with icon, nominations, judges, date ranges, and vote type settings
+ * @returns JSX element with jam edit/create form
+ */
 export default function JamEdit() {
 	const params = useParams();
 	const navigate = useNavigate();
@@ -118,13 +123,13 @@ export default function JamEdit() {
 	const title = methods.watch("title");
 	const id = methods.watch("id");
 	const nominations = methods.watch("nominations") || [];
-	const judges_data = methods.watch("judges_data");
+	const judgesData = methods.watch("judges_data");
 
-	const date_started = methods.watch("date_started");
-	const date_finished = methods.watch("date_finished");
-	const date_vote_started = methods.watch("date_vote_started");
-	const date_vote_finished = methods.watch("date_vote_finished");
-	const is_avatar = methods.watch("is_avatar");
+	const dateStarted = methods.watch("date_started");
+	const dateFinished = methods.watch("date_finished");
+	const dateVoteStarted = methods.watch("date_vote_started");
+	const dateVoteFinished = methods.watch("date_vote_finished");
+	const isAvatar = methods.watch("is_avatar");
 
 	return (
 		<FormProvider {...methods}>
@@ -160,7 +165,7 @@ export default function JamEdit() {
 											{
 												id,
 												is_avatar:
-													is_avatar || handlePreviewIcon,
+													isAvatar || handlePreviewIcon,
 											} as GameProps
 										}
 										size="full"
@@ -213,7 +218,10 @@ export default function JamEdit() {
 								}}
 							/>
 							<div className="flex flex-row gap-4 flex-wrap">
-								{nominations?.map((tag: string, i: number) => (
+								{nominations?.map((
+									tag: string,
+									i: number
+								) => (
 									<span
 										className="pr-2 border border-br rounded-xl cursor-pointer flex gap-2 items-center"
 										onClick={() => {
@@ -235,7 +243,7 @@ export default function JamEdit() {
 							name="judges"
 							placeholder={t("jams.placeholders.judges")}
 							label={t("jams.labels.judges")}
-							initial={judges_data}
+							initial={judgesData}
 							{...methods}
 						/>
 						<div className="flex flex-col gap-2 text-placeholder">

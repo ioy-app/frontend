@@ -26,28 +26,33 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
-  BiChevronsLeft,
-  BiChevronsRight,
-  BiX
+	BiChevronsLeft,
+	BiChevronsRight,
+	BiX
 } from "react-icons/bi";
 import {
-  Navigate,
-  useNavigate,
-  useParams
+	Navigate,
+	useNavigate,
+	useParams
 } from "react-router-dom";
 import JamBlock from "../games/jam";
 import {
-  useMutation,
-  useQuery
+	useMutation,
+	useQuery
 } from "@tanstack/react-query";
 import { jams_details } from "@/pages/jams/api";
 import {
-  pictures_create,
-  pictures_delete,
-  pictures_details,
-  pictures_edit
+	pictures_create,
+	pictures_delete,
+	pictures_details,
+	pictures_edit
 } from "./api";
 
+/**
+ * Edit
+ * @description Picture creation and editing form with image upload, tags, status, and game association
+ * @returns JSX element with picture edit/create form
+ */
 export default function Edit() {
 	const params = useParams();
 	const navigate = useNavigate();
@@ -66,15 +71,19 @@ export default function Edit() {
 			label: t(record.label),
 		}));
 
-	const methods = useForm();
+	const methods = useForm({
+		defaultValues: {
+			status: "public"
+		}
+	});
 
 	// Get jamdata:
-	const jam_id = (params?.jam_id && Number(params.jam_id)) || methods?.watch("jam_id");
+	const jamId = (params?.jam_id && Number(params.jam_id)) || methods?.watch("jam_id");
 	const queryJam = useQuery({
-		queryKey: [ "jam", jam_id ],
-		enabled: Boolean(jam_id > 0),
+		queryKey: [ "jam", jamId ],
+		enabled: Boolean(jamId > 0),
 		queryFn: async () => {
-			const response = await jams_details(jam_id);
+			const response = await jams_details(jamId);
 			return response;
 		}
 	});
@@ -94,10 +103,10 @@ export default function Edit() {
 			const title = data?.title;
 			const version = data?.version;
 			const description = data?.description;
-			const status: "draft" | "public" = !jam_id ? data?.status : "public";
+			const status: "draft" | "public" = !jamId ? data?.status : "public";
 			const tags = data?.tags || [];
-			const is_background = data?.is_background;
-			const game_id = data?.game_id;
+			const isBackground = data?.is_background;
+			const gameId = data?.game_id;
 
 			const props = {
 				title,
@@ -106,9 +115,9 @@ export default function Edit() {
 				status,
 				tags,
 				image,
-				jam_id,
-				is_background,
-				game_id
+				jam_id: jamId,
+				is_background: isBackground,
+				game_id: gameId
 			}
 
 			if (isCreate)
@@ -263,13 +272,13 @@ export default function Edit() {
 							<label className="max-md:w-full flex flex-col justify-center gap-4 items-center p-4 border-4 border-dotted border-br rounded-2xl cursor-pointer">
 								<div className="w-90 max-md:w-full">
 									{(handlePreviewIcon || id) && (
-                    <Picture
-                      dataSource={{ id }}
-                      size="full"
-                      preview={handlePreviewIcon}
-                      nolink
-                    />
-                  )}
+										<Picture
+											dataSource={{ id }}
+											size="full"
+											preview={handlePreviewIcon}
+											nolink
+										/>
+									)}
 								</div>
 								<div className="flex flex-col text-center">
 									<p className="text-placeholder">
@@ -326,7 +335,10 @@ export default function Edit() {
 							className="flex flex-row gap-4 flex-wrap"
 							key={tags}
 						>
-							{(tags || [])?.map((tag: string, i: number) => (
+							{(tags || [])?.map((
+								tag: string,
+								i: number
+							) => (
 								<span
 									className="pr-2 border border-br rounded-xl cursor-pointer flex gap-2 items-center"
 									onClick={() => {
@@ -346,7 +358,7 @@ export default function Edit() {
 						</div>
 						<div className="flex gap-4 items-end justify-between w-full flex-wrap">
 							<div className="flex gap-4 items-center">
-								{!jam_id && (
+								{!jamId && (
 									<Select
 										options={status}
 										value={status?.[1]}

@@ -40,6 +40,11 @@ import { jams_details } from "@/pages/jams/api";
 import UserProps from "@/pages/users/api";
 import { useSelector } from "react-redux";
 
+/**
+ * Edit
+ * @description Game creation and editing form with icon upload, file uploader, tags, authors, and status management
+ * @returns JSX element with game edit/create form
+ */
 export default function Edit() {
 	const params = useParams();
 	const navigate = useNavigate();
@@ -61,15 +66,19 @@ export default function Edit() {
 			label: t(record.label),
 		}));
 
-	const methods = useForm();
+	const methods = useForm({
+		defaultValues: {
+			status: "public"
+		}
+	});
 
 	// Get jamdata:
-	const jam_id = (params?.jam_id && Number(params.jam_id)) || methods?.watch("jam_id");
+	const jamId = (params?.jam_id && Number(params.jam_id)) || methods?.watch("jam_id");
 	const queryJam = useQuery({
-		queryKey: [ "jam", jam_id ],
-		enabled: Boolean(jam_id > 0),
+		queryKey: [ "jam", jamId ],
+		enabled: Boolean(jamId > 0),
 		queryFn: async () => {
-			const response = await jams_details(jam_id);
+			const response = await jams_details(jamId);
 			return response;
 		}
 	});
@@ -89,11 +98,11 @@ export default function Edit() {
 			const title = data?.title;
 			const version = data?.version;
 			const description = data?.description;
-			const status: "draft" | "public" = !jam_id ? data?.status : "public";
+			const status: "draft" | "public" = !jamId ? data?.status : "public";
 			const authors = data?.authors || [];
 			const tags = data?.tags || [];
 			const game = data?.game;
-			const is_background = data?.is_background;
+			const isBackground = data?.is_background;
 
 			const props = {
 				title,
@@ -104,8 +113,8 @@ export default function Edit() {
 				tags,
 				game,
 				icon,
-				jam_id,
-				is_background
+				jam_id: jamId,
+				is_background: isBackground
 			}
 			if (isCreate)
 				return (await games_create(props));
@@ -188,12 +197,12 @@ export default function Edit() {
 
 	const title = methods.watch("title");
 	const tags = methods.watch("tags") || [];
-	const is_avatar = methods.watch("is_avatar") || false;
-	const authors_data = methods.watch("authors_data");
+	const isAvatar = methods.watch("is_avatar") || false;
+	const rawAuthorsData = methods.watch("authors_data");
 
 	const authorsData = useMemo(() => {
-		return (authors_data || [])?.filter?.((user: UserProps) => user?.login != login) || [];
-	}, [ authors_data, login ]);
+		return (rawAuthorsData || [])?.filter?.((user: UserProps) => user?.login != login) || [];
+	}, [ rawAuthorsData, login ]);
 
 	// Game details:
 	const query = useQuery({
@@ -268,7 +277,7 @@ export default function Edit() {
 										dataSource={
 											{
 												id,
-												is_avatar: handlePreviewIcon || is_avatar
+												is_avatar: handlePreviewIcon || isAvatar
 											} as GameProps
 										}
 										size="full"
@@ -337,7 +346,10 @@ export default function Edit() {
 							className="flex flex-row gap-4 flex-wrap"
 							key={tags}
 						>
-							{(tags || [])?.map((tag: string, i: number) => (
+							{(tags || [])?.map((
+								tag: string,
+								i: number
+							) => (
 								<span
 									className="pr-2 border border-br rounded-xl cursor-pointer flex gap-2 items-center"
 									onClick={() => {
@@ -365,14 +377,17 @@ export default function Edit() {
 						disabled={submit.isPending}
 					/>
 					<Uploader
-						onChange={(files, total_size) => {
+						onChange={(
+							files,
+							total_size
+						) => {
 							methods.setValue("game", files);
 						}}
 						disabled={submit.isPending}
 					/>
 					<div className="flex gap-4 items-center justify-between w-full flex-wrap">
 						<div className="flex gap-4 items-center">
-							{!jam_id && (
+							{!jamId && (
 								<Select
 									options={status}
 									value={status?.[1]}

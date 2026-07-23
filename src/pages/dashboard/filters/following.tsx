@@ -5,11 +5,10 @@ import { Select } from "@/components";
 import { useMemo } from "react";
 
 /**
- * Dashboard following filters
- *
- * @example
- * <DashboardFilterFollowing />
-*/
+ * DashboardFilterFollowing
+ * @description Filter panel for the following dashboard tab with sort options
+ * @returns JSX element with following filter controls
+ */
 const DashboardFilterFollowing: React.FC = () => {
 	const methods = useFormContext();
 	const { t } = useTranslation();

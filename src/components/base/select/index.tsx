@@ -22,6 +22,26 @@ type SelectComponentProps = {
 	"children"
 >;
 
+/**
+ * Select
+ * @description Custom animated dropdown selector with portal-based options list, clear functionality, and react-hook-form integration
+ *
+ * @param name - Name attribute for the select field (used with form context)
+ * @param options - Array of selectable options with label and value
+ * @param value - Currently selected option object
+ * @param onChange - Change event handler triggered when a selection is made
+ * @param placeholder - Placeholder text shown when no option is selected
+ * @param className - Additional CSS class names for the select container
+ * @param ref - Ref forwarded to the outer container div
+ * @param isFirstOption - Whether to auto-select the first option on mount
+ * @param disabled - Whether the select is disabled
+ * @param allowClear - Whether to show a clear button to reset the selection
+ * @param onUpdate - Callback invoked with the selected value when the selection changes
+ * @returns A custom dropdown selector with animated open/close states and a portal-rendered options list
+ *
+ * @example
+ * <Select name="category" options={categories} placeholder="Select category" allowClear />
+ */
 const Select: React.FC<SelectComponentProps & {
 	placeholder?: string;
 	isFirstOption?: boolean;
@@ -170,7 +190,7 @@ const Select: React.FC<SelectComponentProps & {
 					style={{
 						top: (rect?.top + rect?.height) + "px",
 						left: rect?.left + "px",
-						width: rect?.width + "px"
+						minWidth: rect?.width + "px"
 					}}
 				>
 					{!options?.length && (
@@ -181,7 +201,10 @@ const Select: React.FC<SelectComponentProps & {
 							</p>
 						</div>
 					)}
-					{options?.map((option: Option, i: number) => (
+					{options?.map((
+					option: Option,
+					i: number
+				) => (
 						<div
 							className={`group cursor-pointer text-default transition-colors ${(option.value == localValue?.value && "text-primary") || "text-text"}`}
 							key={i}

@@ -1,5 +1,6 @@
 {
 	"games": {
+		"title": "Игры",
 		"titles": {
 			"create": "Создать игру",
 			"edit": "Редактировать {{title}}"

@@ -13,6 +13,13 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
+/**
+ * Delete
+ * @description Account deletion confirmation modal with code verification and logout
+ *
+ * @param onClose - Callback when the modal is closed
+ * @returns JSX element with deletion confirmation form
+ */
 const Delete: React.FC<{
 	onClose: () => void;
 }> = ({ onClose }) => {

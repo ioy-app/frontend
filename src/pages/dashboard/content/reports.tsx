@@ -13,26 +13,34 @@ import UserProps from "@/pages/users/api";
 import { useModal } from "@/hooks";
 import JamProps from "@/pages/jams/api";
 
+/**
+ * Reports
+ * @description Dashboard tab displaying user reports with reply functionality and pagination
+ * @returns JSX element with reports table
+ */
 const Reports: React.FC = () => {
 	const { t } = useTranslation();
 	const { modal } = useModal();
 	const [ searchParams, setSearchParams ] = useSearchParams();
 
 	const max = 10;
-	const current_page = Number(searchParams.get("page") || 1);
+	const currentPage = Number(searchParams.get("page") || 1);
 
 	const query = useQuery({
 		queryKey: [ "dashboard", "reports", searchParams?.toString() ],
 		queryFn: async () => {
 			const result = await reports_list(
-				(current_page - 1) * max,
+				(currentPage - 1) * max,
 				max,
 			);
 			return result;
 		},
 	});
 
-	const handleOpen = (data, i) => {
+	const handleOpen = (
+		data,
+		i
+	) => {
 		modal("", (onClose) => <ReportAnswer onClose={onClose} data={data} />);
 	}
 
@@ -43,7 +51,10 @@ const Reports: React.FC = () => {
 					{
 						title: t("dashboard.table.reports.target_id"),
 						dataIndex: "instance",
-						render: (instance, data) => <RenderInstance instance={instance} data={data} />,
+						render: (
+						instance,
+						data
+					) => <RenderInstance instance={instance} data={data} />,
 					},
 					{
 						title: t("dashboard.table.reports.source_id"),
@@ -118,7 +129,10 @@ const Reports: React.FC = () => {
 							dayjs(date).format("HH:mm DD.MM.YYYY"),
 					}
 				]}
-				control={(row, i) => (
+				control={(
+				row,
+				i
+			) => (
 					<>
 						<Components.Button
 							variant="second"
@@ -133,9 +147,12 @@ const Reports: React.FC = () => {
 				footer={
 					<Components.Pagination
 						total={query?.data?.total || 1}
-						current={current_page}
-						per_page={max}
-						onChange={(offset, page) => {
+						current={currentPage}
+						perPage={max}
+						onChange={(
+						offset,
+						page
+					) => {
 							searchParams.set("page", String(page));
 							setSearchParams(searchParams);
 							query.refetch();
@@ -147,6 +164,11 @@ const Reports: React.FC = () => {
 	);
 };
 
+/**
+ * ReportAnswer
+ * @description Form component for submitting a response to a report
+ * @returns JSX element
+ */
 const ReportAnswer: React.FC<{
 	onClose: () => void;
 	data: Record<string, any>;
@@ -248,6 +270,11 @@ const ReportAnswer: React.FC<{
 	);
 }
 
+/**
+ * RenderInstance
+ * @description Renders a preview of the reported instance (jam, game, or picture) based on its type
+ * @returns JSX element
+ */
 const RenderInstance: React.FC<{}> = ({ instance, data }) => {
 	switch (data.target_type) {
 		case "jam":

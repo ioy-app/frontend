@@ -6,11 +6,10 @@ import { Select } from "@/components";
 import { useMemo } from "react";
 
 /**
- * Dashboard likes filters
- *
- * @example
- * <DashboardFilterLikes />
-*/
+ * DashboardFilterLikes
+ * @description Filter panel for the likes dashboard tab with type and sort options
+ * @returns JSX element with likes filter controls
+ */
 const DashboardFilterLikes: React.FC = () => {
 	const methods = useFormContext();
 	const { t } = useTranslation();

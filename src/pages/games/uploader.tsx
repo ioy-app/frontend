@@ -5,13 +5,19 @@ import { Empty } from "@/icons";
 import { BiFile, BiFileBlank } from "react-icons/bi";
 
 /**
- * Example description for the Component
- * @example
- * return <Uploader />
-*/
+ * Uploader
+ * @description Directory file uploader component that displays selected files with sizes and total size validation
+ *
+ * @param disabled - Whether the upload input is disabled
+ * @param onChange - Callback when files are selected, receives files array and total size in MB
+ * @returns JSX element with file upload input and file list display
+ */
 const Uploader: React.FC<{
   disabled?: boolean;
-  onChange: (files: File[], total_size: number) => void;
+  onChange: (
+    files: File[],
+    total_size: number
+  ) => void;
 }> = ({
   disabled,
   onChange
@@ -28,12 +34,18 @@ const Uploader: React.FC<{
     setFiles(filteredFiles);
     onChange && onChange(
       filteredFiles,
-      filteredFiles?.reduce((a, b) => a + b.size, 0) / 1024 / 1024
+      filteredFiles?.reduce((
+          a,
+          b
+        ) => a + b.size, 0) / 1024 / 1024
     );
   }
 
   const totalSize = useMemo(() => {
-    return files?.reduce((a, b) => a + b.size, 0) / 1024 / 1024;
+    return files?.reduce((
+        a,
+        b
+      ) => a + b.size, 0) / 1024 / 1024;
   }, [ files ]);
   
 

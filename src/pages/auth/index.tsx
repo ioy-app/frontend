@@ -5,8 +5,12 @@ import { Button, Tabs } from "@/components";
 import { BiX } from "react-icons/bi";
 
 /**
- * Auth content
-*/
+ * Auth
+ * @description Authentication modal with tabbed login and registration forms
+ *
+ * @param onClose - Callback when the modal is closed
+ * @returns JSX element with auth tabs
+ */
 const Auth: React.FC<{ onClose: () => void; }> = ({ onClose }) => {
 	const { t } = useTranslation();
 

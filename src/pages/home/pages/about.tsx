@@ -22,15 +22,12 @@ import { FaBluesky } from "react-icons/fa6";
 import { useEffect } from "react";
 
 /**
- * About page
- * @example
- * return <About />
+ * About
+ * @description About page with project description, featured games and pictures, social links, and license info
+ * @returns JSX element with about page content
  */
 export default function About() {
 	const { t } = useTranslation();
-	useEffect(() => {
-		document.title = t("about.title");
-	}, [ t ]);
 	
 	const gamesQuery = useQuery({
 		queryKey: [ "about", "games" ],
@@ -51,9 +48,9 @@ export default function About() {
 	return (
 		<div className="w-full flex flex-col gap-4 h-fit items-center">
 			<Meta
-				title="ioy.app"
+				title={t("about.title")}
 				description={t("about.description")}
-				url="https://ioy.app/"
+				url="https://ioy.app/about"
 			/>
 			<div className="flex flex-col justify-center gap-4 flex-1 max-w-[60%] max-md:max-w-full z-2">
 				<div className="flex justify-center w-full">
@@ -90,7 +87,10 @@ export default function About() {
 					<p className="text-center px-6">{t("about.games")}</p>
 					<Spin loading={gamesQuery?.isLoading}>
 						<div className="grid grid-cols-3 gap-4">
-							{gamesQuery?.data?.items?.map?.((item, i) => (
+							{gamesQuery?.data?.items?.map?.((
+							item,
+							i
+						) => (
 								<Game
 									dataSource={item}
 									size="full"
@@ -113,7 +113,10 @@ export default function About() {
 					<p className="text-center px-6">{t("about.pictures")}</p>
 					<Spin loading={picturesQuery?.isLoading}>
 						<div className="grid grid-cols-3 gap-4 items-center">
-							{picturesQuery?.data?.items?.map?.((item, i) => (
+							{picturesQuery?.data?.items?.map?.((
+							item,
+							i
+						) => (
 								<Picture
 									dataSource={item}
 									size="full"

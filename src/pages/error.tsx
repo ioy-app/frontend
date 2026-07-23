@@ -3,6 +3,13 @@ import { Button } from "@/components";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+/**
+ * ErrorPage
+ * @description Displays a styled error page with an optional custom message and a link to the main page
+ *
+ * @param msg - Optional translation key for the error message
+ * @returns JSX element with error display and navigation button
+ */
 export default function ErrorPage({
 	msg
 }: {

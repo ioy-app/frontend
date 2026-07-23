@@ -6,11 +6,10 @@ import { Select } from "@/components";
 import { useMemo } from "react";
 
 /**
- * Dashboard jams filters
- *
- * @example
- * <DashboardFilterJams />
-*/
+ * DashboardFilterJams
+ * @description Filter panel for the jams dashboard tab with jam type and sort options
+ * @returns JSX element with jams filter controls
+ */
 const DashboardFilterJams: React.FC = () => {
 	const methods = useFormContext();
 	const { t } = useTranslation();
