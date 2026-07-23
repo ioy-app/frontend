@@ -117,13 +117,8 @@ export default function Home() {
 								</div>
 							</Spin>
 						</div>
-						<div className="col-span-2 flex flex-col gap-4 items-end">
-							<NavLink
-								to="/jams"
-								className="transition-opacity hover:opacity-75 text-title w-fit"
-							>
-								<TitleColorfull text={t("home.titles.jams")} />
-							</NavLink>
+						<div className="col-span-2 flex flex-col gap-4 items-end text-title">
+							<span><TitleColorfull text={t("home.titles.jams")} /></span>
 							<Jams />
 						</div>
 					</div>
