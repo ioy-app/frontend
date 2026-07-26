@@ -1,6 +1,6 @@
 import Home from "./home";
 import Content from "./content";
-import Profile, { ProfileEdit } from "./users";
+import Profile from "./users";
 import UserContent from "./users/content";
 import Game from "./games/details";
 import GameEdit from "./games/edit";
@@ -23,7 +23,6 @@ export {
 	AuthLogin,
 	AuthReg,
 	Profile,
-	ProfileEdit,
 	Game,
 	ErrorPage,
 	Dashboard,

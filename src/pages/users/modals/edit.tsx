@@ -2,8 +2,6 @@ import {
 	Button,
 	Checkbox,
 	Input,
-	Spin,
-	Tabs,
 	Textarea,
 	User,
 } from "@/components";
@@ -18,10 +16,7 @@ import {
 } from "../../../stories/login";
 import { profile_logout } from "@/api/profile";
 import {
-	Navigate,
 	NavigateFunction,
-	useNavigate,
-	useParams,
 } from "react-router-dom";
 import {
 	useEffect,
@@ -30,19 +25,14 @@ import {
 	useState,
 } from "react";
 import {
-	users_details,
 	users_edit,
 	users_me,
 } from "../api";
 import Email from "./email";
 import Delete from "./delete";
 import {
-	BiArrowBack,
 	BiCheck,
-	BiChevronsLeft,
 	BiExit,
-	BiSave,
-	BiSolidChevronLeft,
 	BiX,
 } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
@@ -86,9 +76,18 @@ const Edit: React.FC<{
 					throw new Error("errors.avatar_limit");
 			}
 
+			if (fd?.banner?.[0]) {
+				const file = fd?.banner?.[0];
+				if (file?.type != "image/png")
+					throw new Error("errors.banner_type");
+				if (file.size >= 1 * 1024 * 1024)
+					throw new Error("errors.banner_limit");
+			}
+
 			const response = await users_edit(data.login, {
 				...fd,
 				avatar: fd?.avatar?.[0],
+				banner: fd?.banner?.[0]
 			});
 
 			notify(t("notify.save"), "success");
@@ -113,6 +112,7 @@ const Edit: React.FC<{
 	};
 
 	const avatar = watch("avatar");
+	const banner = watch("banner");
 
 	const handlePreview = useMemo(() => {
 		if (avatar && avatar.length > 0)
@@ -121,7 +121,15 @@ const Edit: React.FC<{
 		return null;
 	}, [avatar]);
 
+	const handlePreviewBanner = useMemo(() => {
+		if (banner && banner.length > 0)
+			return URL.createObjectURL(banner[0]);
+
+		return `/api/v1/users/${login}/banner`;
+	}, [ banner, login ]);
+
 	const refPreview = useRef<string | null>(null);
+	const refPreviewBanner = useRef<string | null>(null);
 	const formRef = useRef<HTMLFormElement>(null);
 
 	useEffect(() => {
@@ -129,6 +137,12 @@ const Edit: React.FC<{
 			URL.revokeObjectURL(refPreview.current);
 		refPreview.current = handlePreview;
 	}, [refPreview]);
+
+	useEffect(() => {
+		if (refPreviewBanner.current)
+			URL.revokeObjectURL(refPreviewBanner.current);
+		refPreviewBanner.current = handlePreviewBanner;
+	}, [refPreviewBanner]);
 
 	useEffect(() => {
 		setLoading(true);
@@ -164,8 +178,7 @@ const Edit: React.FC<{
 					ref={formRef}
 					className="flex flex-col gap-4 w-full items-center"
 					onSubmit={handleSubmit(submit)}
-				>
-					
+				>		
 					<label className="flex flex-col justify-center gap-4 items-center p-4 border-4 border-dotted border-br rounded-2xl cursor-pointer">
 						<div className="w-32 h-32" key={data?.is_avatar}>
 							<User
@@ -194,6 +207,28 @@ const Edit: React.FC<{
 							className="hidden"
 						/>
 					</label>
+					<label className="flex flex-col justify-center gap-4 w-full items-center p-4 border-4 border-dotted border-br rounded-2xl cursor-pointer">
+						<div className="w-full h-40 bg-primary/5 rounded-2xl overflow-hidden flex justify-center items-center">
+							<img
+								src={handlePreviewBanner}
+								className="w-full aspect-video"
+							/>
+						</div>
+						<div className="flex flex-col text-center">
+							<p className="text-placeholder">
+								{t("profile.placeholders.banner")}
+							</p>
+							<p className="text-placeholder text-text/50">
+								{t("profile.placeholders.banner_limit")}
+							</p>
+						</div>
+						<input
+							type="file"
+							accept="image/*"
+							{...register("banner")}
+							className="hidden"
+						/>
+					</label>
 					<Input
 						placeholder={t("profile.placeholders.login")}
 						label={t("profile.labels.login")}
@@ -205,30 +240,7 @@ const Edit: React.FC<{
 						)}
 						label={t("profile.labels.description")}
 						{...register("description")}
-					/>
-					<div className="flex flex-col gap-4 w-full mt-8">
-						<p className="text-default">
-							{t("profile.labels.privacy.title")}
-						</p>
-						<Checkbox
-							placeholder={t("profile.labels.privacy.games")}
-							{...register("privacy.games")}
-						/>
-						<Checkbox
-							placeholder={t(
-								"profile.labels.privacy.subscribers",
-							)}
-							{...register("privacy.subscribers")}
-						/>
-						<Checkbox
-							placeholder={t("profile.labels.privacy.likes")}
-							{...register("privacy.likes")}
-						/>
-						<Checkbox
-							placeholder={t("profile.labels.privacy.pictures")}
-							{...register("privacy.pictures")}
-						/>
-					</div>
+					/>	
 					<div className="flex flex-col gap-4 w-full mt-8">
 						<p className="text-default">
 							{t("profile.labels.notify.title")}

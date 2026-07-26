@@ -13,7 +13,9 @@
 			"equal": "User {{login}} has",
 			"denied": "Access denied",
 			"avatar_limit": "Avatar limit 1mb",
-			"avatar_type": "Avatar type only .png"
+			"avatar_type": "Avatar type only .png",
+			"banner_limit": "Banner limit 1mb",
+			"banner_type": "Banner type only .png"
 		},
 		"titles": {
 			"games": "Own games",
@@ -27,6 +29,8 @@
 		"placeholders": {
 			"avatar": "Upload avatar",
 			"avatar_limit": "limit 1mb",
+			"banner": "Upload banner",
+			"banner_limit": "limit 1mb",
 			"login": "Login...",
 			"description": "About me...",
 			"current_email": "example@example.test",
