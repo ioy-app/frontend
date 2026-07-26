@@ -35,7 +35,7 @@ export default function Profile() {
 	return (
 		<Spin loading={query?.isLoading}>
 			<div className="w-full px-4 pb-4 flex gap-4 flex-col items-center flex-1">
-				<div className="flex flex-col gap-4 w-[60%] max-md:w-full items-center h-full relative pt-4">
+				<div className="flex flex-col gap-4 w-[60%] max-md:w-full items-center relative pt-4">
 					<UsersHeader
 						subscribers={subscribers}
 					/>
