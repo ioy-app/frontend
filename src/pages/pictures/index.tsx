@@ -51,7 +51,7 @@ const Pictures: React.FC<{}> = ({}) => {
 	const items = useMemo(() => [].concat(...(query?.data?.pages?.map(page => page.items) || [])), [ query?.data ]);
 
 	return (
-		<>
+		<div className="p-4 flex flex-col gap-4">
 			<Meta
 				title={t("pictures.title")}
 				description={t("about.description")}
@@ -103,7 +103,7 @@ const Pictures: React.FC<{}> = ({}) => {
 					<MasonryTable items={items} />
 				</InfiniteScroll>
 			</Spin>
-		</>
+		</div>
 	);
 };
 

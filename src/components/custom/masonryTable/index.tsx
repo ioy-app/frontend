@@ -5,6 +5,8 @@ import {
 	useState
 } from "react"
 import Picture from "../../content/picture";
+import Game from "@/components/content/game";
+import { AnimatePresence, motion } from "framer-motion";
 
 /**
  * useMasonryColumns
@@ -47,7 +49,10 @@ const useMasonryColumns = ({
 			item,
 			i
 		) => {
-			masonryColumns[i % cols].push(item);
+			masonryColumns[i % cols].push({
+				...item,
+				table_index: i
+			});
 		});
 
 		return masonryColumns;
@@ -97,16 +102,64 @@ const MasonryTable: React.FC<{
 						key={`col-${i}`}
 						className="flex-1 flex flex-col gap-4"
 					>
-						{col?.map?.((item) => (
-							<Picture
-								key={item?.id}
-								dataSource={item}
-								size="full"
-								className="break-inside-avoid"
-								nolink={nolink}
-								onClick={() => onClick && onClick(item?.id)}
-							/>
-						))}
+						{col?.map?.((item, j) => {
+							switch(item?.type) {
+								case "game":
+									return (
+										<AnimatePresence mode="wait">
+											<motion.div
+												initial={{
+													opacity: 0,
+													scale: .5
+												}}
+												animate={{
+													opacity: 1,
+													scale: 1,
+													transition: {
+														delay: (item?.table_index % 40) / 100 * 2.5
+													}
+												}}
+											>
+												<Game
+													key={`game-${item?.id}`}
+													dataSource={item}
+													size="full"
+													className="break-inside-avoid"
+													nolink={nolink}
+													onClick={() => onClick && onClick(item?.id)}
+												/>
+											</motion.div>
+										</AnimatePresence>
+									);
+								break;
+							}
+							return (
+								<AnimatePresence mode="wait">
+									<motion.div
+										initial={{
+											opacity: 0,
+											scale: .5
+										}}
+										animate={{
+											opacity: 1,
+											scale: 1,
+											transition: {
+												delay: (item?.table_index % 40) / 100
+											}
+										}}
+									>
+										<Picture
+											key={`picture-${item?.id}`}
+											dataSource={item}
+											size="full"
+											className="break-inside-avoid"
+											nolink={nolink}
+											onClick={() => onClick && onClick(item?.id)}
+										/>
+									</motion.div>
+								</AnimatePresence>
+							);
+						})}
 					</div>
 				))}
 			</div>

@@ -61,6 +61,7 @@ const Routes = {
 	likes: (login: string) => `/users/${login}/likes`,
 	email: `/users/change-email`,
 	delete: `/users/delete`,
+	instances: (login: string) => `/users/${login}/instances`
 };
 
 /**
@@ -200,3 +201,11 @@ export const users_edit_email = (
 */
 export const users_delete = () =>
 	apiInstance.post(Routes.delete);
+
+/**
+ * Get user's instances
+*/
+export const users_instances = (login: string, params?: Record<string, string>) =>
+	apiInstance.get(Routes.instances(login), {
+		params
+	});

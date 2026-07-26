@@ -13,7 +13,9 @@
 			"equal": "Пользователь {{login}} уже существует",
 			"denied": "Доступ запрещен",
 			"avatar_limit": "Для аватара лимит 1МБ",
-			"avatar_type": "Аватар может быть только .png"
+			"avatar_type": "Аватар может быть только .png",
+			"banner_limit": "Для баннера лимит 1МБ",
+			"banner_type": "Баннер может быть только .png"
 		},
 		"titles": {
 			"games": "Игры",
@@ -27,6 +29,8 @@
 		"placeholders": {
 			"avatar": "Загрузить .png",
 			"avatar_limit": "Лимит 1МБ",
+			"banner": "Загрузить .png",
+			"banner_limit": "Лимит 1МБ",
 			"login": "Логин...",
 			"description": "Расскажите о себе...",
 			"current_email": "example@example.test",

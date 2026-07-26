@@ -50,6 +50,8 @@ const Select: React.FC<SelectComponentProps & {
 	value?: Option;
 	allowClear?: boolean;
 	onUpdate?: (value?: string) => void;
+	hideIcon?: boolean;
+	noSelect?: boolean;
 }> = ({
 	name,
 	options,
@@ -61,7 +63,9 @@ const Select: React.FC<SelectComponentProps & {
 	isFirstOption,
 	disabled,
 	allowClear,
-	onUpdate
+	onUpdate,
+	hideIcon,
+	noSelect
 }) => {
 	const { t } = useTranslation();
 	const [ isOpen, setOpen ] = useState<boolean>(false);
@@ -136,53 +140,55 @@ const Select: React.FC<SelectComponentProps & {
 						</motion.p>
 					)}
 				</AnimatePresence>
-				<AnimatePresence
-					mode="wait"
-					initial={false}
-				>
-					<motion.div
-						className="flex items-center gap-1"
-						key={localValue && allowClear ? "clear" : isOpen ? "closed" : "opened"}
-						initial={{
-							rotate: "180deg",
-							scale: .5
-						}}
-						animate={{
-							rotate: "0deg",
-							scale: 1
-						}}
-						exit={{
-							rotate: "-180deg",
-							scale: .5
-						}}
-						transition={{
-							duration: .15
-						}}	
-					>	
-						{(localValue && allowClear) ? (
-							<BiX
-								className="text-xl text-placeholder hover:text-primary transition-colors cursor-pointer"
-								onClick={(e) => {
-									e.stopPropagation();
-									setValue(undefined);
-									onChange && onChange({
-										target: {
-											name: name,
-											value: null,
-										},
-									});
-									onUpdate && onUpdate?.(null);
-								}}
-							/>
-						)
-						:
-						(!isOpen ? (
-							<BiChevronDown className="text-2xl text-br group-hover:text-primary" />
-						) : (
-							<BiChevronUp className="text-2xl text-primary" />
-						))}
-					</motion.div>
-				</AnimatePresence>
+				{!hideIcon && (
+					<AnimatePresence
+						mode="wait"
+						initial={false}
+					>
+						<motion.div
+							className="flex items-center gap-1"
+							key={localValue && allowClear ? "clear" : isOpen ? "closed" : "opened"}
+							initial={{
+								rotate: "180deg",
+								scale: .5
+							}}
+							animate={{
+								rotate: "0deg",
+								scale: 1
+							}}
+							exit={{
+								rotate: "-180deg",
+								scale: .5
+							}}
+							transition={{
+								duration: .15
+							}}	
+						>	
+							{(localValue && allowClear) ? (
+								<BiX
+									className="text-xl text-placeholder hover:text-primary transition-colors cursor-pointer"
+									onClick={(e) => {
+										e.stopPropagation();
+										setValue(undefined);
+										onChange && onChange({
+											target: {
+												name: name,
+												value: null,
+											},
+										});
+										onUpdate && onUpdate?.(null);
+									}}
+								/>
+							)
+							:
+							(!isOpen ? (
+								<BiChevronDown className="text-2xl text-br group-hover:text-primary" />
+							) : (
+								<BiChevronUp className="text-2xl text-primary" />
+							))}
+						</motion.div>
+					</AnimatePresence>
+				)}
 			</div>
 			{isOpen && createPortal(
 				<div
@@ -209,7 +215,8 @@ const Select: React.FC<SelectComponentProps & {
 							className={`group cursor-pointer text-default transition-colors ${(option.value == localValue?.value && "text-primary") || "text-text"}`}
 							key={i}
 							onClick={() => {
-								setValue(option);
+								if (!noSelect)
+									setValue(option);
 								setOpen(false);
 								onChange && onChange({
 									target: {

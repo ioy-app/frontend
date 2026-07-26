@@ -49,7 +49,7 @@ const Games: React.FC<{}> = ({}) => {
 	const items = [].concat(...(query?.data?.pages?.map(page => page.items) || []));
 
 	return (
-		<>
+		<div className="p-4 flex flex-col gap-4">
 			<Meta
 				title={t("games.title")}
 				description={t("about.description")}
@@ -112,7 +112,7 @@ const Games: React.FC<{}> = ({}) => {
 					))}
 				</InfiniteScroll>
 			</Spin>
-		</>
+		</div>
 	);
 };
 

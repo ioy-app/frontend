@@ -60,7 +60,7 @@ export default function Home() {
 				description={t("about.description")}
 				url="https://ioy.app/"
 			/>
-			<div className="flex flex-col gap-4 w-full h-full min-h-fit">
+			<div className="flex flex-col gap-4 w-full h-full min-h-fit p-4">
 				<div className="w-full flex gap-4 h-full max-md:flex-col">
 					<div className="grid grid-cols-5 max-md:grid-cols-2 gap-4 flex-1 w-full max-md:flex max-md:flex-col">
 						{login && (

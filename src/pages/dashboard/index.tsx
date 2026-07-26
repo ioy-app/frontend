@@ -55,7 +55,7 @@ export default function Dashboard() {
 	}, [ t, tab ]);
 
 	return (
-		<div className="flex-1">
+		<div className="flex-1 p-4">
 			<DashboardFilters
 				tab={tab}
 				key={tab}
